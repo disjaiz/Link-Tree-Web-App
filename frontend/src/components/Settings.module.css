@@ -1,0 +1,70 @@
+.container{
+    height:100%;
+    width: 100%;
+    padding: 1% 4%;
+    background-color: #f1f2f3; 
+}
+.header{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Poppins;
+    margin-bottom: 2%;
+}
+.settingsContainer{
+    height: auto;
+    min-height: 400px;
+    width: 80%;
+    color: black;
+    background-color: white;
+    border-radius: 20px;
+    margin-bottom: 7%;
+    padding: 2% ;
+}
+.settingsContainer span{
+    color: #29A263;
+    font-size: 15px;
+    border-bottom: 3px solid #29A263;
+    padding: 0px 5px;
+}
+
+.editForm{
+    width: 46%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2%;
+    margin-top: 3%;
+}
+.editForm label{
+    color: #5E5E5E;
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+    font-family: Poppins;
+}
+.editForm input{
+    width: 100%;
+    padding: 8px 14px;
+    border-radius: 11px;
+    border: 1.5px solid rgb(102, 102, 102, 0.5);
+    margin-bottom: 0.8rem;
+    font-family: Poppins;
+    color: #000000;
+}
+
+.editButton{
+    background-color: #29A263;
+    color: #FFFFFF;
+    padding: 6.5px 45px;
+    border-radius: 9px;
+    border: none;
+    font: 14px Poppins;
+}
+
+.settingsContainer div{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1%;
+}
+

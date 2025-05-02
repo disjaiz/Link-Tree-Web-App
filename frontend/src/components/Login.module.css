@@ -1,0 +1,138 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.signupContainer{
+    background-color: #fcfffd;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 0.7fr 3fr 1.8fr;
+}
+.sparkLogo{
+    display: flex;
+    justify-content: flex-start;
+    align-items:flex-start;
+    padding-top: 30px;
+    padding-left: 30px;
+}
+.sparkLogo img:nth-child(1){
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+.sideWoman{
+    height:100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    background-color: antiquewhite;
+    object-fit: contain;
+}
+.sideWoman img{
+    width: 100%;
+    height: 100%;
+}
+.formContainer{
+    height: 100%;
+    padding-top: 50px;
+    font-family: Poppins;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.formContainer h1{
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: #000000;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.formContainer p{
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #676B5F;
+    text-align: center;
+}
+.loginForm{
+    height:400px;
+    width: 70%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+.loginForm input{
+    background-color: #EFF0EC;
+    color: #676B5F;
+    padding: 12px 17px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: Poppins;
+}
+.loginForm input:focus{
+    outline: none;
+    border: 1.5px solid #a3a4a4;
+}
+.loginForm button{
+    background-color: #E0E2D9;
+    margin-top: 35px;
+    color: #A8AAA2;
+    padding: 12px 17px;
+    border: none;
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 30px;
+    margin-bottom: 30px;
+}
+.loginButton:active {
+    transform: scale(0.95); 
+    transition: transform 0.1s ease-in-out;
+  }
+  .errorText {
+    color: red !important;
+    font-size: 12px;
+    margin-top: 0px !important;
+    text-align: left !important;
+  }
+
+/* ====================== */
+.customToast {
+    background-color: #05A763 !important; 
+    color: white !important;
+    border-radius: 8px;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+  }
+  .toastContent {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 0;
+  }
+  .toastIcon {
+    width: 20px; 
+    height: 20px;
+  }
+  .closeBtn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 19px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+  }
+  
+ 
+   
+ 
+  
