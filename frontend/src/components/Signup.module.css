@@ -13,15 +13,23 @@
 }
 .sparkLogo{
     display: flex;
+    height:max-content;
+    /* justify-content: flex-start;
+    align-items:flex-start; */
     justify-content: flex-start;
-    align-items:flex-start;
-    padding-top: 30px;
-    padding-left: 30px;
+    align-items: center;
+    padding-top: 3em;
+    padding-left: 3em;
 }
 .sparkLogo img:nth-child(1){
-    width: 25px;
-    height: 25px;
+    width: 1.7em;
+    height: 1.7em;
     margin-right: 5px;
+}
+.sparkLogo img:nth-child(2){
+    width: 5em;
+    height: 1.2em;
+    margin-right: 0.3em;
 }
 .sideWoman{
     height: 100%;  
@@ -38,18 +46,17 @@
 }
 .formContainer{
     height: 100%;
-    padding-top: 50px;
+    padding-top: 3.1em;
     font-family: Poppins;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
 .formContainer h1{
     font-size: 2.4rem;
     font-weight: 900;
     color: #000000;
-    margin-bottom: 1.5rem;
+    margin-bottom:  0.6em;
     text-align: center;
 }
 .formContainer p{
@@ -59,15 +66,15 @@
     text-align: center;
 }
 .formContainer > p{
-    margin-top: 100px;
-    /* margin-bottom: 10px; */
+    margin-top: 9em;
 }
 .signup_options{
     display: flex;
-    gap: 6rem;
+    width: 46%;
+    /* gap: 6rem; */
     justify-content: space-between;
     align-items: center; 
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.5em;
 }
 .signup_options p:nth-child(1){
     color: #333333;
@@ -89,54 +96,69 @@
 }
 .signupForm input{
     width: 100%;
-    padding: 12px 15px;
-    border-radius: 9px;
-    border: 1.5px solid rgb(102, 102, 102, 0.5);  
+    padding: 0.7em 0.9em;
+    border-radius: 0.5em;
+    border: 0.1em solid #66666680;  
 }
 .signupForm input:focus{
     outline: none;
-    border: 1.5px solid #888a89;
-}
-.signupForm button{
-    background-color: #acabab;
-    color: #FFFFFF;
-    padding: 10px 0;
-    border-radius: 20px;
-    border: none;
-    margin-top: 2%;
+    border: 0.1em solid #888a89;
 }
 .signupForm label{
     color: #666666;
     font-size: 0.8rem;
-    margin-top: 0.8rem;
+    margin-top: 1.1em;
+    margin-bottom: 0.1em;
 }
 .checkbox{
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    align-items: self-start;
+    gap: 0.5em;
+    margin-bottom: 1.5em;
     margin-top: 8%;
+    accent-color: black;
 }
 .checkbox input{
-    width: 15px;
-    height: 15px;
+    width: 1.1em;
+    height: 1.1em;
 }
 .checkbox p{
     font-size: 0.7rem;
     color: #181818;
 }
+.signupButton{
+    background-color: #acabab;
+    color: #FFFFFF;
+    padding: 0.7em 0;
+    border-radius: 1.2em;
+    border: none;
+    margin-top: 2%;
+    font-family: Poppins;
+}
 .signupButton:active {
     transform: scale(0.95); /* Shrinks button slightly */
     transition: transform 0.1s ease-in-out;
 }
-  .errorText {
+.errorText {
     color: red !important;
-    font-size: 12px;
+    font-size: 1.1rem;
     margin-top: 0px !important;
     text-align: left !important;
   }
 /* ====================== */
+
+  .Toastify__toast,
+  .customToast,
+  .Toastify__toast-body {
+    height: 3.75em !important;
+    min-height: 3.75em !important;
+    min-width: 21.875em !important;
+    width: auto !important;
+    display: flex;
+    align-items: center;
+  }
+  
 .customToast {
     background-color: #05A763 !important; 
     color: white !important;
@@ -167,7 +189,73 @@
     margin-right: 10px;
   }
   
- 
-   
+  
+ /* =================================================== */
+ /* =================================================== */
+ /* =================================================== */
+ /* =================================================== */
+  @media (max-width: 375px) {
+    .sideWoman{
+      display: none;
+      visibility: hidden;
+    } 
+    .signupContainer{
+       width: 95%;
+       margin: 0 auto;
+       /* background-color: #e2d9d9; */
+       grid-template-columns: 1fr;
+       grid-template-rows: auto auto auto;
+    }
+    .formContainer h1{
+        font-size: 1.9rem;
+        font-weight: 800;
+        margin-bottom: 2.5rem;
+    }
+    .sparkLogo{
+        padding-top: 1.6em;
+        padding-left: 0.6em;
+    }
+    .signup_options{
+        width: 90%;
+        margin-bottom: 0.7rem;
+    }
+    .signup_options p:nth-child(1){
+        font-size: 1.3rem;
+    }
+    .signup_options p:nth-child(2){
+        font-size: 0.7rem;
+    }
+    .signupForm{
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+    }
+    .signupForm input{
+        border: 1px solid rgba(102, 102, 102, 0.3);  
+    }
+    .signupForm label{
+        color: rgb(102, 102, 102, 0.6); 
+        font-size: 0.8rem;
+    }
+    .formContainer > p{
+        margin-top: 7em;
+        font-size: 0.5rem;
+    }
+    .Toastify__toast,
+    .customToast,
+    .Toastify__toast-body {
+      height: 3.75em !important;
+      min-height: 3.75em !important;
+      min-width: 21em !important;
+    width: auto !important;
+      display: flex;
+      align-items: center;
+    }
+    .customToast {
+        border-radius: 8px !important;
+        margin-top: 0.5em !important;
+      }
+      
+}
  
   

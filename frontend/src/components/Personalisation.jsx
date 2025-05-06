@@ -15,6 +15,7 @@ import heart from '../images/heart.png'
 import tech from '../images/tech.png'
 import travel from '../images/travel&tourism.png'
 import { useNavigate ,  useLocation} from 'react-router-dom';
+import {updateProfileTitle} from '../FetchMaker';
 
 const options = [
     { name: "Business", image: business },
@@ -53,12 +54,7 @@ function Personalisation() {
     const profileTitle = name; 
 
     try {
-        const response = await fetch(`http://localhost:3000/user/update-profile-title/${userId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ profileTitle }),
-        });
-
+        const response = await updateProfileTitle(userId,  profileTitle );
         const data = await response.json();
         if (response.ok) {
             console.log("Profile title updated:", data.user);
@@ -100,7 +96,7 @@ function Personalisation() {
                       className={`${style.selectItem} ${selected === index ? style.selected : ""}`}
                       onClick={() => setSelected(index)}
                     >
-                        <img src={option.image} alt={option.name} className={style.optionImage} style={{marginRight: '10px'}} />
+                        <img src={option.image} alt={option.name} className={style.optionImage} style={{marginRight: '0.6em'}} />
                         <span>{option.name}</span>
                     </div>
                 ))}

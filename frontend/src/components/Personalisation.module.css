@@ -12,18 +12,19 @@
 }
 .sparkLogo{
     display: flex;
+    height:max-content;
     justify-content: flex-start;
-    align-items:flex-start;
-    padding-top: 30px;
-    padding-left: 30px;
+    align-items: center;
+    padding-top: 1.9em;
+    padding-left: 3em;
 }
 .sparkLogo img:nth-child(1){
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
+    width: 1.6em;
+    height: 1.6em;
+    margin-right: 0.3em;
 }
 .sideWoman{
-    height: 650px;  
+    height: 40.6em;  
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -55,9 +56,9 @@
 }
 .middleContainer input{
     width: 80%;
-    padding: 17px;
-    font-size: 15px;
-    border-radius: 9px;
+    padding: 1em;
+    font-size: 0.9rem;
+    border-radius: 0.6em;
     border: none;
     background-color: #f0f1ee;
     color: #000000;
@@ -67,12 +68,12 @@
     background-color: #28A263;
     color: white;
     font-weight: 600;
-    padding: 13px 15px;
+    padding: 0.9em 1em;
     border: none;
-    border-radius: 20px;
+    border-radius: 1.3em;
     width: 80%;
     margin-top: 9%;
-    font-size: 15px;
+    font-size: 0.9rem;
 }
 .middleContainer button:active {
     transform: scale(0.95); 
@@ -81,7 +82,7 @@
 #pTwo{
     color: black;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 0.9rem;
     font-family: Inter;
     margin-bottom: 4%;
 }
@@ -90,19 +91,70 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    padding-right: 100px;
+    gap: 0.6em;
   }
 .selectItem {
-    padding: 5px 17px;
+    padding: 0.3em 1em;
     border: 1px solid #ccc;
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 1.2em;
     transition: background 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }  
 .selected {
     background-color: #28A263;
     color: white;
     border-color: black;
   }
+
+ /* =================================================== */
+ /* =================================================== */
+ /* =================================================== */
+ /* =================================================== */
+ @media (max-width: 375px) {
+    .sideWoman{
+      display: none;
+      visibility: hidden;
+    } 
+    .container{
+        margin: 0 auto;
+        width: 90%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+    .sparkLogo{
+        padding-left: 0;
+    }
+    .middleContainer h1{
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 0;
+    }
+    #pOne{
+        font-size: 0.7rem;
+    }
+    .middleContainer input{
+        width: 100%;
+        font-family: Inter;
+        margin-top: 5%;
+    }
+    #pTwo{
+        font-size: 0.8rem;
+        margin-bottom: 5%;
+        margin-top: 1%;
+    }
+    .selectContainer {
+        font-size: 0.9rem;
+      } 
+    .middleContainer button{
+        width: 100%;
+        margin-top: 12%;
+        margin-bottom: 20%;
+        font-size: 1rem;
+        padding: 0.7em 1em;
+    }
+}
   

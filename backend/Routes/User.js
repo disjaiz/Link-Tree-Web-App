@@ -7,6 +7,10 @@ import jwt  from "jsonwebtoken";
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import upload from '../Middlewares/upload.js';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 // =================================get all users==============================================================
 router.get('/' , async(req, res)=>{
     const users = await User.find();
@@ -95,8 +99,11 @@ router.post('/login', async (req, res)=>{
             res.cookie('Token', token, {
                 httpOnly: false, 
                 maxAge:5 * 60 * 60 * 1000,
-                sameSite: 'None', 
-                secure: true,
+                // sameSite: 'None', 
+                // secure: true,
+                secure: false,
+sameSite: 'Lax',
+
               });
           
             return res.status(200).json({msg: "You are logged in!" ,existingUser});
@@ -145,59 +152,59 @@ router.put("/update-profile-title/:userId", async (req, res) => {
 export default router;
 
 // ============================update profile image===================================
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      const dir = './uploads/';
-      if (!fs.existsSync(dir)) fs.mkdirSync(dir);
-      cb(null, dir);
-    },
-    filename: (req, file, cb) => {
-      const uniqueName = `${Date.now()}-${file.originalname}`;
-      cb(null, uniqueName);
-    },
-  });
-  
-  const upload = multer({ storage });
-
-  // Combined route
-router.post('/upload-profile-image', Authenticate, upload.single('image'), async (req, res) => {
+// Upload image
+router.post('/upload-profile-image',Authenticate, upload.single('image'), async (req, res) => {
     try {
-      const userId = req.user.id; // from token middleware
-      const imageUrl = `/uploads/${req.file.filename}`;
+      const userId = req.user.id; // assumes auth middleware sets req.user
+      const user = await User.findById(userId);
   
-      const user = await User.findByIdAndUpdate(
-        userId,
-        { profileImage: imageUrl },
-        { new: true }
-      );
+      // remove old image if exists
+      if (user.profileImage) {
+        const oldPath = path.join(__dirname, '..', 'uploads', 'profileImages', path.basename(user.profileImage));
+        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+      }
   
-      res.json({ message: 'Image uploaded & profile updated', profileImage: imageUrl, user });
+      const imageUrl = `/uploads/profileImages/${req.file.filename}`;
+      user.profileImage = imageUrl;
+      await user.save();
+  
+      res.json({ success: true, imageUrl });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ error: 'Upload or update failed' });
+      res.status(500).json({ success: false, message: 'Upload failed' });
     }
   });
   
-//   router.post('/upload', upload.single('image'), (req, res) => {
-//     const imageUrl = `/uploads/${req.file.filename}`;
-//     res.json({ url: imageUrl });
-//   });
+// ============================ REMOVE  profile image===================================
+  router.delete('/remove-profile-image',Authenticate, async (req, res) => {
+    try {
+      const userId = req.user._id;
+      const user = await User.findById(userId);
+  
+      if (user.profileImage) {
+        const filePath = path.join(__dirname, '..', 'uploads', 'profileImages', path.basename(user.profileImage));
+        if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+        user.profileImage = '';
+        await user.save();
+      }
+  
+      res.json({ success: true });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: 'Delete failed' });
+    }
+  });
+  
 
-//   router.post('/update-profile-image', verifyToken, async (req, res) => {
-//     try {
-//       const userId = req.user.id; // assuming token middleware sets req.user
-//       const { profileImage } = req.body;
+
+// ===========================Fetch user data ===================================
+router.get('/userData', Authenticate, async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id).select('name email profileImage');
+      if (!user) return res.status(404).json({ message: 'User not found' });
   
-//       const user = await User.findByIdAndUpdate(
-//         userId,
-//         { profileImage },
-//         { new: true }
-//       );
-  
-//       res.json({ message: 'Profile image updated', user });
-//     } catch (err) {
-//       console.error(err);
-//       res.status(500).json({ error: 'Failed to update profile image' });
-//     }
-//   });
-  
+      res.json(user);
+    } catch (err) {
+      res.status(500).json({ message: 'Server error' });
+    }
+  });

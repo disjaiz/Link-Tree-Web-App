@@ -19,16 +19,15 @@ import instagram from '../images/instagramLogo.png'
 import youtube from '../images/youtubeLogo.png'
 import tiktok from '../images/tiktokLogo.png'
 import linktree from '../images/linktreeLogo.png'
-
 import boxOne from '../images/boxOne.png'
 import style from  './LandingPage.module.css'
-
 import { useNavigate } from 'react-router-dom';
 
 function LandingPage() {
     const navigate = useNavigate();
 
   return (
+    <div className={style.page}>   
     <div className={style.container}>
 
         <div className={style.navbarTab}>
@@ -48,12 +47,13 @@ function LandingPage() {
                 <p>The easiest place to  update and share your Connection</p>
                 <p>Help your followers discover everything you're sharing all over the internet, 
                     in one simple place. They'll thank you for it! </p>
-                <button>Get your free spark</button>
+                <button onClick={()=> navigate('/signup')} >Get your free spark</button>
             </div>
             <img  className={style.boxOneRight} src={boxOne}  alt="boxOneImage" />
         </div>
 
         <div className={style.boxTwo}>
+          
             <div className={style.boxTwoLeft}>
                  <img src={greenPallete}   alt="color_pallete_img" />
                  <p>Sell products and collect payments. It's monetization made simple.</p>
@@ -63,7 +63,9 @@ function LandingPage() {
                 <p>Analyze your audience and keep your followers engaged</p>
                 <p>Track your engagement over time, monitor reevenue and learn what's converting your audience. 
                     Make informed updates on the fly to keep them coming back.</p>
-            </div>       
+            </div>  
+
+               
         </div>
 
         <div className={style.boxThree}>
@@ -93,7 +95,7 @@ function LandingPage() {
         </div>  
 
         <div className={style.boxFive}>
-            <div className={style.boxFiveItems} style={{backgroundColor: '#DEDEDE'}}>
+            <div className={style.boxFiveItems} >
                 <p>Amazing tool! Saved me months</p>
                 <p>This is a placeholder for your testimonials and what your client has to say, put them here and make sure its 100% true and meaningful.</p>
                 <div>
@@ -126,7 +128,7 @@ function LandingPage() {
                     </div>
                 </div>
               </div>
-              <div className={style.boxFiveItems} style={{backgroundColor: '#DEDEDE'}}>
+              <div className={style.boxFiveItems}>
               <p>Amazing tool! Saved me months</p>
                 <p>This is a placeholder for your testimonials and what your client has to say, put them here and make sure its 100% true and meaningful.</p>
                 <div>
@@ -208,12 +210,13 @@ function LandingPage() {
         </div> 
 
         <div className={style.footer}>
+
             <div className={style.footerDivOne}>
-                <div>
+                <div className={style.footerDivOneLeft}>
                     <button onClick={()=> navigate('/login')}>Log in</button>
                     <button onClick={()=> navigate('/signup')}>Sign up free</button>
                 </div>
-                <div>
+                <div className={style.footerDivOneRight}>
                     <ul>    
                         <li>About Spark</li>
                         <li>Blog</li>
@@ -249,7 +252,7 @@ function LandingPage() {
                 </div>
             </div>
         </div>
-
+        </div>
     </div>
   )
 }

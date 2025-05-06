@@ -424,7 +424,7 @@
     margin: 0 auto;
     margin-bottom: 4%;
 }
-  .saveBtn{
+.saveBtn{
     background-color: #29A263;
     border-radius: 15px;
     border: none;
@@ -435,4 +435,16 @@
     align-items: center;
     color: #FFFFFF;
     font: 500 17px Poppins;
+}
+
+ /* ========================================================== */
+ /* =========================================================== */
+ /* ============================================================ */
+ /* ============================================================= */
+   
+ @media (max-width: 375px) {
+    .sideWoman{
+      display: none;
+      visibility: hidden;
+    }
 }

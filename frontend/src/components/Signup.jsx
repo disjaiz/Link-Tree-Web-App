@@ -20,7 +20,7 @@ function Signup() {
     confirmPassword: ""
   })
 
-const [errors, setErrors] = useState({}); // Store validation errors
+const [errors, setErrors] = useState({}); 
 
 const validateForm = () => {
   let newErrors = {};
@@ -55,9 +55,9 @@ const handleSignup = async (e) => {
     const signupData = await response.json();
 
     if (response.ok) {
-      // console.log('df', signupData.user.name);
       navigate('/personalization', { state: { userid: signupData.user._id, name: signupData.user.name,} });
-    } else {
+    }
+     else {
       toast.error( <div className={style.toastContent}>
         <img src={checkCircle} alt="Success" className={style.toastIcon} />
         <span>{signupData.msg || "Signup failed"}</span>
@@ -92,10 +92,7 @@ const handleSignup = async (e) => {
             icon: false, 
           });
   }
-};
-
-
-  
+}; 
 // // ===============================================================================================================================================
   return (
     <div className={style.signupContainer}>

@@ -1,15 +1,16 @@
 import React, {useState, useEffect } from 'react'
 import style from './Links.module.css'
 import share from '../images/share.png'
-import { useNavigate ,  useLocation} from 'react-router-dom';
-import memojiBoy from "../images/memojiBoy.png";
+import {  useLocation} from 'react-router-dom';
 import bigMemojiBoy from "../images/bigMemojiBoy.png";
 import plusImage from "../images/plusImage.png";
 import movingOut from "../images/movingOut.png";
 import blackFire from "../images/blackFire.png"
 import whiteFire from "../images/whiteFire.png"
 import HomeIcon from '../svg/HomeIcon.jsx';
-
+import {fetchUserData, uploadProfileImage, removeProfileImage} from '../FetchMaker.js';
+const port = 3000 || 5000;
+const baseUrl = `http://192.168.0.105:${port}`;
 
 function Links() {
   const location = useLocation();
@@ -17,68 +18,46 @@ function Links() {
   const Name = location.state?.name;
  
   const [imageSrc, setImageSrc] = useState(bigMemojiBoy);
-  const [imageFile, setImageFile] = useState(null);
 
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     setImageSrc(URL.createObjectURL(file));
-  //     setImageFile(file);
-  //     // optional: upload file to server here
-  //   }
-  // };
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await fetchUserData();
+      const data = await response.json();
+    
+      setImageSrc(data.profileImage || bigMemojiBoy);
+    };
+    fetchUser();
+  }, []);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setImageSrc(URL.createObjectURL(file));
-      setImageFile(file);
+    if (!file) return;
   
-      const formData = new FormData();
-      formData.append('image', file);
+    setImageSrc(URL.createObjectURL(file));
   
-      try {
-        const res = await fetch('http://localhost:3000/user/upload-profile-image', {
-          method: 'POST',
-          body: formData, 
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ profileImage: data.url }),
-        });
+    const formData = new FormData();
+    formData.append('image', file);
   
-        const data = await res.json();
-        console.log('Uploaded image URL:', data); // backend should return the image URL
-        // optionally update profileImage in DB here
-
-      } catch (err) {
-        console.error('Upload failed:', err);
-      }
+    try {
+      const res = await uploadProfileImage(formData);
+      const data = await res.json();
+      console.log('Uploaded image URL:', data.imageUrl);
+  
+    } catch (err) {
+      console.error('Upload failed:', err);
     }
   };
   
-
-
-
-  const handleRemove = () => {
-    setImageSrc(bigMemojiBoy);
-    setImageFile(null);
-    // optional: delete image from server here
+  const handleRemove = async () => {
+    try {
+      const res = await removeProfileImage();
+      const data = await res.json();
+  
+      setImageSrc(bigMemojiBoy);
+    } catch (err) {
+      console.error('Remove failed:', err);
+    }
   };
-
-  const handleImageUpload = async () => {
-    if (!imageFile) return;
-    const formData = new FormData();
-    formData.append('image', imageFile);
-  
-    const res = await fetch('http://localhost:5000/upload', {
-      method: 'POST',
-      body: formData,
-    });
-  
-    const data = await res.json();
-    setImageSrc(`http://localhost:5000/image/${data.file.filename}`);
-  };
-  
 
   const [bio, setBio] = useState("");
   const [isSocial, setIsSocial] = useState(true);
@@ -108,9 +87,9 @@ function Links() {
         </button>
       </div>
 
-      {/* ===========================preview div======================================== */}
+     
       <div className={style.previewContainer} >
-
+ {/* ===========================  MOBILE preview ======================================== */}
         <div className={style.mobilePreviewDiv}>
           <div className={style.mobilePreview}>
             <div className={style.mobilePreviewHeader}>
@@ -137,13 +116,17 @@ function Links() {
 
         </div>
 
+{/* ========================== PROFILE SEGMENTS ================================== */}
         <div className={style.profileDiv}>
           <div className={style.profileSegmentBox}>
               <p>Profile</p>
               <div className={style.profileSegment}>
                <div className={style.pickImageDiv}>
                    <div>
-                       <img src={imageSrc} alt="memojiBoy" />  
+                       {/* <img src={imageSrc} alt="memojiBoy" />  */}
+                       {/* <img src={`http://localhost:3000${imageSrc}`} alt="profile" /> */}
+                       <img src={imageSrc.startsWith("/uploads") ? `${baseUrl}${imageSrc}` : imageSrc} style={{objectFit: "fill"}} />
+
                    </div>
 
                    <div>
@@ -157,11 +140,6 @@ function Links() {
                         />
                        <button type="button" onClick={handleRemove} className={style.imageRemoverBtn}>Remove</button>
                   </div>
-                   {/* <div>
-                      <button >Pick an image</button>
-                      <button>Remove</button>
-                   </div> */}
-
                </div>
 
               <div >
@@ -210,8 +188,8 @@ function Links() {
                     
                   </div>
                   <div className={style.textWrapper}>
-                      <p>@oppo_08</p>
-                     <p><img src={whiteFire} alt="fireImage" height='14px' />/opopo_08</p>
+                      <p>{userName}</p>
+                     <p><img src={whiteFire} alt="fireImage" height='14px' />/{userName}</p>
                   </div>
 
                 </div>  

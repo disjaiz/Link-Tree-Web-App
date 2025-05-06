@@ -14,13 +14,13 @@
     display: flex;
     justify-content: flex-start;
     align-items:flex-start;
-    padding-top: 30px;
-    padding-left: 30px;
+    padding-top: 1.9em;
+    padding-left: 1.9em;
 }
 .sparkLogo img:nth-child(1){
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
+    width: 1.6em;
+    height: 1.6em;
+    margin-right: 0.3em;
 }
 .sideWoman{
     height:100%;
@@ -37,7 +37,7 @@
 }
 .formContainer{
     height: 100%;
-    padding-top: 50px;
+    padding-top: 3.1em;
     font-family: Poppins;
     display: flex;
     flex-direction: column;
@@ -47,7 +47,7 @@
     font-size: 2.4rem;
     font-weight: 900;
     color: #000000;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.6em;
     text-align: center;
 }
 .formContainer p{
@@ -57,38 +57,43 @@
     text-align: center;
 }
 .loginForm{
-    height:400px;
+    height:25em;
     width: 70%;
-    padding: 20px;
+    padding: 1.2em;
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
+    margin-bottom: 1.9em;
+}
+.loginForm label{
+    display: none;
+    visibility: hidden;
 }
 .loginForm input{
     background-color: #EFF0EC;
     color: #676B5F;
-    padding: 12px 17px;
-    margin-top: 20px;
+    padding: 0.9em 1.2em;
+    /* margin-top: 1.4em; */
+    margin-bottom: 1.4em;
     border: none;
-    border-radius: 10px;
-    font-size: 15px;
+    border-radius: 0.7em;
+    font-size: 0.9rem;
     font-family: Poppins;
 }
 .loginForm input:focus{
     outline: none;
-    border: 1.5px solid #a3a4a4;
+    border: 0.1em solid #a3a4a4;
 }
 .loginForm button{
     background-color: #E0E2D9;
     margin-top: 35px;
     color: #A8AAA2;
-    padding: 12px 17px;
+    padding: 0.9em  1.2em;
     border: none;
     font-family: Poppins;
-    font-size: 15px;
+    font-size: 0.9rem;
     font-weight: 600;
-    border-radius: 30px;
-    margin-bottom: 30px;
+    border-radius: 2.1em;
+    margin-bottom: 2.1em;
 }
 .loginButton:active {
     transform: scale(0.95); 
@@ -102,8 +107,19 @@
   }
 
 /* ====================== */
+.Toastify__toast,
+.customToast,
+.Toastify__toast-body {
+  height: 3.75em !important;
+  min-height: 3.75em !important;
+  min-width: 21.875em !important;
+  width: auto !important;
+  display: flex;
+  align-items: center;
+}
+
 .customToast {
-    background-color: #05A763 !important; 
+    background-color: #FF003D !important; 
     color: white !important;
     border-radius: 8px;
     display: flex;
@@ -132,7 +148,90 @@
     margin-right: 10px;
   }
   
- 
+ /* ========================================================== */
+ /* =========================================================== */
+ /* ============================================================ */
+ /* ============================================================= */
    
- 
+ @media (max-width: 375px) {
+    .sideWoman{
+      display: none;
+      visibility: hidden;
+    } 
+    .signupContainer{
+        width: 95%;
+        height: auto;
+        margin: 0 auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+     }
+     .formContainer {
+        height: auto;
+     }
+     .formContainer h1{
+        font-size: 1.9rem;
+        font-weight: 800;
+        margin-bottom: 1.7rem;
+    }
+    .sparkLogo{
+        padding-top: 1.6em;
+        padding-left: 0.6em;
+    }
+    .loginForm{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+    .loginForm label{
+        font-size: 0.9rem;
+        margin-bottom: 0.4em;
+        color: #666666;
+        display: block;
+        visibility: visible;
+    }
+    .loginForm input{
+        background-color: white;
+        color: #676B5F;
+        padding: 0.9em 1.2em;
+        margin-bottom: 1.4em;
+        border: 1px solid rgb(189, 187, 187);
+        border-radius: 0.7em;
+        font-size: 0.9rem;
+        font-family: Poppins;
+    }
+    .loginForm input::placeholder{
+        color: transparent;
+    }
+    .loginForm button::after{
+        content: "Sign in";
+        color: #FFFFFF;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .loginForm button{
+        color: transparent;
+        position: relative;
+        background-color: #28A263;
+    }
+    .formContainer p{
+        font-size: 0.5rem;
+        font-weight: 500;
+        color: #676B5F;
+        text-align: center;
+    }
+    #pOne{
+        font-size: 12px !important;
+    }
+    #pTwo{
+        font-size: 11px !important;
+    }
+    #span{
+        font-size: 12px !important;
+    }
+    
+    
+}
   

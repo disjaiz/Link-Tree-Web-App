@@ -2,36 +2,44 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    overflow-x: hidden;
+}
+button{
+    cursor: pointer;
+} 
+.page{
+    width: 100vw;
+    background-color: #f3faf6;
+    /* background-color: thistle; */
 }
 .container{
-    /* background-color: #f7faf8; */
     background-color: #f3faf6;
     height: auto;
-    width: 100vw;
-    padding: 1.5rem;
-    padding-bottom: 50px;
+    /* width: 88%; */
+    width: 90%;
+    /* width: 100%;     */
+    margin: 0 auto;
+    padding: 1.5em 0 4em 0;
+    overflow: visible;
 }
 .navbarTab{
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    border: 1px solid rgb(214, 209, 209);
-    border-radius: 30px;
-    padding: 0 10px;
-    margin: 0 30px;
-    height: 59px;
-    margin-bottom: 60px;
+    border: 0.1em solid rgb(214, 209, 209);
+    border-radius: 1.8em;
+    padding: 0 0.6em;
+    height: 3.7em;
+    margin-bottom: 3.8em;
 }
 .logoBox{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 15px;
+    margin-left: 0.9em;
 }
 .logoBox img{
-    margin-right: 10px;
+    margin-right: 0.6em;
 }
 .separatorContainer {
     display: flex;
@@ -39,79 +47,83 @@
 }
 .separator {
     width: 1px;
-    height: 20px; /* Adjust height as needed */
-    background-color: black; /* Line color */
-    margin: 0 8px; /* Space between elements */
+    height: 1.4em; 
+    background-color: black; 
+    margin: 0 0.5em; 
 }
 .signupBtn{
     background-color: #28A263;
     color: #FFFFFF;
-    border-radius: 30px;
+    border-radius: 1.8em;
     border: none;
-    padding: 0 20px;
+    padding: 0 1.2em;
     font-family: Inter;
-    height: 75%;
-    font-size: 13px;
+    height: 76%;
+    font-size: 0.8rem;
 }
 /*---------------------------box-one------------------------------- */
 .boxOne{
     width: 100%;
-    height: 350px;
-    grid-gap: 10px;
-    position: relative;
-    margin-bottom: 10px;
+    height: 22em;
+    gap: 1em;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.9em;
+    overflow: visible;
 }
 .boxOneLeft{
   font-family: Poppins;
     height: 100%;
-    width: 45%;
     float: left;
-    padding: 10px 0px 0px 50px;
-    margin-left: 40px;
+    padding: 0.6em 0px 0px 0;
+    margin-left: 2em;
 }
 .boxOneLeft p:nth-child(1){
-    font-size: 30px;
+    font-size: 2.4rem;
     font-weight: bold;
 }
 .boxOneLeft p:nth-child(2){
-    font-size: 16px;
+    width: 83%;
+    font-size: 1rem;
     font-weight:medium;
-    margin-top: 5px;
+    margin-top: 0.9em;
 }
 .boxOneLeft button{
-    font-size: 13px;
+    font-size: 0.8rem;
     font-family: Poppins;
     background-color: #28A263;
     color: #FFFFFF;
     border: none;
-    border-radius: 30px;
-    padding: 17px 20px;
-    margin-top: 60px;
+    border-radius: 2.3em;
+    padding: 1.3em 1.5em;
+    margin-top: 5.5em;
 }
 .boxOneRight {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 350px;
-    width: 550px;
-    object-fit: cover;
-    float: right;
-    margin-right: 40px;
+    height: 20em;
+    /* width: 31em; */
+    width: 70%;
+    object-fit: fill;
+    float: right; 
+    box-shadow: 0 0 2.5em rgb(40, 162, 99, 0.3);
+    border-radius: 1.2em;
 }    
 /* =======================box-two--------------------------------- */
 .boxTwo{
     width: 100%;
-    height: 350px;
-    margin-bottom: 10px;
+    height: 21.8em;
+    display: grid;
+    grid-template-columns: 5fr 3.5fr;
+    gap: 6em;
+    margin-bottom: 0.6em;
     font-family: Poppins;
-    padding: 0 70px;
+    padding: 0 1.8em;
+    grid-template-areas: "a b";
 }
-
 .boxTwoLeft {
     font-family: Poppins;
-    height: 100%;
-    width: 50%;
-    padding: 60px;
+    height: 90%;
+    /* width: 50%; */
+    padding: 1.9em;
     float: left;
     display: flex;
     flex-direction: column;
@@ -119,42 +131,44 @@
     justify-content: center;
     background-color: white;
     box-shadow: inset;
-    border-radius: 20px;
+    border-radius: 1.2em;
+    grid-area: a;
 }
-
 .boxTwoLeft img{
-    height: 150px;
-    width:350px;
-    margin-bottom: 30px;
+    height: 9.4em;
+    width: 21.9em;
+    margin-bottom: 1.8em;
 }
 .boxTwoRight{
     float: right;
     height: 100%;
-    width: 35%;
+    /* width: 35%; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    grid-area: b;
 }
 .boxTwoRight p:nth-child(1){
-    font-size: 30px;
+    font-size: 1.8em;
     font-weight: bold;
 }
 .boxTwoRight p:nth-child(2){
-    font-size: 16px;
+    font-size: 1rem;
     font-weight:medium;
-    margin-top: 5px;
+    margin-top: 0.3em;
 }
 /* =====================box-three===================== */
 .boxThree{
     width: 100%;
-    height: 350px;
-    margin-bottom: 10px;
+    height: 21.9em;
+    margin-bottom: 0.6em;
     font-family: Poppins;
-    padding: 0 70px;
-    margin-bottom: 40px;
+    padding: 0 1.8em;
+    margin-bottom: 2.5em;
+    display: flex;
+    justify-content: space-between;
 }
-
 .boxThreeLeft {
     float: left;
     height: 100%;
@@ -165,18 +179,17 @@
     align-items: center;
 }
 .boxThreeLeft p:nth-child(1){
-    font-size: 30px;
+    font-size: 1.9rem;
     font-weight: bold;
 }
 .boxThreeLeft p:nth-child(2){
-    font-size: 16px;
+    font-size: 1rem;
     font-weight:medium;
-    margin-top: 5px;
+    margin-top: 0.3em;
 }
-
 .boxThreeRight{
     background-color: #C6C6C6;
-    border-radius: 15px;
+    border-radius: 0.9em;
     float: right;
     height: 100%;
     width: 50%;
@@ -184,10 +197,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    padding: 1.9em;
 }
 .boxThreeRight p{
-    font-size: 22px;
+    font-size: 1.4rem;
     color: white;
 }
 .boxThreeRightImages{
@@ -195,72 +208,72 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 7px;
-    margin-bottom: 60px;
-    margin-top: 10px;
+    gap: 0.5em;
+    margin-bottom: 3.7em;
+    margin-top: 0.6em;
 }
 .boxThreeRightImages img{
-    height: 150px;
-    width: 150px;
+    height: 9.4em;
+    width: 9.4em;
 }
 .boxThreeRightImages img:nth-child(3){
-   width: 200px!important;
+   width: 12.5em!important;
 }
-
 /* =================box-four================== */
 .boxFour{
     width: 100%;
-    height: 200px;
+    height: 12.5em;
     font-family: Poppins;
-    padding: 0 70px;
+    padding: 0 4.4em;
 }
 .boxFourLeft {
     height: 100%;
-    width: 40%;
+    width: 45%;
 }
 .boxFourLeft p:nth-child(1){
-    font-size: 35px;
+    font-size: 2.1rem;
     font-weight: medium;
-    margin-bottom: 20px;
+    margin-bottom: 0.6em;
 }
 .boxFourLeft p:nth-child(2){
-    font-size: 16px;
+    font-size: 1rem;
     font-weight:medium;
-    border-radius: 25px;
-    border: 2px solid #349F68;
+    border-radius: 1.5em;
+    border: 0.1em solid #349F68;
     color: #28A263;
     display: inline;
-    padding: 10px 15px;
+    padding: 0.6em 0.9em;
 }
-
 /* ==================box-five================ */
 .boxFive{
     /* background-color: #349F68; */
     width: 100%;
-    height: 500px;
+    /* height: 500px; */
+    height: auto;
     font-family: Poppins;
-    padding: 0 70px;
-    margin-bottom: 50px;
+    padding: 0 1em;
+    margin-bottom: 3.1em;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 20px;
+    gap: 1em;
 }
 .boxFiveItems{
-    border-radius: 25px;
-    padding: 30px;
+    border-radius: 1.5em;
+    padding: 2em;
     height: 100%;
 }
+.boxFiveItems:nth-child(1), .boxFiveItems:nth-child(4){
+   background-color: #DEDEDE;
+}
 .boxFiveItems p:nth-child(1){
-    font-size: 30px;
+    font-size: 1.9em;
     color: #000000;
-   
 }
 .boxFiveItems p:nth-child(2){
-    font-size: 15px;
+    font-size: 1rem;
     font-weight: 500;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 0.6em 0 0.6em 0;
     color: #1F1F1F;
     font-family: Poppins;
 }
@@ -270,55 +283,50 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 1.2em;
 }
-
 .circle{
     background-color: #28A263;
     border-radius: 50%;
-    height: 50px;
-    width: 50px;
+    height: 3.1em;
+    width: 3.1em;
     display: inline-block;
 }
-
 .circleText p:nth-child(1){
-    font-size: 18px;
-    margin-left: 10px;
+    font-size: 1.1rem;
+    margin-left: 0.7em;
     color: #060606;
-   
 }
 .circleText p:nth-child(2){
-    font-size: 15px;
-    margin-left: 10px;
+    font-size: 0.9rem;
+    margin-left: 0.6em;
     color: #3D3D3D;
     font-weight: medium;     
-    margin: 0 0 0 10px;   
+    margin: 0 0 0 0.9em;   
 }
 /* =====================app lists =============== */
 .appsListHeading{
-    font-size: 35px;
+    font-size: 2.2rem;
     font-weight: bold;
-    margin-bottom: 60px;
-    padding: 0 70px;
+    margin-bottom: 1.8em;
+    padding: 0 1em;
 }   
 .appsList{
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 30px;
-    padding: 0 70px;
-    margin-bottom: 60px;
+    gap: 1.9em;
+    padding: 0 2.4em;
+    margin-bottom: 3.7em;
 }
 .appsList div{
     display: flex;
-    /* background-color: gold; */
-    /* align-items: center; */
     padding: 0;
 }
 .appsList div img{
-    margin-right: 15px;
-    height: 45px;
-    width: 45px;
+    margin-right: 1em;
+    height: 2.8em;
+    width: 2.8em;
 }
 .appsList div > div{
     display: flex;
@@ -326,80 +334,97 @@
 }
 .appsList > div > div>  p:nth-child(1){
     color: #1E2330;
-    font-size: 19px;
+    font-size: 1.2rem;
 }
 .appsList > div > div>  p:nth-child(2){
     color: #1E2330;
 }
-
 /* =====================footer=========================== */
+
 .footer{
+    position: relative;
     background-color: white;
-    height: 400px;
+    height: 25em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    box-shadow: 0 0 50px  #91cfaf;
-    margin: 0 70px;
+    border-radius: 0.9em;
+    box-shadow: 0 0 3.1em #91cfaf;
+    margin: 0 1.7em;
 }
+.footer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0.9em;
+    box-shadow: 0 0 3.1em #91cfaf;
+    z-index: -1;
+    pointer-events: none;
+  }
+  
 .footerDivOne{
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 3fr;
-    gap: 20px;
+    grid-template-areas: "a b";
+    gap: 1.2em;  
 }
-.footerDivOne div:nth-child(1) button:nth-child(1){
+.footerDivOneLeft button:nth-child(1){
     background-color: #EFF0EC;
     color: #1E2330;
-    border-radius: 8px;
+    border-radius: 0.5em;
     border: none;
-    padding: 0 20px;
+    padding: 0 1.2em;
     font-family: Poppins;
-    font-size: 15px;
-    margin-right: 10px;
-    height: 50px;
+    font-size: 1rem;
+    margin-right: 0.9em;
+    height: 3.1em;
 }
-.footerDivOne div:nth-child(1) button:nth-child(2){
+.footerDivOneLeft button:nth-child(2){
     background-color: #28A263;
     color: white;
-    border-radius: 30px;
+    border-radius: 1.9em;
     border: none;
-    padding: 0 20px;
-    font-size: 15px;
+    padding: 0 1.2em;
+    font-size: 1rem;
     font-family: Poppins;
-    height: 50px;
+    height: 3.1em;
 }
-.footerDivOne div:nth-child(1){
-  margin-left: 20px;
+.footerDivOneLeft{
+  margin-left: 1.2em;
   display: flex;
   justify-content: center;
-  padding-top: 40px;
+  padding-top:2.5em;
+  grid-area: a;
 }
-.footerDivOne div:nth-child(2){
+.footerDivOneRight{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 40px;
-    margin-right: 20px;
+    padding: 2.5em;
+    margin-right: 1.3em;
+    grid-area: b;
 }
-.footerDivOne div:nth-child(2) ul li{
+.footerDivOneRight ul li{
     color: #1E2330;
-    font-size: 13px;
+    font-size: 0.9rem;
     font-family: Poppins;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 1.5em;
 }
 .footerDivTwo{
     width: 100%;
     display: flex;
-    gap: 40px;
+    gap: 2.5em;  
 }
 .footerDivTwo p{
     width: 65%;
-    padding: 0 50px;
+    padding: 0 3.9em;
     color: #1E2330;
-    font-size: 13px;
+    font-size: 0.9rem;
     font-family: Poppins;
     font-weight: bold;
 }
@@ -409,7 +434,182 @@
     justify-content: space-evenly;
 }
 .footerDivTwo div img{
-    height: 30px;
-    width: 35px;
+    font-size: 1rem;
+    height: 1.9em;
+    width: 2.1em;
     object-fit: contain;
+}
+
+/* ======================================================== */
+/* ======================================================== */
+/* ======================================================== */
+/* ======================================================== */
+
+@media (max-width: 375px) {
+    .container{
+        width: 99%;
+    }
+    .navbarTab{
+       border: none;
+       margin-bottom: 1em;
+    }
+    .logoBox p, .separator{
+        display: none;
+        visibility: hidden;
+    }
+    .boxOne{
+        flex-direction: column;
+        height: auto;
+    }
+    .boxOneLeft p:nth-child(1){
+        font-size: 2rem;
+    }
+    .boxOneLeft button{
+        margin: 2em 0 2em 0;
+    }
+    .boxOneRight {
+        margin-left: 1em;
+        height: 15em;
+        width: 90%;
+    }
+    .boxTwo{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        height: 50em;
+        gap: 3em;
+        height: auto;
+        grid-template-areas:"b" "a";
+    }
+    .boxTwoLeft{
+        margin-bottom: 2em;
+        padding: 0 1em 0 1em ;
+    }
+    .boxTwoLeft img{
+        height: 9em;
+        width: 17em;
+    }
+    .boxTwoRight p:nth-child(1){
+        width: 100%;
+        margin-top: 0.6em;
+        margin-bottom: 0.6em;;
+    }
+    .boxThree{
+        flex-direction: column;
+        height: auto;
+    }
+    .boxThreeLeft{
+        width: 100%;
+        height: auto;
+        padding: 0 1em;
+        margin-bottom: 3em;
+    }
+    .boxThreeRight{
+        width: 100%;
+        padding: 1.4em;
+    }
+    .boxThreeRightImages{
+        margin: 0.3em 0 2em 0;
+    }
+    .boxThreeRightImages img{
+        height: 5em;
+        width: 7em;
+    }
+    .boxThreeRightImages img:nth-child(3){
+        width: 9em!important;
+     }
+    .boxThreeRight p{
+        font-size: 1rem;
+     }
+    .boxFour{
+        height: 18em;
+        padding: 0 2.1em;
+    }
+    .boxFourLeft{
+        width: 100%;
+        text-align: center;
+    }
+    .boxFive{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 1em;
+        overflow: scroll;
+    }
+    .boxFiveItems{
+        width: 20em;
+        height: 22em;
+        padding: 1.2em;
+    }
+    .boxFiveItems:nth-child(2), .boxFiveItems:nth-child(4){
+        background-color: #DEDEDE;
+     }
+     .boxFiveItems:nth-child(1){
+        background-color : white;
+     }
+     .appsListHeading{
+        font-size: 2.5rem;
+        padding: 0 0.4em;
+        text-align: center;
+    } 
+    .appsList{
+        display:grid;
+        grid-template-columns: 1fr ;
+        grid-template-rows: auto;
+        padding: 0 1.3em;
+    }
+    .appsList div{
+        display: flex;
+        margin-bottom: 0.5em;
+    }
+    .appsList div img{
+        margin-right: 1.2em;
+        height: 3em;
+        width: 3.3em;
+    }
+    .footer{
+        height: auto;
+    }
+    .footerDivOne{
+        grid-template-areas: "b" "a";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        height: auto;
+        width: 100%;
+    }
+    .footerDivOneLeft{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 2.5em 0 0 0;
+        grid-area: a;
+        padding: 0 0 2.5em 0;
+    }
+    .footerDivOneLeft{
+        flex-direction: column;
+        padding: 0;
+    }
+    .footerDivOneLeft button{
+        width:fit-content;
+        margin: 0 0 0.9em 1em;
+    }
+    .footerDivOneRight{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        grid-area: b;
+        padding: 2.5em 2.5em 0 2em;
+    }
+    .footerDivTwo{
+        flex-direction: column;
+    }
+    .footerDivTwo p{
+        display: none;
+    }
+    .footerDivTwo div{
+        width : 100%;
+        padding: 2em;
+    }
+    .footerDivTwo div img{
+        font-size: 1.1rem;
+        height: 1.6em;
+        object-fit: contain;
+    }
 }
