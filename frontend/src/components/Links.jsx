@@ -1,23 +1,37 @@
 import React, {useState, useEffect } from 'react'
 import style from './Links.module.css'
 import share from '../images/share.png'
-import {  useLocation} from 'react-router-dom';
+import {  useNavigate, useLocation} from 'react-router-dom';
 import bigMemojiBoy from "../images/bigMemojiBoy.png";
 import plusImage from "../images/plusImage.png";
 import movingOut from "../images/movingOut.png";
 import blackFire from "../images/blackFire.png"
 import whiteFire from "../images/whiteFire.png"
 import HomeIcon from '../svg/HomeIcon.jsx';
+import AddLinkModal from './AddLinkModal.jsx';
 import {fetchUserData, uploadProfileImage, removeProfileImage} from '../FetchMaker.js';
 const port = 3000 || 5000;
 const baseUrl = `http://192.168.0.105:${port}`;
 
 function Links() {
+  const navigate = useNavigate();
   const location = useLocation();
   const userName = location.state?.username; 
   const Name = location.state?.name;
  
   const [imageSrc, setImageSrc] = useState(bigMemojiBoy);
+  const [bio, setBio] = useState("");
+  const [selectedColor, setSelectedColor] = useState('#342B26');
+  const presetColors = ['#342B26', '#FFFFFF', '#000000'];
+  const [hexInput, setHexInput] = useState("#342B26");
+
+  const [showModal, setShowModal] = useState(false);
+  const [isSocial, setIsSocial] = useState(true);
+
+  const handleHexChange = (val) => {
+    setHexInput(val);
+    if (/^#[0-9A-Fa-f]{6}$/.test(val)) setSelectedColor(val);
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -59,18 +73,6 @@ function Links() {
     }
   };
 
-  const [bio, setBio] = useState("");
-  const [isSocial, setIsSocial] = useState(true);
-
-  const [selectedColor, setSelectedColor] = useState('#342B26');
-  const presetColors = ['#342B26', '#FFFFFF', '#000000'];
-  const [hexInput, setHexInput] = useState("#342B26");
-
-  const handleHexChange = (val) => {
-    setHexInput(val);
-    if (/^#[0-9A-Fa-f]{6}$/.test(val)) setSelectedColor(val);
-  };
-
 //  =====================================================================================
   return (
     <div className={style.container}>
@@ -97,19 +99,31 @@ function Links() {
                 <img src={movingOut} alt="movingOutPng" />
               </div>
               <div className={style.divTwo}>
-                <img src={bigMemojiBoy} alt="memojiBoyPng" height="90%" width="90%"/>
+                <img src={imageSrc.startsWith("/uploads") ? `${baseUrl}${imageSrc}` : imageSrc} style={{objectFit: "fill"}} height="90%" width="90%"/>
               </div>
-              <p>@oppo_08</p>
+              <p>{userName}</p>
             </div>
             <div className={style.mobilePreviewSlider}>
-              <button>link</button>
-              <button>shop</button>
+              {/* <button>link</button>
+              <button>shop</button> */}
+                  <div className={style.toggleWrapper} onClick={() => setIsSocial(!isSocial)}>
+                    <div className={style.labels}>
+                      <span className={`${isSocial ? style.active : ""} ${style.spanStyle}`}>   
+                        Link
+                      </span>
+                      <span className={`${!isSocial ? style.active : ""} ${style.spanStyle}`}>
+                        Shop
+                     </span>
+                    </div>
+
+                  <div className={`${style.slider} ${isSocial ? style.left : style.right}`} ></div>
+                </div>
             </div>
 
             <div>latest yt video</div>
             <div>latest insta video</div>
 
-            <button className={style.getConnectedBtn}>Get Connected</button>
+            <button className={style.getConnectedBtn} onClick={()=> navigate('/')}>Get Connected</button>
 
             <div className={style.sparkLogo}><img src={blackFire} alt="fireImg" height="20px"/>&nbsp;SPARK</div>
           </div>
@@ -162,19 +176,29 @@ function Links() {
                     <div className={style.labels}>
                       <span className={`${isSocial ? style.active : ""} ${style.spanStyle}`}>
                          <HomeIcon color={isSocial ? "white" : "grey"} />
-                         Social
+                         Add Link
                       </span>
                       <span className={`${!isSocial ? style.active : ""} ${style.spanStyle}`}>
                         <HomeIcon color={!isSocial ? "white" : "grey"} />
-                        Shop
+                        Add Shop
                      </span>
                     </div>
 
                   <div className={`${style.slider} ${isSocial ? style.left : style.right}`} ></div>
                 </div>
 
-                 <button className={style.addBtn}><img src={plusImage} alt="plusImage" />Add</button>    
+                <button className={style.addBtn} onClick={() => setShowModal(true)}>
+                    <img src={plusImage} alt="plusImage" />
+                    Add
+                </button>    
 
+                {showModal && (
+                        <AddLinkModal
+                          onClose={() => setShowModal(false)}
+                          isSocial={isSocial}
+                          setIsSocial={setIsSocial}
+                        />
+                )}
               </div>
           </div>
 
@@ -228,8 +252,7 @@ function Links() {
 
         <div className={style.saveBtnDiv}>
             <button className={style.saveBtn}>Save</button>
-        </div>
-          
+        </div>          
       </div >
     </div>
 

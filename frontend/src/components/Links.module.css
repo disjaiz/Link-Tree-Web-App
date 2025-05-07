@@ -10,7 +10,7 @@
     background-color: #f1f2f3;    
 }
 .header{
-    padding: 10px;
+    padding: 0.6em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,8 +20,8 @@
 .shareBtn{
     background-color: white;
     border: none;
-    padding: 10px 15px;
-    border-radius: 25px;
+    padding: 0.6em 0.9em;
+    border-radius: 1.6em;
     font-family: Poppins;
     font-weight: 500;
 }
@@ -35,7 +35,6 @@
     display: flex;
     flex-direction: row;
 }
-
 /*=================================================*/
 .mobilePreviewDiv{
     width: 35%;
@@ -45,11 +44,11 @@
 .mobilePreview{
     position: relative;
     background-color: #FFFFFF;
-    height: 550px;
-    width :80%;
+    height: 34.4em;
+    width: 80%;
     /* margin-top: 5%; */
-    border-radius: 40px;
-    border: 19px solid #000000;
+    border-radius: 2.5em;
+    border: 1.1em solid #000000;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,7 +58,7 @@
     background-color: #3c342f;
     width: 100%;
     height: 30%;
-    border-radius: 20px;
+    border-radius: 1.2em;
 }
 .mobilePreviewHeader .divTwo{
     position: absolute;
@@ -67,8 +66,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #DFDFDF;
-    width: 60px;
-    height: 60px;
+    width: 3.7em;
+    height: 3.7em;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -76,20 +75,20 @@
 }
 .mobilePreviewHeader p{
     position: absolute;
-    bottom: 10px; 
+    bottom: 0.5em; 
     left: 50%;
     transform: translateX(-50%);
     font-family: Poppins;
-    font-size: 20px;
+    font-size: 1.2rem;
     font-weight: 600;
     color: #FFFFFF;
 }
 .mobilePreviewHeader .divOne{
     position: absolute;
-    top: 10px;
-    left: 10px; 
-    width: 30px;
-    height: 30px;
+    top: 0.6em;
+    left: 0.6em; 
+    width: 1.9em;
+    height: 1.9em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,31 +97,31 @@
 }
 .mobilePreviewSlider{
     margin-top: 12%;
-    padding: 20px;
+    padding: 1.2em;
 }
 .getConnectedBtn{
     background-color: #35CA7D;
     color: #FFFFFF;
-    font-size: 14px;
-    padding: 10px 10px;
+    font-size: 0.9rem;
+    padding: .7em;
     width: 70%;
-    border-radius: 25px;
+    border-radius: 1.7em;
     border: none;
     position: absolute;
-    bottom: 50px; 
+    bottom: 3.4em; 
     left: 50%;
     transform: translateX(-50%);
 }
 .sparkLogo{
     position: absolute;
-    bottom: 10px; 
+    bottom: 0.7em; 
     left: 50%;
     transform: translateX(-50%);
     color: black;
     display: flex;
     justify-content: center;
     font-weight: 700;
-    font-size: 14px;
+    font-size: .9rem;
 }
 /*============================= PROFILE SEGMENT ================================== */
 .profileDiv{
@@ -139,27 +138,27 @@
 }
 .profileSegmentBox > p, .bannerSegmentBox > p{
     color: #000000;
-    font: 600 16px Poppins;
-    margin-bottom: 9px;
+    font: 600 1rem Poppins;
+    margin-bottom: 0.6em;
 }
 .profileSegment{
     width: 100%;
     height: 100%;
     background-color: white;
-    border-radius: 20px;
     padding: 5% 5% 3% 5%;
     margin-bottom: 5%;
+    border-radius: 20px;
 }
 .pickImageDiv{
     width: 100%;
-    height: 100px;
+    height: 6.2em;
     display: grid;
     grid-template-columns: 1fr 4fr;
     margin-bottom: 2%;
 }
 .pickImageDiv div:nth-child(1){
-    height: 70px;
-    width: 65px;
+    height: 4.4em;
+    width: 4.1em;
     background-color: #DFDFDF;
     border-radius: 50%;
     display: flex;
@@ -175,18 +174,17 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    font: 600 16px Poppins;
+    font: 600 1rem Poppins;
     color: #000000;
-
 }
 .imagePickerBtn{
     background-color: #28A263;
     color: #FFFFFF;
-    font : 600 14px Inter;
+    font : 600 0.9rem Inter;
     border: none;
-    border-radius: 20px;
-    padding: 12px 0;
-    margin-bottom: 10px;
+    border-radius: 1.4em;
+    padding: 0.8em 0;
+    margin-bottom: 0.7em;
     cursor: pointer;
     text-align: center;
 }
@@ -194,32 +192,30 @@
     background-color: white;
     border: 1px solid rgb(213, 210, 210);
     color: #A8AAA2;
-    font: 600 14px Inter;
-    padding: 11px 0;
-    border-radius: 20px;
+    font: 600 0.9rem Inter;
+    padding: 0.8em 0;
+    border-radius: 1.4em;
     cursor: pointer;
 }
-
 .profileSegment > div:nth-child(2),
 .profileSegment > div:nth-child(3) {
     background-color: #F6F7F5;
-    border-radius: 8px;
-    padding: 9px 20px;
+    border-radius: .5em;
+    padding: 0.6em 1.2em;
     display: flex;
     flex-direction: column;
     margin-bottom: 3%;
 }
-
 .profileSegment > div:nth-child(2)> label,
 .profileSegment > div:nth-child(3) > label {
     color: #676B5F;
-    font: 400 14px Inter;
-    margin-bottom: 6px;
+    font: 400 0.9em Inter;
+    margin-bottom: 0.4em;
 }
 .profileSegment > div:nth-child(2)> input,
 .profileSegment > div:nth-child(3) > input {
     color: #000000;
-    font: 400 14px Inter;
+    font: 400 0.9em Inter;
     border: none;
     background-color: #F6F7F5;    
 }
@@ -234,67 +230,64 @@
     align-items: center;
 }
 .profileSegment > div:nth-child(4) > p{
-    font: 12px Inter;
+    font: 0.7rem Inter;
     color: #676B5F;
 }
-
 /* ========================================= */
 .profileSegmentPartTwo{
     width: 100%;
     height: 100%;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 1.2em;
     padding: 5%;
 }
 .addBtn{
     background-color: #28A263;
-    font: 600 14px Inter;
+    font: 600 0.9rem Inter;
     color: #FFFFFF;
     border: none;
-    border-radius: 20px;
+    border-radius: 1.4em;
     width: 100%;
-    padding: 12px 0;
+    padding: .8em 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 0.6em;
     margin-top: 5%;
 }
 .toggleWrapper {
     position: relative;
     width: 45%;
-    height: 37px;
+    height: 2.4em;
     background-color: #ddd;
-    border-radius: 25px;
+    border-radius: 1.6em;
     cursor: pointer;
     display: flex;
     align-items: center;
-    box-sizing: border-box;
     user-select: none;
 }
-  .labels {
+.labels {
     position: absolute;
     width: 100%;
     display: flex;
     justify-content: space-around;
-    padding: 0 10px;
-    font: 600 13px Inter;
+    font: 600 0.8rem Inter;
     color: #555;
     z-index: 2;
   }
-  .labels span.active {
+.labels span.active {
     color: #FFFFFF;
   }
-  .slider {
+.slider {
     position: absolute;
     width: 50%;
     height: 100%;
     background-color: #28a263;
-    border-radius: 20px;
+    border-radius: 1.2em;
     transition: all 0.3s ease;
     z-index: 1;
   }
-  .spanStyle{
+.spanStyle{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -303,21 +296,18 @@
 .left {
     left: 0;
   }
-  
 .right {
     left: 50%;
   }
 .icon {
     margin-right: 5px;
   }
-  
-  .active {
+.active {
     color: white;
     fill: white;
     stroke: white;
   }
-  
-  .inactive {
+.inactive {
     color: grey;
     fill: grey;
     stroke: grey;
@@ -327,20 +317,20 @@
     width: 100%;
     height: 100%;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 1.2em;
     padding: 5% 5% 3% 5%;
     margin-bottom: 5%;
 }
-
 .bannerSegmentProfileBoard {
     background-color: #342B26;
-    border-radius: 9px;
+    border-radius: 0.6em;
     width: 100%;
-    height: 200px;
+    height: 12.4em;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 3%;
+    border: 1px solid #ccc;
   }
 .avatarWrapper {
     flex: 1;
@@ -349,8 +339,8 @@
     align-items: center;
   }
 .avatarWrapper div{
-    height: 70px;
-    width: 70px;
+    height: 4.4em;
+    width: 4.4em;
     background-color: #DFDFDF;
     border-radius: 50%;
     display: flex;
@@ -358,37 +348,35 @@
     align-items: center;
 }
 .textWrapper {
-    margin-bottom: 20px;
+    margin-bottom: 1.2em;
     text-align: center;
     color: #FFFFFF;
 }
 .textWrapper p:nth-child(1) {
-    font: 700 20px Poppins;
-    margin-bottom: 5px;
+    font: 700 1.2rem Poppins;
+    margin-bottom: .3em;
 }
 .textWrapper p:nth-child(2) {
-    font: 400 11px Poppins;
+    font: 400 0.7rem Poppins;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 2px;
  }
-  
 /* ===================================== */
 .colorPicker {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.6em;
   }
 .colorPicker > p {
-    font: 500 14px Poppins;
+    font: 500 0.9rem Poppins;
     color: #000000;
-    margin-bottom: 9px;
+    margin-bottom: 0.6em;
   }
-  
 .colorOptions {
     display: flex;
-    gap: 10px;
+    gap: 0.6em;
     margin-bottom: 2%;
   }
 .colorCircle {
@@ -401,21 +389,20 @@
 .hexInputRow {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.6em;
     justify-content: center;
   }
-.hexInput {
-    width: 100px;
-    padding: 4px;
+  .hexInput {
+    width: 6.3em;
+    padding: 0.2em;
     border: none;
   }
 .previewCircle {
-    width: 50px;
-    height: 50px;
+    width: 3.1em;
+    height: 3.1em;
     border-radius: 20%;
     border: 1px solid #ccc;
   }
-  
   /* ========= */
 .saveBtnDiv{
     display: flex;
@@ -426,25 +413,115 @@
 }
 .saveBtn{
     background-color: #29A263;
-    border-radius: 15px;
+    border-radius: 0.9em;
     border: none;
-    height: 45px;
-    width: 170px;
+    height: 2.6em;
+    width: 9.7em;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #FFFFFF;
-    font: 500 17px Poppins;
-}
-
+    font: 500 1.1rem Poppins;
+} 
  /* ========================================================== */
  /* =========================================================== */
  /* ============================================================ */
  /* ============================================================= */
    
  @media (max-width: 375px) {
-    .sideWoman{
-      display: none;
-      visibility: hidden;
+    .container{
+        height: auto;
+        width: 100%;
+        padding: 0;
+        background-color: white; 
+    }
+    .mobilePreviewDiv, .header{
+        display: none;
+        visibility: hidden;
+    }
+    .profileDiv{
+        width: 100%; 
+        height: auto;
+        flex-direction: column; 
+        margin-bottom: 20%;
+    }
+    .profileSegmentBox, .bannerSegmentBox{
+        width: 100%;
+        padding-top: 4%;
+    }
+    .profileSegmentBox > p, .bannerSegmentBox > p{
+        font: 600 1rem Inter;
+        margin: 0 0 0.9em 0.5em;
+    }
+    .profileSegment{
+        width: 100%;
+        height: auto;
+        padding: 2% 1% 0 2%;
+        margin-bottom: 0;
+    }
+    .imagePickerBtn{
+        font : 600 0.8rem Inter;
+        padding: 0.6em 0;
+    }
+    .imageRemoverBtn{
+        font: 600 .7rem Inter;
+        padding: 0.6em 0;
+    }
+    .pickImageDiv div:nth-child(1){
+        height: 4.2em;
+        width: 4.2em;
+        margin-right: 0.8em;
+    }
+    .profileSegment > div:nth-child(2),
+    .profileSegment > div:nth-child(3) {
+        font-size: 0.9rem;
+        padding: 0.4em 1em;
+    }
+    .profileSegment > div:nth-child(4) > p{
+        font: 0.6rem Inter;
+    }
+    .toggleWrapper {
+        font-size: 0.9rem;
+        width: 65%;
+        height: 2.3em;
+    }
+    .labels svg{
+        height: 1.4em;
+        width: 1.4em;
+    }
+    .addBtn{
+        font: 600 0.8rem Inter;
+        margin-top: 3%;
+    }
+    .addBtn img{
+        height: 1em;
+    }
+    .bannerSegment{
+        padding: 5%;
+    }
+    .bannerSegmentProfileBoard {
+        border-radius: 0.3em;
+        height: 11em;
+      }
+    .colorPicker > p {
+        font: 500 0.7rem Poppins;
+      }
+    .colorCircle {
+        width: 40px;
+        height: 40px;
+      }
+    .previewCircle {
+        width: 2.5em;
+        height: 2.5em;
+      }
+    .saveBtnDiv{
+        justify-content: flex-start;
+        width: 100%;
+    }
+    .saveBtn{
+        margin-left: 1em;
+        height: 2.3em;
+        width: 9em;
+        font: 500 0.9rem Poppins;
     }
 }

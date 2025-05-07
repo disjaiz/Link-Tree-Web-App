@@ -65,8 +65,10 @@ router.post('/signup', async (req, res) => {
         res.cookie('Token', token, {
             httpOnly: true,
             maxAge: 5 * 60 * 60 * 1000,
-            sameSite: 'None',
-            secure: true,
+            // sameSite: 'None',
+            // secure: true,
+            secure: false,
+            sameSite: 'Lax',
         });
         return res.status(200).json({ msg: "User registered and logged in!", user });
     } catch (error) {
@@ -148,9 +150,6 @@ router.put("/update-profile-title/:userId", async (req, res) => {
         res.status(500).json({ message: "Server error", error });
     }
 });
-
-export default router;
-
 // ============================update profile image===================================
 // Upload image
 router.post('/upload-profile-image',Authenticate, upload.single('image'), async (req, res) => {
@@ -194,9 +193,6 @@ router.post('/upload-profile-image',Authenticate, upload.single('image'), async 
       res.status(500).json({ success: false, message: 'Delete failed' });
     }
   });
-  
-
-
 // ===========================Fetch user data ===================================
 router.get('/userData', Authenticate, async (req, res) => {
     try {
@@ -208,3 +204,35 @@ router.get('/userData', Authenticate, async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   });
+
+// ==========================Edit user data =======================================
+router.put('/update-settings', Authenticate, async (req, res) => {
+  try {
+    const userId = req.user._id; 
+
+    const { firstName, lastName, email, password, confirmPassword } = req.body;
+
+    if (password && password !== confirmPassword) {
+      return res.status(400).json({ message: 'Passwords do not match' });
+    }
+
+    const updateFields = {
+      name: `${firstName} ${lastName}`,
+      email,
+    };
+
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      updateFields.password = hashedPassword;
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(userId, updateFields, { new: true });
+
+    res.json({ message: 'User updated', user: updatedUser });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+});
+
+
+export default router;

@@ -168,9 +168,9 @@ function Dashboard() {
     </div>
 
         {/* =========== RENDER COMPS ================= */}
-        {/* <div className={styles.content}>
+        <div className={styles.content}>
           {renderComponent()}
-        </div> */}
+        </div>
         {/* ============================================ */}
   
       </div>

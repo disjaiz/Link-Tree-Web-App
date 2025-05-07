@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import style from './Settings.module.css'
 import {useLocation} from 'react-router-dom';
+import {updateSettings} from '../FetchMaker.js';
 
 function Settings() {
   const location = useLocation();
@@ -15,40 +16,48 @@ function Settings() {
     })
   const [errors, setErrors] = useState({}); 
 
-  const handleEdit = (e) => {
-    e.preventDefault();
+  const validateForm = () => {
     const newErrors = {};
-
-    // if (!formData.firstName) {
-    //   newErrors.firstName = "First name is required";
-    // }
-    // if (!formData.lastName) {
-    //   newErrors.lastName = "Last name is required";
-    // }
-    // if (!formData.email) {
-    //   newErrors.email = "Email is required";
-    // } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-    //   newErrors.email = "Email address is invalid";
-    // }
-    // if (!formData.password) {
-    //   newErrors.password = "Password is required";
-    // } else if (formData.password.length < 6) {
-    //   newErrors.password = "Password must be at least 6 characters long";
-    // }
-    // if (formData.password !== formData.confirmPassword) {
-    //   newErrors.confirmPassword = "Passwords do not match";
-    // }
+    if (!formData.firstName) {  newErrors.firstName = "First name is required*";}
+    if (!formData.lastName) {  newErrors.lastName = "Last name is required*";}
+    if (!formData.email) {  newErrors.email = "Email is required";} 
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) {  newErrors.email = "Email address is invalid";}
+    if (!formData.password) {  newErrors.password = "Password is required*";} 
+    else if (formData.password.length < 6) { newErrors.password = "Password must be at least 6 characters long";}
+    if (formData.password !== formData.confirmPassword) { newErrors.confirmPassword = "Passwords do not match";}
 
     setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-    if (Object.keys(newErrors).length === 0) {
-      // Submit the form data to the server or perform any other action
-      console.log("Form submitted successfully:", formData);
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    console.log(formData)
+    try {
+      const response = await updateSettings(formData.firstName, 
+                                            formData.lastName, 
+                                            formData.email, 
+                                            formData.password, 
+                                            formData.confirmPassword
+                                          );
+      const updatedData = await response.json();
+  
+      if (response.ok) {
+        console.log(updatedData.user)
+      }
+       else {
+        console.log(updatedData.message)
+      }
+    } catch (error) {
+    console.log(error)
     }
-  }
+  };
+
   return (
     <div className={style.container}>
-          {/* ===========================================header========================== */}
+          {/* ==================================header====================================== */}
           <div className={style.header}>
             <div>
             <p style={{marginBottom:'4px', letterSpacing:'1px'}}><span style={{fontWeight: '700'}}>Hi,</span>&nbsp;{userName}</p>
@@ -58,9 +67,9 @@ function Settings() {
 
           <div className={style.settingsContainer}>
             <span>Edit Profile</span>
-            <hr />
+            <hr id={style.hrOfSettings}/>
 
-            {/* ============== */}
+            {/* ================================ FORM ============================================= */}
                <form id="myForm" onSubmit={handleEdit} className={style.editForm}>
                       <label htmlFor="firstname">First name</label>
                       <input type="text" name="firstName" 
@@ -73,7 +82,7 @@ function Settings() {
                       {errors.lastName && <p className={style.errorText}>{errors.lastName}</p>}
             
                       <label htmlFor="email">Email</label>
-                      <input type="email" name="email" 
+                      <input type="text" name="email" 
                       value={formData.email} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
             {errors.email && <p className={style.errorText}>{errors.email}</p>}
             

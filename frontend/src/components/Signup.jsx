@@ -40,7 +40,7 @@ const validateForm = () => {
 const handleSignup = async (e) => {
   e.preventDefault();
 
-  if (!validateForm()) return; // Stop if validation fails
+  if (!validateForm()) return;
 
   const capitalize = (str) =>
     str.replace(/\b\w/g, (char) => char.toUpperCase());
@@ -49,7 +49,7 @@ const handleSignup = async (e) => {
     ...formData,
     name: capitalize(`${formData.firstName} ${formData.lastName}`.trim()),
   };
-
+  
   try {
     const response = await signup(updatedFormData);
     const signupData = await response.json();
@@ -75,7 +75,6 @@ const handleSignup = async (e) => {
       });
     }
   } catch (error) {
-   
      toast.error( <div className={style.toastContent}>
             <img src={checkCircle} alt="Success" className={style.toastIcon} />
             <span>Network error. Please check your internet connection.</span>

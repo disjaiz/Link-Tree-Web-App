@@ -156,8 +156,8 @@
     width: 100%;
     background-color: white;
   }
-    .sparkLogo{
-    padding: 1.2em 0 1.2em 1em;
+  .sparkLogo{
+    padding: 1.2em 0 1.2em 0.2em;
   }
   .memojiContainer {
     width: fit-content;
@@ -189,6 +189,7 @@
     border-top: .6px solid #00000033;
     border-bottom: .6px solid #00000033;
     padding: 0.8em;
+    background-color: white;
   }
   .optionBtnsContainer button{
     padding: 0;

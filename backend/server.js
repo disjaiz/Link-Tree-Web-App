@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import routerUser from './Routes/User.js';
 
 dotenv.config();
 const app = express();
@@ -41,7 +42,7 @@ app.use(cors({
 
 
 app.use(cookieParser());
-import routerUser from './Routes/User.js';
+
 app.use('/user', routerUser);
 
 const __filename = fileURLToPath(import.meta.url);

@@ -124,3 +124,29 @@ catch (err) {
   throw err;  
 }}
 export {removeProfileImage}
+
+// ================================EDIT USER DATA ==========================================
+async function updateSettings(firstName, lastName, email, password, confirmPassword){
+  try {
+    const response = await fetch(`${baseUrl}/user/update-settings`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include', 
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword
+      })
+    });
+    return response;
+
+    } catch (err) {
+      console.log('Login error:', err);
+      throw err;  
+    }
+};
+export {updateSettings}
