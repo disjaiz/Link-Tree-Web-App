@@ -66,10 +66,10 @@ router.post('/signup', async (req, res) => {
         res.cookie('Token', token, {
             httpOnly: true,
             maxAge: 5 * 60 * 60 * 1000,
-            // sameSite: 'None',
-            // secure: true,
-            secure: false,
-            sameSite: 'Lax',
+            sameSite: 'None',
+            secure: true,
+            // secure: false,
+            // sameSite: 'Lax',
         });
         return res.status(200).json({ msg: "User registered and logged in!", user });
     } catch (error) {
@@ -102,10 +102,10 @@ router.post('/login', async (req, res)=>{
             res.cookie('Token', token, {
                 httpOnly: false, 
                 maxAge:5 * 60 * 60 * 1000,
-                // sameSite: 'None', 
-                // secure: true,
-                secure: false,
-sameSite: 'Lax',
+                sameSite: 'None', 
+                secure: true,
+//                 secure: false,
+// sameSite: 'Lax',
 
               });
           
