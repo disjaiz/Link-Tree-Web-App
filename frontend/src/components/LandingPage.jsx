@@ -18,7 +18,7 @@ import twitter from '../images/twitterLogo.png'
 import instagram from '../images/instagramLogo.png'
 import youtube from '../images/youtubeLogo.png'
 import tiktok from '../images/tiktokLogo.png'
-import linktree from '../images/linktreeLogo.png'
+import linktree from '../images/linkTreeLogo.png'
 import boxOne from '../images/boxOne.png'
 import style from  './LandingPage.module.css'
 import { useNavigate } from 'react-router-dom';
