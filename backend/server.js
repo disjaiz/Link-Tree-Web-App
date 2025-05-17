@@ -18,7 +18,7 @@ app.use(express.json());
 //   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 // }));
 app.use(cors({
-  origin: 'https://link-tree-web-app-2-backend.onrender.com', 
+  origin: 'https://link-tree-web-app-frontend.onrender.com', 
   credentials: true, 
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
