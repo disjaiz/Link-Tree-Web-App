@@ -35,10 +35,7 @@ function App() {
       path: "/user/preview/:id",
       element: <Profile />,
     },
-    {
-      path: "/text",
-      element: <Text />
-    }
+
 ])
 
   return (
