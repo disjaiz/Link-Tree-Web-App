@@ -35,6 +35,7 @@ function LandingPage() {
                 <img src={fire} alt="fire_logo" style={{ height: '25px' }} />
                 <div className={style.separatorContainer}>
                 <img src={spark} alt="spark_logo" style={{ height: '15px' }} />
+
                 <div className={style.separator}></div>
                 </div>
                 <p style={{ display: "inline-block" }}>Marketplace</p>

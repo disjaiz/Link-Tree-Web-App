@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import fire from '../images/fire.png'
-import spark from '../images/spark.png'
+import spark from '../images/SPARK.png'
 import sideWoman from '../images/sideWoman.png'
 import checkCircle from '../images/checkCircle.png'
 import style from  './Signup.module.css'

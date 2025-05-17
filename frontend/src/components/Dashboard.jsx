@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect, use} from 'react'
 import styles from './Dashboard.module.css'
 import fire from '../images/fire.png'
-import spark from '../images/spark.png'
+import spark from '../images/SPARK.png'
 
 import Links from "./Links";
 import Appearence from "./Appearence";
