@@ -1,7 +1,7 @@
 import style from './AddLinkModal.module.css'
 import HomeIcon from '../svg/HomeIcon.jsx';
 import { useRef, useEffect, useState } from "react";
-import copyImg from '../images/CopyImg.png';
+import copyImg from '../images/copyImg.png';
 import deleteImg from '../images/deleteImg.png';
 import instagram from '../images/instagram.png';
 import facebook from '../images/facebook.png';
