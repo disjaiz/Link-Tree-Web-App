@@ -8,13 +8,83 @@ import facebook from '../images/facebook.png';
 import youtube from '../images/youtube.png';
 import x from '../images/x.png';
 import penImg from '../images/penImage.png';
+import defaultAppIcon from '../images/defaultAppIcon.png';
+import {createLink, updateLink} from '../FetchMaker.js';
 
-function AddLinkModal({ onClose, isSocial, setIsSocial }) {
+function AddLinkModal({ mode, linkData, onClose, isSocial, setIsSocial }) {
     const modalRef = useRef();
     const [isSave, setIsSave] = useState(false);
 
-    const [socialInput, setSocialInput] = useState({ title: "", url: "" });
-    const [shopInput, setShopInput] = useState({ title: "", url: "" });
+    const [socialInput, setSocialInput] = useState({ title: "", url: "", icon: defaultAppIcon });
+    const [shopInput, setShopInput] = useState({ title: "", url: "", icon: defaultAppIcon });
+
+    const handleIconClick = (iconPath) => {
+      if (isSocial) {
+        setSocialInput({ ...socialInput, icon: iconPath });
+      } else {
+        setShopInput({ ...shopInput, icon: iconPath });
+      }
+    };
+
+    // ==========================
+//     useEffect(() => {
+//       console.log("lainkData",linkData);
+
+//   if (mode === "edit" && linkData) {
+//     if (isSocial) setSocialInput(linkData);
+//     else setShopInput(linkData);
+//   }
+// }, [mode, linkData, isSocial]);
+
+
+//     useEffect(() => {
+//       const handleClickOutside = (e) => {
+//         if (modalRef.current && !modalRef.current.contains(e.target)) {
+//           onClose();
+//         }
+//       };
+  
+//       document.addEventListener("mousedown", handleClickOutside);
+//       return () => document.removeEventListener("mousedown", handleClickOutside);
+//     }, [onClose]);
+
+    useEffect(() => {
+      // Handle outside click
+      const handleClickOutside = (e) => {
+        if (modalRef.current && !modalRef.current.contains(e.target)) {
+          onClose();
+        }
+      };
+      document.addEventListener("mousedown", handleClickOutside);
+    
+      // Handle edit mode data fill
+      if (mode === "edit" && linkData) {
+        console.log("lainkData",linkData);
+        if (linkData.type === "social") {
+           setSocialInput({ 
+            title: linkData.title,
+             url: linkData.url,
+             icon: linkData.icon,
+            });
+        } 
+        if (linkData.type === "shop")  {
+          setShopInput({
+              title: linkData.title,
+             url: linkData.url,
+             icon: linkData.icon,
+          })
+        }              
+      }
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [onClose, mode, linkData, isSocial]);
+
+// useEffect(() => {
+//   console.log("socialInput updated:", socialInput);
+// }, [socialInput]);
+
+// ========================================================
 
     const handleInputChange = (e) => {
       const { name, value } = e.target;
@@ -25,24 +95,72 @@ function AddLinkModal({ onClose, isSocial, setIsSocial }) {
         setShopInput({ ...shopInput, [name]: value });
       }
     };
+    // const handleSaveToggle = async() => {
+    //   const linkData = {
+    //     type: isSocial ? "social" : "shop",
+    //     linkTitle: isSocial ? socialInput.title : shopInput.title,
+    //     linkUrl: isSocial ? socialInput.url : shopInput.url,
+    //     icon: isSocial ? socialInput.icon : shopInput.icon,
+    //   };
+  
+    //   const response = await createLink(linkData);
+    //   const data = await response.json();
 
-    const handleSaveToggle =()=>{
-      setIsSave(!isSave);
-      console.log(socialInput)
-
-      onClose();
-    }
-
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-          if (modalRef.current && !modalRef.current.contains(e.target)) {
-            onClose();
-          }
-        };
+    //   if (response.ok) {
+    //     console.log("Updated link:");
+    // } else {
+    //   console.error("Error updating link:", err);
+    // }
     
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-      }, [onClose]);
+    //   setIsSave(!isSave);
+    //   onClose();
+    // };
+
+    const handleSaveToggle = async () => {
+        // console.log(socialInput)
+      const linkPayload = {
+        type: isSocial ? "social" : "shop",
+        linkTitle: isSocial ? socialInput.title : shopInput.title,
+        linkUrl: isSocial ? socialInput.url : shopInput.url,
+        icon: isSocial ? socialInput.icon : shopInput.icon,
+      };
+
+      let response;
+      if (mode === "edit") {
+        // console.log(linkData.id, { ...linkPayload})
+        response = await updateLink(linkData.id, { ...linkPayload});
+      } else {
+        response = await createLink({ ...linkPayload });
+      }
+
+      const data = await response.json();
+    
+      if (response.ok) {
+        console.log(mode === "edit" ? "Link updated" : "Link added");
+      }
+       else {
+        console.error("Error:", data);
+      }
+      setIsSave(!isSave);
+      onClose();
+    };
+    
+    const handleCopy = () => {
+      alert('entered')
+      const currentInput = isSocial ? socialInput : shopInput;
+      console.log("currentINput",currentInput)
+      const combined = `${currentInput.title} - ${currentInput.url}`;
+      console.log("combined", combined);
+      navigator.clipboard.writeText(combined);
+      alert("done")
+    };
+    const handleDelete = () => {
+      if (isSocial) {
+        setSocialInput({ title: "", url: "" });
+      } else {
+        setShopInput({ title: "", url: "" });
+      }
+    };
 
     return (
       <div className={style.modalBackdrop}>
@@ -70,7 +188,7 @@ function AddLinkModal({ onClose, isSocial, setIsSocial }) {
                          onChange={handleInputChange}
                   />
                   <img src={penImg} className={style.inputIcon}  />  
-                  <div onClick={handleSaveToggle} className={`${style.saveToggle} ${isSave? style.saved : ""}`}>
+                  <div  onClick={handleSaveToggle} className={`${style.saveToggle} ${isSave? style.saved : ""}`}>
                   <div className={`${style.saveSlider} ${isSave ? style.right : ""}`} />
                   </div>
                
@@ -81,38 +199,36 @@ function AddLinkModal({ onClose, isSocial, setIsSocial }) {
                     name='url'
                     placeholder='Link Url'
                     value={isSocial ? socialInput.url : shopInput.url}
-                    onChange={handleInputChange}
+                    onChange={handleInputChange}  
                 />
                 <img src={penImg} className={style.inputIcon} />
-                <img src={copyImg} alt="CopyImg" className={style.copyImg} />
-                <img src={deleteImg} alt="deleteImg" className={style.deleteImg}/>
+                <img src={copyImg} alt="CopyImg" className={style.copyImg} onClick={handleCopy} title='Copy inputs'/>
+                <img src={deleteImg} alt="deleteImg" className={style.deleteImg} onClick={handleDelete}  title='Clear inputs'/>
             </div>
             <hr id={style.hrOfModal}/>
 
             <p className={style.applicationsHeading}>Applications</p>
+
             <div className={style.applicationsContainer}>
-                <div>
-                    <div><img src={instagram} className={style.instaImage} /></div>
-                    <p>Instagram</p>
+                <div onClick={() => handleIconClick(instagram)}>
+                  <div><img src={instagram} className={style.instaImage} /></div>
+                  <p>Instagram</p>
                 </div>
-                <div>
-                    <div><img src={facebook} className={style.facebookImage} /></div>
-                    <p>Facebook</p>
+                <div onClick={() => handleIconClick(facebook)}>
+                  <div><img src={facebook} className={style.facebookImage} /></div>
+                  <p>Facebook</p>
                 </div>
-                <div>
-                    <div><img src={youtube} className={style.youtubeImage} /></div>
-                    <p>Youtube</p>
+                <div onClick={() => handleIconClick(youtube)}>
+                  <div><img src={youtube} className={style.youtubeImage} /></div>
+                  <p>Youtube</p>
                 </div>
-                <div>
-                    <div><img src={x} className={style.xImage} /></div>
-                    <p>X</p>
+                <div onClick={() => handleIconClick(x)}>
+                  <div><img src={x} className={style.xImage} /></div>
+                  <p>X</p>
                 </div>
             </div>
+
         </div>
-
-
-  
-          {/* <button onClick={onClose}>Close</button> */}
         </div>
       </div>
     );

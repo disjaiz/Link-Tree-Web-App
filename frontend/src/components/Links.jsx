@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react'
+import React, {useState, useEffect, useRef } from 'react'
 import style from './Links.module.css'
 import share from '../images/share.png'
 import {  useNavigate, useLocation} from 'react-router-dom';
@@ -7,41 +7,67 @@ import plusImage from "../images/plusImage.png";
 import movingOut from "../images/movingOut.png";
 import blackFire from "../images/blackFire.png"
 import whiteFire from "../images/whiteFire.png"
+import deleteImg from '../images/deleteImg.png';
+import savedToggle from '../images/savedToggle.png';
+import eightPointer from '../images/eightPointer.png';
+import clicksLadder from '../images/clicksLadder.png';
+import pen from '../images/penImage.png';
 import HomeIcon from '../svg/HomeIcon.jsx';
 import AddLinkModal from './AddLinkModal.jsx';
-import {fetchUserData, uploadProfileImage, removeProfileImage} from '../FetchMaker.js';
+import defaultAppIcon from '../images/defaultAppIcon.png';
+import eye from "../images/eye.png";
+import {fetchUserData, uploadProfileImage, removeProfileImage, deleteLink, updateProfileBanner} from '../FetchMaker.js';
+import LinkProfilePreview from './LinkProfilePreview.jsx';
 const port = 3000 || 5000;
 const baseUrl = `http://192.168.0.105:${port}`;
 
 function Links() {
-  const navigate = useNavigate();
   const location = useLocation();
-  const userName = location.state?.username; 
+  // const userName = location.state?.username; 
   const Name = location.state?.name;
- 
+  const [userName, setUserName] = useState("");
   const [imageSrc, setImageSrc] = useState(bigMemojiBoy);
   const [bio, setBio] = useState("");
-  const [selectedColor, setSelectedColor] = useState('#342B26');
+  const [selectedColor, setSelectedColor] = useState("");
   const presetColors = ['#342B26', '#FFFFFF', '#000000'];
   const [hexInput, setHexInput] = useState("#342B26");
-
-  const [showModal, setShowModal] = useState(false);
+  const [showAddLinkModal, setShowAddLinkModal] = useState(false);
+  const [showEditLinkModal, setShowEditLinkModal] = useState(false);
   const [isSocial, setIsSocial] = useState(true);
+  const [selectedLinkData, setSelectedLinkData] = useState({ title: "", url: "", icon: defaultAppIcon, type:"", id: ""});
+  const [links, setLinks] = useState([]);
+  const profileRef = useRef();
+  const bioRef = useRef();
+  const [profilePreviewId, setProfilePreviewId] = useState("");
+  const [userData, setUserData] = useState(null);
+
 
   const handleHexChange = (val) => {
     setHexInput(val);
     if (/^#[0-9A-Fa-f]{6}$/.test(val)) setSelectedColor(val);
   };
 
+  const fetchUser = async () => {
+    const response = await fetchUserData();
+    const data = await response.json();
+
+    setUserData(data);
+  
+    setImageSrc(data.profileImage || bigMemojiBoy);
+    setUserName(data.profileTitle);
+    setSelectedColor(data.bannerColor);
+    setBio(data.bio);
+    setProfilePreviewId(data.profilePreviewId);
+    setLinks([
+      ...data.social.map(link => ({ ...link, type: 'social' })),
+      ...data.shop.map(link => ({ ...link, type: 'shop' })),
+    ]); 
+  };
+
   useEffect(() => {
-    const fetchUser = async () => {
-      const response = await fetchUserData();
-      const data = await response.json();
-    
-      setImageSrc(data.profileImage || bigMemojiBoy);
-    };
     fetchUser();
   }, []);
+
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -51,7 +77,11 @@ function Links() {
   
     const formData = new FormData();
     formData.append('image', file);
-  
+
+//     for (let pair of formData.entries()) {
+//   console.log(pair[0], pair[1]);
+// }
+
     try {
       const res = await uploadProfileImage(formData);
       const data = await res.json();
@@ -73,9 +103,38 @@ function Links() {
     }
   };
 
+  const handleDeleteLink =async( id) =>{
+    const response = await deleteLink(id);
+    const data = await response.json();
+    if(response.ok){
+        setLinks(prev => prev.filter(link => link._id !== id));
+    }  
+  }
+
+  const handleEditLink = (link) =>{
+    setSelectedLinkData({title: link.linkTitle, url: link.linkUrl, icon: link.icon, type: link.type, id: link._id});
+    setShowEditLinkModal(true);
+  };
+
+  const handleSave = async () =>{
+    const profileTitle = profileRef.current.value;
+    const bio = bioRef.current.value;
+    try {
+      const res = await updateProfileBanner({profileTitle, bio, bannerColor:selectedColor});
+      const data = await res.json(); 
+      console.log(data)
+    } catch (err) {
+      console.error('Remove failed:', err);
+    }
+  }
+const [showMobilePreview, setShowMobilePreview] = useState(false);
+
 //  =====================================================================================
   return (
     <div className={style.container}>
+      <div className={style.mobilePreviewFixedBtn} onClick={() => setShowMobilePreview(!showMobilePreview)}>
+        <img src={eye}/> &nbsp;Preview
+        </div>
       {/* ===========================================header========================== */}
 
       <div className={style.header}>
@@ -89,49 +148,43 @@ function Links() {
         </button>
       </div>
 
-     
       <div className={style.previewContainer} >
  {/* ===========================  MOBILE preview ======================================== */}
-        <div className={style.mobilePreviewDiv}>
-          <div className={style.mobilePreview}>
-            <div className={style.mobilePreviewHeader}>
-              <div className={style.divOne}>
-                <img src={movingOut} alt="movingOutPng" />
-              </div>
-              <div className={style.divTwo}>
-                <img src={imageSrc.startsWith("/uploads") ? `${baseUrl}${imageSrc}` : imageSrc} style={{objectFit: "fill"}} height="90%" width="90%"/>
-              </div>
-              <p>{userName}</p>
-            </div>
-            <div className={style.mobilePreviewSlider}>
-              {/* <button>link</button>
-              <button>shop</button> */}
-                  <div className={style.toggleWrapper} onClick={() => setIsSocial(!isSocial)}>
-                    <div className={style.labels}>
-                      <span className={`${isSocial ? style.active : ""} ${style.spanStyle}`}>   
-                        Link
-                      </span>
-                      <span className={`${!isSocial ? style.active : ""} ${style.spanStyle}`}>
-                        Shop
-                     </span>
-                    </div>
+ {(window.innerWidth > 375 || showMobilePreview) && (
+    <LinkProfilePreview
+                    user={userData}
+                    imageSrc={imageSrc} 
+                    userName={userName} 
+                    isSocial={isSocial} 
+                    setIsSocial={setIsSocial}  
+                    // links={links} 
+                    bannerColor={selectedColor}
+                    profilePreviewId={profilePreviewId}
+                    />
+ )}
 
-                  <div className={`${style.slider} ${isSocial ? style.left : style.right}`} ></div>
-                </div>
-            </div>
-
-            <div>latest yt video</div>
-            <div>latest insta video</div>
-
-            <button className={style.getConnectedBtn} onClick={()=> navigate('/')}>Get Connected</button>
-
-            <div className={style.sparkLogo}><img src={blackFire} alt="fireImg" height="20px"/>&nbsp;SPARK</div>
-          </div>
-
-        </div>
+ {window.innerWidth <= 375 && showMobilePreview && (
+  <button
+    onClick={() => setShowMobilePreview(false)}
+    style={{
+      position: 'fixed',
+      bottom: "10%",
+      left: '50%',
+      transform: 'translate(-50%)',
+      zIndex: 10000,
+      background: 'white',
+      border: "none",
+      padding: '10px 20px',
+      borderRadius: '19px',
+      boxShadow: "4px 4px 10px rgb(43, 42, 42, 0.4)",
+    }}
+  >
+    X
+  </button>
+)}
 
 {/* ========================== PROFILE SEGMENTS ================================== */}
-        <div className={style.profileDiv}>
+        <div className={style.profileDiv} style={{display: showMobilePreview ? "none": "block"}}>
           <div className={style.profileSegmentBox}>
               <p>Profile</p>
               <div className={style.profileSegment}>
@@ -144,7 +197,7 @@ function Links() {
                    </div>
 
                    <div>
-                        <label htmlFor="imageInput" className={style.imagePickerBtn}>Pick an image</label>
+                      <label htmlFor="imageInput" className={style.imagePickerBtn}>Pick an image</label>
                         <input
                           type="file"
                           accept="image/*"
@@ -158,11 +211,11 @@ function Links() {
 
               <div >
                     <label htmlFor="profileTitle">Profile Title</label>
-                    <input id="profileTitle" type="text" value={userName} readOnly/>
+                    <input id="profileTitle" type="text" defaultValue={userName} ref={profileRef}/>
               </div> 
               <div>      
                     <label htmlFor="bio">Bio</label>
-                    <input id="bio" type="text" placeholder="Bio" maxLength="80"  onChange={(e) => setBio(e.target.value)}/>
+                    <input id="bio" type="text" placeholder="Bio" maxLength="80" defaultValue={bio} onChange={(e) => setBio(e.target.value)} ref={bioRef}/>
                     
               </div>
               <div>
@@ -187,20 +240,73 @@ function Links() {
                   <div className={`${style.slider} ${isSocial ? style.left : style.right}`} ></div>
                 </div>
 
-                <button className={style.addBtn} onClick={() => setShowModal(true)}>
+                <button className={style.addBtn} onClick={()=>setShowAddLinkModal(true)}>
                     <img src={plusImage} alt="plusImage" />
                     Add
-                </button>    
+                </button>  
 
-                {showModal && (
+                 {/*================================Render links===================================  */}
+                 <div className={style.linksList}>
+                      {links
+                        .filter(link => isSocial ? link.type === 'social' : link.type === 'shop')
+                        .map((link, index) => (
+                          <div key={index} className={style.linkCard}>
+                            <div className={style.eightPointerDiv}>
+                              <img src={eightPointer} alt="" />
+                            </div>
+                            <div className={style.linkCardDetailsDiv}>
+                              <p className={style.linkTitle}>
+                                {link.linkTitle}
+                                 <img src={pen} onClick={()=>handleEditLink(link)}/>
+                              </p>
+                              <p className={style.linkUrl}>
+                                {link.linkUrl} 
+                                <img src={pen} onClick={()=>handleEditLink(link)}/>
+                              </p>
+                              <div className={style.clicksCountDiv}>
+                                <img src={clicksLadder} alt="clicksLadderImg" />
+                                <p>0 clicks</p>
+                              </div>
+                            </div>
+                            <div className={style.linkCardControlsDiv}> 
+                              <img src={savedToggle} alt="savedToggleImg" />
+                              <img  onClick={() => handleDeleteLink(link._id)} src={deleteImg} alt="deleteImg" />
+                            </div>
+                          </div>
+                      ))}
+                  </div>
+                {/* ======================================================================================== */}
+                {showAddLinkModal && (
                         <AddLinkModal
-                          onClose={() => setShowModal(false)}
+                          mode = "add"
+                          linkData = "null"
+                          onClose={() => {
+                                          setShowAddLinkModal(false);
+                                          fetchUser();
+                                        }
+                          }
+                          isSocial={isSocial}
+                          setIsSocial={setIsSocial}
+                        />
+                )}
+
+                 {showEditLinkModal && (
+                        <AddLinkModal
+                          mode="edit" 
+                          linkData={selectedLinkData} 
+                          onClose={() => {
+                                          setShowEditLinkModal(false);
+                                          fetchUser();
+                                        }
+                          }
                           isSocial={isSocial}
                           setIsSocial={setIsSocial}
                         />
                 )}
               </div>
           </div>
+          {/* ================================================================================================ */}
+
 
         <div className={style.bannerSegmentBox}>
               <p>Banner</p>
@@ -208,16 +314,15 @@ function Links() {
                 <div className={style.bannerSegmentProfileBoard} style={{ backgroundColor: selectedColor }}>
 
                   <div className={style.avatarWrapper}>
-                    <div><img src={bigMemojiBoy} alt="memojiBoyImg" /></div>
-                    
+                    {/* <div><img src={bigMemojiBoy} alt="memojiBoyImg" /></div> */}
+                     <div><img src={imageSrc.startsWith("/uploads") ? `${baseUrl}${imageSrc}` : imageSrc} style={{objectFit: "fill"}} /></div>
+
                   </div>
                   <div className={style.textWrapper}>
                       <p>{userName}</p>
-                     <p><img src={whiteFire} alt="fireImage" height='14px' />/{userName}</p>
+                     <p><img src={whiteFire} alt="fireImage" height='14px' />/{bio}</p>
                   </div>
-
                 </div>  
-                
                      
                 <div className={style.colorPicker}>
                   <p>Custom Background Color</p>
@@ -246,12 +351,12 @@ function Links() {
                         />
                       </div>
                   </div>             
-</div>
+            </div>
               </div>
         </div>
 
         <div className={style.saveBtnDiv}>
-            <button className={style.saveBtn}>Save</button>
+            <button className={style.saveBtn} onClick={handleSave}>Save</button>
         </div>          
       </div >
     </div>

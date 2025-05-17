@@ -15,7 +15,9 @@
     padding: 1em 0 4em 0;
     border-radius: 10px;
     z-index: 101;
-    min-width: 500px;
+    /* min-width: 500px; */
+    max-width: 500px;
+    width: 100%;
     height: auto;
   }  
 .toggleWrapper {
@@ -93,6 +95,7 @@
 .copyImg, .deleteImg{
   height: 1.2em;
   width: 1.2em;
+  cursor: pointer;
 }
 .linkUrlDiv, .linkTitleDiv{
     display: flex;
@@ -104,7 +107,7 @@
 .linkTitleDiv input, .linkUrlDiv input{
     border-radius: 1.6em;
     padding: 0.9em 1.2em;
-    background-color: #e5e7e3;
+    background-color: #eef1ec;
     border: none;
     width: 85%;
     font : 500 0.8rem Inter;
@@ -192,6 +195,12 @@
     align-items: center;
     background-color: #EFEFEF;
     border-radius: 0.4em;
+    cursor: pointer;
+}
+.applicationsContainer div div:active{
+  background-color: #e0e0e0;
+  transform: scale(0.90);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 .instaImage, .facebookImage{
     height: 23px;
@@ -204,6 +213,35 @@
 .xImage{
   height: 22px;
   width: 22px;
+}
+
+ /* ========================================================== */
+ /* =========================================================== */
+ /* ============================================================ */
+ /* ============================================================= */
+   
+ @media (max-width: 375px) {
+  .toggleWrapper {
+    width: 60%;
+    height: 2.2em;
+  }
+  .linkTitleDiv input, .linkUrlDiv input{
+    background-color: #F6F7F5;
+  }
+  .copyImg, .deleteImg{
+    height: 1em;
+    width: 1em;
+  }
+  .saveToggle {
+    width: 35px;
+    height: 18px;
+  }
+  .saveSlider {
+    width: 14px;
+    height: 14px;
+    top: 2px;
+    left: 2px;
+  }
 }
 
 

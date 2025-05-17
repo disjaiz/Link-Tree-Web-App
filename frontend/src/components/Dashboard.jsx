@@ -28,9 +28,6 @@ function Dashboard() {
   const userName = location.state?.username;
   const [activeTab, setActiveTab] = useState("links"); 
 
-  console.log(userName);
-  console.log(Name);
-
   const [imageSrc, setImageSrc] = useState(bigMemojiBoy);
 
   useEffect(() => {

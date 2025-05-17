@@ -7,7 +7,12 @@
     height: 100%;
     width: 100%;
     padding: 1% 2%;
-    background-color: #f1f2f3;    
+    background-color: hsl(210, 8%, 95%);    
+    position: relative;
+}
+.mobilePreviewFixedBtn{
+    display: none;
+    visibility: hidden;
 }
 .header{
     padding: 0.6em;
@@ -166,8 +171,8 @@
     align-items: center;
 }
 .pickImageDiv div:nth-child(1) img{
-    width: 95%;
-    height: 95%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 .pickImageDiv div:nth-child(2){
@@ -253,7 +258,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.6em;
-    margin-top: 5%;
+    margin: 5% 0;
 }
 .toggleWrapper {
     position: relative;
@@ -423,6 +428,67 @@
     color: #FFFFFF;
     font: 500 1.1rem Poppins;
 } 
+.linksList{
+    width: 100%;
+    max-height: 400px;
+}
+.linkCard{
+    background-color: #F3F3F1;
+    margin-bottom: 1em;
+    display: grid;
+    grid-template-columns: 0.4fr 5fr 1fr;
+    border-radius: 17px;
+    padding: 1.5em 0 1em 0;
+}
+.eightPointerDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.linkCardDetailsDiv{
+    padding-left: 0.5em;
+}
+.linkTitle, .linkUrl{
+    margin-bottom: 0.5em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+.linkTitle{
+    color: #575757;
+    font: 600 .9rem Poppins;
+}
+.linkUrl{
+    color: #767676;
+    font: 600 .8rem Poppins;
+}
+.clicksCountDiv{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-top: 1em;
+}
+.clicksCountDiv img{
+    height: .9em;
+    width: .9em;
+}
+.clicksCountDiv p{
+    color: #9EA099;
+    font-size: 0.8rem;
+}
+.linkCardControlsDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.linkCardControlsDiv img:nth-child(1){
+    height: 16px;
+}
+.linkCardControlsDiv img:nth-child(2){
+    height: 15px;
+    width: 15px;
+}
  /* ========================================================== */
  /* =========================================================== */
  /* ============================================================ */
@@ -491,7 +557,7 @@
     }
     .addBtn{
         font: 600 0.8rem Inter;
-        margin-top: 3%;
+        margin-top: 4%;
     }
     .addBtn img{
         height: 1em;
@@ -524,4 +590,20 @@
         width: 9em;
         font: 500 0.9rem Poppins;
     }
+    .linksList{
+        max-height: 250px;
+    }
+    .mobilePreviewFixedBtn{
+    display: inline-block;
+    visibility: visible;
+    position: fixed;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    box-shadow: 4px 4px 10px rgb(43, 42, 42, 0.4);
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    font: 500 Poppins;
+}
 }

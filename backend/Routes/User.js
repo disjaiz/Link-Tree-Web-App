@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 const router = express.Router();
 import User from '../Schema/UserSchema.js';
 import Authenticate from "../Middlewares/Authenticate.js";
@@ -154,7 +155,7 @@ router.put("/update-profile-title/:userId", async (req, res) => {
 // Upload image
 router.post('/upload-profile-image',Authenticate, upload.single('image'), async (req, res) => {
     try {
-      const userId = req.user.id; // assumes auth middleware sets req.user
+      const userId = req.user._id; // assumes auth middleware sets req.user
       const user = await User.findById(userId);
   
       // remove old image if exists
@@ -164,8 +165,7 @@ router.post('/upload-profile-image',Authenticate, upload.single('image'), async 
       }
   
       const imageUrl = `/uploads/profileImages/${req.file.filename}`;
-      user.profileImage = imageUrl;
-      await user.save();
+      await User.findByIdAndUpdate(userId, { profileImage: imageUrl });
   
       res.json({ success: true, imageUrl });
     } catch (err) {
@@ -196,7 +196,9 @@ router.post('/upload-profile-image',Authenticate, upload.single('image'), async 
 // ===========================Fetch user data ===================================
 router.get('/userData', Authenticate, async (req, res) => {
     try {
-      const user = await User.findById(req.user.id).select('name email profileImage');
+      const user = await User.findById(req.user.id)
+      // .select('name email profileImage profileTitle social shop bio bannerColor profilePreviewId');
+
       if (!user) return res.status(404).json({ message: 'User not found' });
   
       res.json(user);
@@ -233,6 +235,147 @@ router.put('/update-settings', Authenticate, async (req, res) => {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
+
+// ======================== create link ============================================
+router.put('/create-link', Authenticate, async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { type, linkTitle, linkUrl, icon } = req.body;
+
+    if (!['social', 'shop'].includes(type)) {
+      return res.status(400).json({ message: 'Invalid type' });
+    }
+
+    const update = {
+      $push: {
+        [type]: { linkTitle, linkUrl, icon },
+      },
+    };
+
+    const updatedUser = await User.findByIdAndUpdate(userId, update, { new: true });
+
+    res.json({ message: `${type} link added`, data: updatedUser[type] });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+});
+
+// ===========================delete link=================================
+router.delete('/links/:linkId',Authenticate, async (req, res) => {
+  try {
+    const { linkId } = req.params;
+    const userId = req.user._id;
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { social: { _id: linkId } } },
+      { new: true }
+    );
+
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    res.status(200).json({ message: 'Link deleted' });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// ========================= update link ====================================
+router.put('/links/update/:linkId', Authenticate, async (req, res) => {
+  const { linkId } = req.params;
+  const userId = req.user._id;
+  const { linkTitle, linkUrl, icon, type } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(linkId)) {
+    return res.status(400).json({ error: 'Invalid ID' });
+  }
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    const updatedLinks = user[type].map(link =>
+      link._id.toString() === linkId
+        ? { ...link.toObject(), linkTitle, linkUrl, icon }
+        : link
+    );
+
+    user[type] = updatedLinks;
+    await user.save();
+
+    res.status(200).json({ message: 'Link updated' });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// ===================== banner update route ====================================
+router.put('/profile/update-banner', Authenticate, async (req, res) => {
+  const { profileTitle, bio, bannerColor } = req.body;
+  const userId = req.user._id;
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { profileTitle, bio, bannerColor },
+      { new: true }
+    );
+    res.status(200).json({ message: "Profile updated", user: updatedUser });
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// =====================profile preview route ==========================
+router.get('/preview/:id', async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findOne({ profilePreviewId: id });
+
+  if (!user) return res.status(404).json({ error: 'Not found' });
+
+  res.json( user );
+
+   // {imageSrc: user.profileImage,
+    // userName: user.profileTitle,
+    // links: user.shop,
+    // bannerColor: user.bannerColor,}
+});
+
+// =================== update appereance data ============================
+// Route to update appearance settings
+router.put('/appearance', Authenticate, async (req, res) => {
+  const userId = req.user._id; 
+
+  const {
+    profileLayout,
+    buttonStyle,
+    buttonColor,
+    buttonFontColor,
+    fontFamily,
+    fontColor,
+    theme,
+  } = req.body;
+
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        profileLayout,
+        buttonStyle,
+        buttonColor,
+        buttonFontColor,
+        fontFamily,
+        fontColor,
+        theme,
+      },
+      { new: true }
+    );
+    res.json({ success: true, user });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 
 
 export default router;

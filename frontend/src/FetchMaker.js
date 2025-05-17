@@ -150,3 +150,63 @@ async function updateSettings(firstName, lastName, email, password, confirmPassw
     }
 };
 export {updateSettings}
+
+// ============================ create link fetch ==================================
+async function createLink(linkData){
+  try {
+    const response = await fetch(`${baseUrl}/user/create-link`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(linkData),
+    });
+
+    return response;
+  } catch (err) {
+    console.log("Error updating link:", err);
+  }
+}
+export {createLink}
+
+// ======================= delete link fetch ==============================================
+async function deleteLink(linkId){
+  try {
+      const response = await fetch(`${baseUrl}/user/links/${linkId}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+    return response;
+    } catch (err) {
+      console.error('Error deleting link', err);
+    }
+}
+export {deleteLink}
+
+// ====================== update link fetch ==================================================
+export const updateLink = async (linkId, linkPayload) => {
+  try {
+    const response = await fetch(`${baseUrl}/user/links/update/${linkId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify(linkPayload),
+      credentials: "include",
+    });
+
+    return response;
+  } catch (err) {
+    console.error("Error updating link:", err);
+  }
+};
+
+// ========================update banner fetch ===========================================
+export const updateProfileBanner = async (data) => {
+  const response = await fetch(`${baseUrl}/user/profile/update-banner`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json'},
+    credentials: 'include',
+    body: JSON.stringify(data),
+  });
+  return response;
+};

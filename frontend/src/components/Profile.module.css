@@ -1,0 +1,414 @@
+/*=================================================*/
+.mobilePreviewDiv{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+.mobilePreview{
+    position: relative;
+    background-color: #FFFFFF;
+    /* height: 34.4em; */
+    height: 100vh;
+    width: 80%;
+    border-radius: 2.5em;
+    border: 1.1em solid #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.mobilePreviewHeader{
+    position: relative;
+    background-color: #3c342f;
+    width: 100%;
+    height: 30%;
+    border-radius: 1.2em;
+}
+.mobilePreviewHeader .divTwo{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #DFDFDF;
+    width: 3.7em;
+    height: 3.7em;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mobilePreviewHeader p{
+    position: absolute;
+    bottom: 0.5em; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: Poppins;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+.mobilePreviewHeader .divOne{
+    position: absolute;
+    top: 0.6em;
+    left: 0.6em; 
+    width: 1.9em;
+    height: 1.9em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: white;
+}
+.last{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    margin-top: 10px;
+}
+.getConnectedBtn{
+    background-color: #35CA7D;
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    padding: .7em;
+    width: 70%;
+    border-radius: 1.7em;
+    border: none;
+    margin-bottom: 1em;
+}
+.sparkLogo{
+    margin-bottom: .5em;    
+    color: black;
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+    font-size: .9rem;
+}
+.mobilePreviewSlider{
+    width: 80%;
+    margin-top: 2%;
+    padding: 1em;
+}
+.toggleWrapper {
+    position: relative;
+    width: 100%;
+    height: 2.2em;
+    background-color: #ddd;
+    border-radius: 1.6em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+.labels {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font: 600 0.8rem Inter;
+    color: #555;
+    z-index: 2;
+  }
+  
+.labels span.active {
+    color: #FFFFFF;
+  }
+.slider {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: #28a263;
+    border-radius: 1.2em;
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
+.spanStyle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+.left {
+    left: 0;
+  }
+.right {
+    left: 50%;
+  }
+.active {
+    color: white;
+    fill: white;
+    stroke: white;
+  }
+.inactive {
+    color: grey;
+    fill: grey;
+    stroke: grey;
+}
+/* ======================================== */
+/* ======================================== */
+.linksList{
+    width: 90%;
+    height: 150px;
+    overflow-y: auto; 
+    flex: 1;
+    padding: 0.5em;
+}
+.stackLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+.gridLayout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+}
+.carauselLayout {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    scroll-snap-type: x mandatory;
+}
+.linkCard{
+    background-color: #F3F3F1;
+    /* border-radius: 17px; */
+    /* padding: 0.5em; */
+    flex-shrink: 0;
+    /* height: 50px; */
+    display: flex;
+    justify-content: flex-start;
+    /* gap: 1em; */
+    align-items: center;
+}
+.stackLayoutCard{
+ height: 50px;
+ /* padding-left: 10px; */
+}
+.gridLayoutCard{
+    height: 90px;
+    flex-direction: column;
+    padding-top: 10px;
+}
+.carauselLayoutCard{
+    height: 90%;
+    width: 40%;
+    flex-direction: column;
+    padding-top: 10px;
+}
+.linkCardImageDiv{
+    background-color: white;
+    border-radius: 50%;
+     height:40px;
+    width: 40px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    margin-left: 10px;
+}
+.linkCardImageDiv img{
+   height: 70%;
+   width: 70%;
+   border-radius: 50%;
+}
+.fillOne{
+    border-radius: 0;
+}
+.fillTwo{
+    border-radius: 8px;
+}
+.fillThree{
+    border-radius: 24px;
+    outline: 5px solid #F6F7F5;
+}
+.outlineOne{
+    border: 1px solid black;
+    background-color: white !important;
+}
+.outlineTwo{
+    border: 1px solid black;
+    border-radius: 8px;
+     background-color: white !important;
+}
+.outlineThree{
+    border: 1px solid black;
+    border-radius: 24px;
+    background-color: white !important;
+}
+.hardShadowOne{
+    box-shadow: 4px 4px #000000;
+     background-color: white !important;
+     border: 1px solid black;
+}
+.hardShadowTwo{
+    box-shadow: 4px 4px #000000;
+     background-color: white !important;
+     border-radius: 8px;
+     border: 1px solid black;
+}
+.hardShadowThree{
+    box-shadow: 4px 4px #000000;
+     background-color: white !important;
+     border-radius: 24px;
+     border: 1px solid black;
+}
+.softShadowOne{
+    box-shadow: 0 4px 4px #00000029;
+     background-color: white !important;
+}
+.softShadowTwo{
+    box-shadow: 0 4px 4px #00000029;
+     background-color: white !important;
+     border-radius: 8px;
+}
+.softShadowThree{
+    box-shadow: 0 4px 4px #00000029;
+     background-color: white !important;
+     border-radius: 24px;
+}
+
+.specialOne {
+  position: relative;
+  background-color: #f0f0f0;
+  overflow: visible;
+  /* padding-left: 0 !important; */
+}
+.specialOne::before,
+.specialOne::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 5px; 
+  background: linear-gradient(135deg, transparent 5px, var(--zigzag-color) 0) left,
+              linear-gradient(225deg, transparent 2px, var(--zigzag-color) 0) right;
+  background-size: 5px 5px; 
+  background-repeat: repeat-x;
+}
+
+.specialOne::before {
+  top: -5px;
+}
+
+.specialOne::after {
+  top: 100%;
+  bottom: auto;
+  transform: scaleY(-1);
+}
+/* ========== */
+.specialTwo {
+  position: relative;
+  background-color: #000000;
+  overflow: visible;
+}
+.specialTwo::before,
+.specialTwo::after {
+ content: "";
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background:
+    radial-gradient(circle 4px at 4px 8px, transparent 90%, var(--zigzag-color) 81%) left,
+    radial-gradient(circle 4px at 8px 0px, var(--zigzag-color) 90%, transparent 81%) right;
+  background-size: 12px 20px;
+  background-repeat: repeat-x;
+}
+
+.specialTwo::before {
+  top: -5px;
+}
+
+.specialTwo::after {
+  top: 100%;
+  bottom: auto;
+  transform: scaleY(-1);
+}
+/* ======= */
+  .specialThree{
+  position: relative;
+  border: 1px solid black;
+  z-index: 1;
+  overflow: visible;
+  background-color: white !important;
+}
+.specialThree::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 4px;
+    width: calc(100% - 10px); /* wider */
+    height: calc(100% + 10px); /* shorter */
+    border: 1px solid black;
+    z-index: 100;
+  }
+.specialFour{
+    border-radius: 24px;
+}
+.specialFive{
+    position: relative;
+    overflow: visible;
+}
+.specialFive::before,
+.specialFive::after,
+.specialFive div::before,
+.specialFive div::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border: 1px solid black;
+}
+.specialFive::before {
+  top: -4px;
+  left: -4px;
+}
+.specialFive::after {
+  top: -4px;
+  right: -4px;
+}
+.specialFive div::before {
+  bottom: -4px;
+  left: -4px;
+}
+.specialFive div::after {
+  bottom: -4px;
+  right: -4px;
+}
+.specialSix{
+    border-bottom-left-radius: 24px;
+    border-top-left-radius: 24px;
+}
+ /* ========================================================== */
+ /* =========================================================== */
+ /* ============================================================ */
+ /* ============================================================= */
+   
+ @media (max-width: 475px) {
+
+    .header{
+        display: none;
+        visibility: hidden;
+    }
+    .mobilePreviewDiv{
+      width: 100%;
+
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+    }
+    .mobilePreview{
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      border: none;
+  }
+  .mobilePreviewHeader{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+ 
+  }
