@@ -12,7 +12,7 @@ import links from "../images/linksImg.png";
 import appearance from "../images/appearanceImg.png";
 import analytics from "../images/analyticsImg.png";
 import settings from "../images/settingsImg.png";
-import memojiBoy from "../images/memojiBoy.png";
+import memojiBoy from "../images/MemojiBoy.png";
 import bigMemojiBoy from "../images/bigMemojiBoy.png";
 import signOut from "../images/signOut.png";
 import { useNavigate ,  useLocation} from 'react-router-dom';
