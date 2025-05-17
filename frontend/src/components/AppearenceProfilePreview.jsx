@@ -8,7 +8,8 @@ const port = 3000;
 // const baseUrl = `http://localhost:${port}`;
 // const baseUrl = `http://192.168.0.105:${port}`;
 const baseUrl = `https://link-tree-web-app-1.onrender.com`;
-const frontEndBaseUrl = `http://192.168.0.105:5173`;
+// const frontEndBaseUrl = `http://192.168.0.105:5173`;
+const frontEndBaseUrl = `https://link-tree-web-app-frontend.onrender.com`;
 
 
 function LinkProfilePreview({ imageSrc, userName, isSocial, setIsSocial, links, bannerColor, profilePreviewId,
