@@ -1,6 +1,6 @@
 import React from 'react'
 import fire from '../images/fire.png'
-import spark from '../images/spark.png'
+import spark from '../images/SPARK.png'
 import greenPallete from '../images/green_pallet.png'
 import bubbleGum from '../images/bubbleGum.png'
 import blackWoman from '../images/blackWoman.png'
