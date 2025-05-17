@@ -6,7 +6,8 @@ import { useEffect} from 'react';
 
 const port = 3000;
 // const baseUrl = `http://localhost:${port}`;
-const baseUrl = `http://192.168.0.105:${port}`;
+// const baseUrl = `http://192.168.0.105:${port}`;
+const baseUrl = `https://link-tree-web-app-1.onrender.com`;
 const frontEndBaseUrl = `http://192.168.0.105:5173`;
 
 

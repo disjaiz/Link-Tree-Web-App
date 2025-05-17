@@ -19,7 +19,8 @@ import eye from "../images/eye.png";
 import {fetchUserData, uploadProfileImage, removeProfileImage, deleteLink, updateProfileBanner} from '../FetchMaker.js';
 import LinkProfilePreview from './LinkProfilePreview.jsx';
 const port = 3000 || 5000;
-const baseUrl = `http://192.168.0.105:${port}`;
+// const baseUrl = `http://192.168.0.105:${port}`;
+const baseUrl = `https://link-tree-web-app-1.onrender.com`;
 
 function Links() {
   const location = useLocation();

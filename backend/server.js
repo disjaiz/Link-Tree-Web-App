@@ -24,7 +24,7 @@ app.use(express.json());
 //   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 // }));
 
-const allowedOrigins = ['http://localhost:5173', 'http://192.168.0.105:5173'];
+const allowedOrigins = ['https://link-tree-web-app-1.onrender.com','http://localhost:5173', 'http://192.168.0.105:5173'];
 
 app.use(cors({
   origin: function(origin, callback) {
