@@ -13,12 +13,12 @@ import airBlack from "../images/airBlack.png";
 import mineralBlue from "../images/mineralBlue.png";
 import mineralGreen from "../images/mineralGreen.png";
 import mineralOrange from "../images/mineralOrange.png";
+import checkCircle from '../images/checkCircle.png'
 import eye from "../images/eye.png";
-import {fetchUserData} from '../FetchMaker.js';
+import toastErrorImage from "../images/toastErrorImage.png";
+import {fetchUserData , updateAppearence}  from '../FetchMaker.js';
+import { toast, ToastContainer } from "react-toastify";
 
-const port = 3000 || 5000;
-// const baseUrl = `http://192.168.0.105:${port}`;
-const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
 function Appearence() {
   const location = useLocation();
   const Name = location.state?.name;
@@ -79,21 +79,49 @@ function Appearence() {
   };
 
   try {
-    const response = await fetch(`${baseUrl}/user/appearance`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      credentials: "include",
-    });
+    const response = await updateAppearence(payload);
     const data = await response.json();
-    console.log(data)
+
     if (data.success) {
-      alert('Appearance saved!');
-    } else {
-      alert('Save failed');
+        toast.success(
+            <div className={style.toastContent}>
+              <img src={checkCircle} alt="Success" className={style.toastIcon} />
+              <span>Appearance saved</span>
+            </div>,
+            {
+              className: `${style.customToast} ${style.toastGreen}`,
+              autoClose: false,
+              hideProgressBar: true,
+              closeOnClick: true,
+              draggable: false,
+              closeButton: ({ closeToast }) => (
+                <span className={style.closeBtn} onClick={closeToast}>✖</span>
+              ),
+              icon: false,
+            }
+          );
+    } 
+    else {
+       toast.error(
+      <div className={style.toastContent} >
+        <img src={toastErrorImage} alt="Fail" className={style.toastIcon} />
+        <span>Save failed</span>
+      </div>,
+      {
+        className: `${style.customToast} ${style.toastRed}`,
+        autoClose: false,
+        hideProgressBar: true,
+        closeOnClick: true,
+        draggable: false,
+        closeButton: ({ closeToast }) => (
+          <span className={style.closeBtn} onClick={closeToast}>✖</span>
+        ),
+        icon: false,
+      }
+    );
     }
   } catch (error) {
-    alert('Error saving appearance');
+    console.log(error);
   }
 };
 
@@ -101,6 +129,7 @@ const [showMobilePreview, setShowMobilePreview] = useState(false);
 // =========================================================================================================================================
   return (
     <div className={style.container}>
+      <ToastContainer   />
 
       <div className={style.mobilePreviewFixedBtn} onClick={() => setShowMobilePreview(!showMobilePreview)}>
          <img src={eye}/> &nbsp;Preview

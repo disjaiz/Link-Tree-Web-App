@@ -7,7 +7,6 @@ import Login from './components/Login';
 import Personalisation from './components/Personalisation';
 import Dashboard from './components/Dashboard';
 import Profile from './components/Profile';
-import Text from './components/Text';
 
 function App() {
   const routerdata = createBrowserRouter([

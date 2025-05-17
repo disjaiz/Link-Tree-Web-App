@@ -1,7 +1,7 @@
 const port = 3000;
 // const baseUrl = `http://localhost:${port}`;
-// const baseUrl = `http://192.168.0.105:${port}`;
-const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+const baseUrl = `http://192.168.0.105:${port}`;
+// const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
 //=============================== signup fetch ======================================
 async function signup(formdata){
 
@@ -210,3 +210,19 @@ export const updateProfileBanner = async (data) => {
   });
   return response;
 };
+
+// ====================== save appearence fetch ==========================================
+export const updateAppearence = async (payload) => {
+    try {
+      const response = await fetch(`${baseUrl}/user/appearance`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      credentials: "include",
+    });
+    return response
+  }
+  catch (err) {
+    console.error("Error updating appearence:", err);
+  }
+}

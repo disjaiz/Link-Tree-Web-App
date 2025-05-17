@@ -66,10 +66,10 @@ router.post('/signup', async (req, res) => {
         res.cookie('Token', token, {
             httpOnly: true,
             maxAge: 5 * 60 * 60 * 1000,
-            sameSite: 'None',
-            secure: true,
-            // secure: false,
-            // sameSite: 'Lax',
+            // sameSite: 'None',
+            // secure: true,
+            secure: false,
+            sameSite: 'Lax',
         });
         return res.status(200).json({ msg: "User registered and logged in!", user });
     } catch (error) {
@@ -100,13 +100,12 @@ router.post('/login', async (req, res)=>{
             const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn:"5h"});
             // store token in cokkie
             res.cookie('Token', token, {
-                // httpOnly: false, 
                 httpOnly: true,
                 maxAge:5 * 60 * 60 * 1000,
-                sameSite: 'None', 
-                secure: true,
-//                 secure: false,
-// sameSite: 'Lax',
+                // sameSite: 'None', 
+                // secure: true,
+                secure: false,
+ sameSite: 'Lax',
 
               });
           
@@ -197,7 +196,7 @@ router.post('/upload-profile-image',Authenticate, upload.single('image'), async 
 // ===========================Fetch user data ===================================
 router.get('/userData', Authenticate, async (req, res) => {
     try {
-      const user = await User.findById(req.user.id)
+      const user = await User.findById(req.user._id)
       // .select('name email profileImage profileTitle social shop bio bannerColor profilePreviewId');
 
       if (!user) return res.status(404).json({ message: 'User not found' });

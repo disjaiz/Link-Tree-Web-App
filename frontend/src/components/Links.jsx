@@ -19,8 +19,8 @@ import eye from "../images/eye.png";
 import {fetchUserData, uploadProfileImage, removeProfileImage, deleteLink, updateProfileBanner} from '../FetchMaker.js';
 import LinkProfilePreview from './LinkProfilePreview.jsx';
 const port = 3000 || 5000;
-// const baseUrl = `http://192.168.0.105:${port}`;
-const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+const baseUrl = `http://192.168.0.105:${port}`;
+// const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
 
 function Links() {
   const location = useLocation();
@@ -41,16 +41,14 @@ function Links() {
   const bioRef = useRef();
   const [profilePreviewId, setProfilePreviewId] = useState("");
   const [userData, setUserData] = useState(null);
+  const [showMobilePreview, setShowMobilePreview] = useState(false);
 
-
-  const handleHexChange = (val) => {
-    setHexInput(val);
-    if (/^#[0-9A-Fa-f]{6}$/.test(val)) setSelectedColor(val);
-  };
 
   const fetchUser = async () => {
     const response = await fetchUserData();
     const data = await response.json();
+    if (!data) return;
+    // console.log(data, "data")
 
     setUserData(data);
   
@@ -69,6 +67,10 @@ function Links() {
     fetchUser();
   }, []);
 
+  const handleHexChange = (val) => {
+    setHexInput(val);
+    if (/^#[0-9A-Fa-f]{6}$/.test(val)) setSelectedColor(val);
+  };
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -78,10 +80,6 @@ function Links() {
   
     const formData = new FormData();
     formData.append('image', file);
-
-//     for (let pair of formData.entries()) {
-//   console.log(pair[0], pair[1]);
-// }
 
     try {
       const res = await uploadProfileImage(formData);
@@ -128,7 +126,6 @@ function Links() {
       console.error('Remove failed:', err);
     }
   }
-const [showMobilePreview, setShowMobilePreview] = useState(false);
 
 //  =====================================================================================
   return (
