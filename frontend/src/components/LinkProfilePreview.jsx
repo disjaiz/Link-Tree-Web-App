@@ -20,8 +20,7 @@ function LinkProfilePreview({user, imageSrc , userName, isSocial, setIsSocial, b
 
     const handleCopyLink = () => {
       const link = `${frontEndBaseUrl}/user/preview/${profilePreviewId}`;
-      // navigator.clipboard.writeText(link);
-      alert(link);
+      navigator.clipboard.writeText(link);
        toast.success(
                      <div className={style.toastContent}>
                           <img src={checkCircle} alt="Success" className={style.toastIcon} />
