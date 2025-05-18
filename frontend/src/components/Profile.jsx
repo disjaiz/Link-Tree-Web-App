@@ -46,7 +46,7 @@ function Profile() {
      if (!user) return null; // or a loader
 //  ======================================================
   return (
-    <>
+    <div className={style.container}>
   
       <div className={style.mobilePreviewDiv}>
                 <div className={style.mobilePreview} style={{ backgroundColor: user.theme }}>
@@ -123,7 +123,7 @@ function Profile() {
                   <div className={style.sparkLogo}><img src={blackFire} alt="fireImg" height="20px"/>&nbsp;SPARK</div>
                 </div>
               </div>
-    </>
+    </div>
   )
 }
 

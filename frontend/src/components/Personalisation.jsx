@@ -37,19 +37,21 @@ function Personalisation() {
   const userId = location.state?.userid;
   const Name = location.state?.name; 
 
-  // console.log(userName);
-
     const navigate = useNavigate();
     const [selected, setSelected] = useState(null);
     const [name, setName] = useState("");
 
+    const [error, setError] = useState("");
+
     const handleContinue = async () => {
-      if (!name || selected === null) {
-        alert("Please enter your name and select a category.");
+      if (!name) {
+        setError("Please enter your username.");
         return;
     }
-    console.log("Name:", name);
-    console.log("Category:", options[selected].name);
+     if(selected === null){
+        setError("Select a category.");
+        return;
+      }
 
     const profileTitle = name; 
 
@@ -86,6 +88,9 @@ function Personalisation() {
             value={name} 
             onChange={(e) => setName(e.target.value)} 
             />
+
+            {error && <p className={style.errorText}>{error}</p>}
+
 
           <p id={style.pTwo}>Select one category that best describes your Linktree:</p>
 

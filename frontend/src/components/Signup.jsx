@@ -112,27 +112,27 @@ const handleSignup = async (e) => {
           <label htmlFor="firstname">First name</label>
           <input type="text" name="firstName" 
           value={formData.firstName} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
- {errors.firstName && <p className={style.errorText}>{errors.firstName}</p>}
+          {errors.firstName && <p className={style.errorText}>{errors.firstName}</p>}
 
           <label htmlFor="lastname">Last name</label>
-    <input type="text" name="lastName" 
+           <input type="text" name="lastName" 
           value={formData.lastName} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
           {errors.lastName && <p className={style.errorText}>{errors.lastName}</p>}
 
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" 
+          <input type="text" name="email" 
           value={formData.email} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
-{errors.email && <p className={style.errorText}>{errors.email}</p>}
+          {errors.email && <p className={style.errorText}>{errors.email}</p>}
 
           <label htmlFor="password">Password</label>
           <input type="password" name="password"
           value={formData.password} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
-  {errors.password && <p className={style.errorText}>{errors.password}</p>}
+         {errors.password && <p className={style.errorText}>{errors.password}</p>}
 
           <label htmlFor="confirmpassword">Confirm Password</label>
           <input type="password" name="confirmPassword" 
           value={formData.confirmPassword} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
-  {errors.confirmPassword && <p className={style.errorText}>{errors.confirmPassword}</p>}
+          {errors.confirmPassword && <p className={style.errorText}>{errors.confirmPassword}</p>}
 
           <div className={style.checkbox}>
               <input type="checkbox" name="checkbox" id="" />

@@ -142,7 +142,7 @@
 }
 .errorText {
     color: red !important;
-    font-size: 1.1rem;
+    font-size:500 0.7rem Poppins;
     margin-top: 0px !important;
     text-align: left !important;
   }

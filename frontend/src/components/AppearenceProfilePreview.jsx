@@ -3,6 +3,8 @@ import movingOut from "../images/movingOut.png";
 import blackFire from "../images/blackFire.png"
 import {useNavigate} from 'react-router-dom';
 import { useEffect} from 'react';
+import { toast, ToastContainer } from "react-toastify";
+import checkCircle from '../images/checkCircle.png'
 
 const port = 3000;
 // const baseUrl = `http://localhost:${port}`;
@@ -20,29 +22,30 @@ function LinkProfilePreview({ imageSrc, userName, isSocial, setIsSocial, links, 
       const link = `${frontEndBaseUrl}/user/preview/${profilePreviewId}`;
       // navigator.clipboard.writeText(link);
       alert(link);
+       toast.success(
+                  <div className={style.toastContent}>
+                    <img src={checkCircle} alt="Success" className={style.toastIcon} />
+                    <span>Profile link saved</span>
+                  </div>,
+                  {
+                    className: `${style.customToast} ${style.toastGreen}`,
+                    autoClose: false,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    draggable: false,
+                    closeButton: ({ closeToast }) => (
+                      <span className={style.closeBtn} onClick={closeToast}>✖</span>
+                    ),
+                    icon: false,
+                  }
+                );
     };
-    // useEffect(() => {
-    //   if (!profilePreviewId) return;
-
-    //   fetch(`${baseUrl}/user/preview/${profilePreviewId}`, {
-    //     credentials: 'include',
-    //     method: "GET",
-    //     headers: {  
-    //       'Content-Type': 'application/json', 
-    //     },
-    //   })
-    //     .then(res => {
-    //       if (!res.ok) throw new Error('Unauthorized');
-    //       return res.json();
-    //     })
-    //     .then(data => console.log(data))
-    //     .catch((err) => console.log(err));
-    // }, [profilePreviewId]);
+  
 // ====================================================================================================== 
   return (
     <>
-{/* <h1>{profilePreviewId}</h1> */}
       <div className={style.mobilePreviewDiv}>
+         <ToastContainer   /> 
                 <div className={style.mobilePreview}  style={{ backgroundColor: theme }}>
 
                   <div className={style.mobilePreviewHeader} style={{backgroundColor: bannerColor}}>

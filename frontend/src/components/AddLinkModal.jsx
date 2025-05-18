@@ -26,28 +26,6 @@ function AddLinkModal({ mode, linkData, onClose, isSocial, setIsSocial }) {
       }
     };
 
-    // ==========================
-//     useEffect(() => {
-//       console.log("lainkData",linkData);
-
-//   if (mode === "edit" && linkData) {
-//     if (isSocial) setSocialInput(linkData);
-//     else setShopInput(linkData);
-//   }
-// }, [mode, linkData, isSocial]);
-
-
-//     useEffect(() => {
-//       const handleClickOutside = (e) => {
-//         if (modalRef.current && !modalRef.current.contains(e.target)) {
-//           onClose();
-//         }
-//       };
-  
-//       document.addEventListener("mousedown", handleClickOutside);
-//       return () => document.removeEventListener("mousedown", handleClickOutside);
-//     }, [onClose]);
-
     useEffect(() => {
       // Handle outside click
       const handleClickOutside = (e) => {
@@ -79,11 +57,6 @@ function AddLinkModal({ mode, linkData, onClose, isSocial, setIsSocial }) {
         document.removeEventListener("mousedown", handleClickOutside);
       };
     }, [onClose, mode, linkData, isSocial]);
-
-// useEffect(() => {
-//   console.log("socialInput updated:", socialInput);
-// }, [socialInput]);
-
 // ========================================================
 
     const handleInputChange = (e) => {
@@ -95,29 +68,8 @@ function AddLinkModal({ mode, linkData, onClose, isSocial, setIsSocial }) {
         setShopInput({ ...shopInput, [name]: value });
       }
     };
-    // const handleSaveToggle = async() => {
-    //   const linkData = {
-    //     type: isSocial ? "social" : "shop",
-    //     linkTitle: isSocial ? socialInput.title : shopInput.title,
-    //     linkUrl: isSocial ? socialInput.url : shopInput.url,
-    //     icon: isSocial ? socialInput.icon : shopInput.icon,
-    //   };
-  
-    //   const response = await createLink(linkData);
-    //   const data = await response.json();
-
-    //   if (response.ok) {
-    //     console.log("Updated link:");
-    // } else {
-    //   console.error("Error updating link:", err);
-    // }
-    
-    //   setIsSave(!isSave);
-    //   onClose();
-    // };
 
     const handleSaveToggle = async () => {
-        // console.log(socialInput)
       const linkPayload = {
         type: isSocial ? "social" : "shop",
         linkTitle: isSocial ? socialInput.title : shopInput.title,
@@ -127,7 +79,6 @@ function AddLinkModal({ mode, linkData, onClose, isSocial, setIsSocial }) {
 
       let response;
       if (mode === "edit") {
-        // console.log(linkData.id, { ...linkPayload})
         response = await updateLink(linkData.id, { ...linkPayload});
       } else {
         response = await createLink({ ...linkPayload });
@@ -135,10 +86,10 @@ function AddLinkModal({ mode, linkData, onClose, isSocial, setIsSocial }) {
 
       const data = await response.json();
     
-      if (response.ok) {
-        console.log(mode === "edit" ? "Link updated" : "Link added");
+      if (data.success) {
+        alert(mode === "edit" ? "Link updated" : "Link added");
       }
-       else {
+      else {
         console.error("Error:", data);
       }
       setIsSave(!isSave);
@@ -146,13 +97,9 @@ function AddLinkModal({ mode, linkData, onClose, isSocial, setIsSocial }) {
     };
     
     const handleCopy = () => {
-      alert('entered')
       const currentInput = isSocial ? socialInput : shopInput;
-      console.log("currentINput",currentInput)
-      const combined = `${currentInput.title} - ${currentInput.url}`;
-      console.log("combined", combined);
-      navigator.clipboard.writeText(combined);
-      alert("done")
+      // navigator.clipboard.writeText(currentInput.url);
+      alert(currentInput.url);
     };
     const handleDelete = () => {
       if (isSocial) {
@@ -161,9 +108,10 @@ function AddLinkModal({ mode, linkData, onClose, isSocial, setIsSocial }) {
         setShopInput({ title: "", url: "" });
       }
     };
-
+// =============================================================================================
     return (
       <div className={style.modalBackdrop}>
+         
         <div className={style.modalContent} ref={modalRef}>
           <div onClick={() => setIsSocial(!isSocial)} className={style.toggleWrapper}>
             <div className={style.labels}>

@@ -6,7 +6,6 @@ import checkCircle from '../images/checkCircle.png'
 import style from  './Login.module.css'
 import { useNavigate } from 'react-router-dom';
 import {login} from '../FetchMaker';
-
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -164,6 +163,7 @@ function Login() {
             onChange={(e) => setformData({ ...formData, [e.target.name]: e.target.value })}
           />
           {errors.userName && <p className={style.errorText}>{errors.userName}</p>}
+          
           <label htmlFor="password">Password</label>
           <input
             type="password"

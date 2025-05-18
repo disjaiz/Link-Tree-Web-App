@@ -7,7 +7,7 @@
     height: 100%;
     width: 100%;
     padding: 1% 2%;
-    background-color: hsl(210, 8%, 95%);    
+    background-color: #f1f2f3;    
     position: relative;
 }
 .mobilePreviewFixedBtn{
@@ -362,12 +362,16 @@
     margin-bottom: .3em;
 }
 .textWrapper p:nth-child(2) {
-    font: 400 0.7rem Poppins;
     display: flex;
     justify-content: center;
-    align-items: center;
+    font: 400 0.7rem Poppins;
     gap: 2px;
+     max-width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    word-break: break-word;
  }
+
 /* ===================================== */
 .colorPicker {
     display: flex;
@@ -489,6 +493,52 @@
     height: 15px;
     width: 15px;
 }
+/* ==============toast styles ============== */
+  .Toastify__toast,
+  .customToast,
+  .Toastify__toast-body {
+    height: 3.75em !important;
+    min-height: 3.75em !important;
+    min-width: 21.875em !important;
+    width: auto !important;
+    display: flex;
+    align-items: center;
+  }
+  
+.customToast {
+    color: white !important;
+    border-radius: 8px;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+  }
+.toastRed{
+    background-color: #FF003D !important;
+}
+.toastGreen{
+  background-color: #05A763 !important;
+}
+  .toastContent {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 0;
+  }
+  .toastIcon {
+    width: 20px; 
+    height: 20px;
+  }
+  .closeBtn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 19px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+  }
  /* ========================================================== */
  /* =========================================================== */
  /* ============================================================ */
@@ -524,6 +574,7 @@
         height: auto;
         padding: 2% 1% 0 2%;
         margin-bottom: 0;
+        border-radius: 0;
     }
     .imagePickerBtn{
         font : 600 0.8rem Inter;
@@ -606,4 +657,23 @@
     border-radius: 20px;
     font: 500 Poppins;
 }
+.textWrapper p:nth-child(2) {
+    font: 500 0.6rem Poppins;
+ }
+/* =========toast ========== */
+.Toastify__toast,
+    .customToast,
+    .Toastify__toast-body {
+      height: 3.75em !important;
+      min-height: 3.75em !important;
+      min-width: 21em !important;
+    width: auto !important;
+      display: flex;
+      align-items: center;
+    }
+    .customToast {
+        border-radius: 8px !important;
+        margin-top: 0.5em !important;
+      }
+/* ================================ */
 }

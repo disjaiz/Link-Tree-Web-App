@@ -13,11 +13,11 @@ import airBlack from "../images/airBlack.png";
 import mineralBlue from "../images/mineralBlue.png";
 import mineralGreen from "../images/mineralGreen.png";
 import mineralOrange from "../images/mineralOrange.png";
-import checkCircle from '../images/checkCircle.png'
 import eye from "../images/eye.png";
-import toastErrorImage from "../images/toastErrorImage.png";
 import {fetchUserData , updateAppearence}  from '../FetchMaker.js';
 import { toast, ToastContainer } from "react-toastify";
+import checkCircle from '../images/checkCircle.png'
+import toastErrorImage from "../images/toastErrorImage.png";
 
 function Appearence() {
   const location = useLocation();
@@ -120,8 +120,8 @@ function Appearence() {
       }
     );
     }
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.error(err);
   }
 };
 

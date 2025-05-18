@@ -1,11 +1,9 @@
-import React, {useState, useEffect, useRef } from 'react'
+import {useState, useEffect, useRef } from 'react'
 import style from './Links.module.css'
 import share from '../images/share.png'
-import {  useNavigate, useLocation} from 'react-router-dom';
+import { useLocation} from 'react-router-dom';
 import bigMemojiBoy from "../images/bigMemojiBoy.png";
 import plusImage from "../images/plusImage.png";
-import movingOut from "../images/movingOut.png";
-import blackFire from "../images/blackFire.png"
 import whiteFire from "../images/whiteFire.png"
 import deleteImg from '../images/deleteImg.png';
 import savedToggle from '../images/savedToggle.png';
@@ -18,9 +16,14 @@ import defaultAppIcon from '../images/defaultAppIcon.png';
 import eye from "../images/eye.png";
 import {fetchUserData, uploadProfileImage, removeProfileImage, deleteLink, updateProfileBanner} from '../FetchMaker.js';
 import LinkProfilePreview from './LinkProfilePreview.jsx';
+import { toast, ToastContainer } from "react-toastify";
+import checkCircle from '../images/checkCircle.png'
+import toastErrorImage from "../images/toastErrorImage.png";
 const port = 3000 || 5000;
 const baseUrl = `http://192.168.0.105:${port}`;
 // const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+const frontEndBaseUrl = `http://192.168.0.105:5173`;
+// const frontEndBaseUrl  = `https://link-tree-web-app-frontend.onrender.com`;
 
 function Links() {
   const location = useLocation();
@@ -48,7 +51,6 @@ function Links() {
     const response = await fetchUserData();
     const data = await response.json();
     if (!data) return;
-    // console.log(data, "data")
 
     setUserData(data);
   
@@ -105,6 +107,46 @@ function Links() {
   const handleDeleteLink =async( id) =>{
     const response = await deleteLink(id);
     const data = await response.json();
+
+       if (data.success) {
+              toast.success(
+                  <div className={style.toastContent}>
+                    <img src={checkCircle} alt="Success" className={style.toastIcon} />
+                    <span>link deleted successfully</span>
+                  </div>,
+                  {
+                    className: `${style.customToast} ${style.toastGreen}`,
+                    autoClose: true,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    draggable: false,
+                    closeButton: ({ closeToast }) => (
+                      <span className={style.closeBtn} onClick={closeToast}>✖</span>
+                    ),
+                    icon: false,
+                  }
+                );
+          } 
+       else {
+             toast.error(
+            <div className={style.toastContent} >
+              <img src={toastErrorImage} alt="Fail" className={style.toastIcon} />
+              <span>failed to delete link</span>
+            </div>,
+            {
+              className: `${style.customToast} ${style.toastRed}`,
+              autoClose: true,
+              hideProgressBar: true,
+              closeOnClick: true,
+              draggable: false,
+              closeButton: ({ closeToast }) => (
+                <span className={style.closeBtn} onClick={closeToast}>✖</span>
+              ),
+              icon: false,
+            }
+          );
+          }
+
     if(response.ok){
         setLinks(prev => prev.filter(link => link._id !== id));
     }  
@@ -115,21 +157,65 @@ function Links() {
     setShowEditLinkModal(true);
   };
 
-  const handleSave = async () =>{
+  const handleSaveProfile = async () =>{
     const profileTitle = profileRef.current.value;
     const bio = bioRef.current.value;
     try {
       const res = await updateProfileBanner({profileTitle, bio, bannerColor:selectedColor});
-      const data = await res.json(); 
-      console.log(data)
-    } catch (err) {
-      console.error('Remove failed:', err);
+      const data = await res.json();
+  
+      if (data.success) {
+              toast.success(
+                  <div className={style.toastContent}>
+                    <img src={checkCircle} alt="Success" className={style.toastIcon} />
+                    <span>Profile saved successfully</span>
+                  </div>,
+                  {
+                    className: `${style.customToast} ${style.toastGreen}`,
+                    autoClose: true,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    draggable: false,
+                    closeButton: ({ closeToast }) => (
+                      <span className={style.closeBtn} onClick={closeToast}>✖</span>
+                    ),
+                    icon: false,
+                  }
+                );
+          } 
+       else {
+             toast.error(
+            <div className={style.toastContent} >
+              <img src={toastErrorImage} alt="Fail" className={style.toastIcon} />
+              <span>failed to update profile</span>
+            </div>,
+            {
+              className: `${style.customToast} ${style.toastRed}`,
+              autoClose: true,
+              hideProgressBar: true,
+              closeOnClick: true,
+              draggable: false,
+              closeButton: ({ closeToast }) => (
+                <span className={style.closeBtn} onClick={closeToast}>✖</span>
+              ),
+              icon: false,
+            }
+          );
+          }
+    } 
+    catch (err) {
+      console.error('Profile update failed:', err);
     }
   }
 
+  const handleShareBtn = () =>{
+      // navigator.clipboard.writeText(frontEndBaseUrl);
+      alert(frontEndBaseUrl);
+  }
 //  =====================================================================================
   return (
     <div className={style.container}>
+        <ToastContainer   />
       <div className={style.mobilePreviewFixedBtn} onClick={() => setShowMobilePreview(!showMobilePreview)}>
         <img src={eye}/> &nbsp;Preview
         </div>
@@ -140,7 +226,7 @@ function Links() {
         <p style={{marginBottom:'4px', letterSpacing:'1px'}}><span style={{fontWeight: '700'}}>Hi,</span>&nbsp;{Name}</p>
         <p style={{color:'#383838', fontSize:'14px'}}>Congratulations, you got a great response today.</p>
         </div>
-        <button className={style.shareBtn}>
+        <button className={style.shareBtn} onClick={handleShareBtn}>
           <img src={share} alt="shareImg" />
           Share
         </button>
@@ -318,7 +404,11 @@ function Links() {
                   </div>
                   <div className={style.textWrapper}>
                       <p>{userName}</p>
-                     <p><img src={whiteFire} alt="fireImage" height='14px' />/{bio}</p>
+                     <p>
+                          <img src={whiteFire} alt="fireImage" height='14px' width='14px'/>/
+                          <span>{bio}</span>
+                          
+                      </p>
                   </div>
                 </div>  
                      
@@ -354,7 +444,7 @@ function Links() {
         </div>
 
         <div className={style.saveBtnDiv}>
-            <button className={style.saveBtn} onClick={handleSave}>Save</button>
+            <button className={style.saveBtn} onClick={handleSaveProfile}>Save</button>
         </div>          
       </div >
     </div>

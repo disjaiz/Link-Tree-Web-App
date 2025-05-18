@@ -230,9 +230,9 @@ router.put('/update-settings', Authenticate, async (req, res) => {
 
     const updatedUser = await User.findByIdAndUpdate(userId, updateFields, { new: true });
 
-    res.json({ message: 'User updated', user: updatedUser });
+    res.status(200).json({success: true, message: 'User updated', user: updatedUser });
   } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
+    res.status(500).json({success: false, message: 'Server error', error: err.message });
   }
 });
 
@@ -254,9 +254,9 @@ router.put('/create-link', Authenticate, async (req, res) => {
 
     const updatedUser = await User.findByIdAndUpdate(userId, update, { new: true });
 
-    res.json({ message: `${type} link added`, data: updatedUser[type] });
+    res.status(200).json({success: true, message: `${type} link added`, data: updatedUser[type] });
   } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
+    res.status(500).json({success: false, message: 'Server error', error: err.message });
   }
 });
 
@@ -274,9 +274,9 @@ router.delete('/links/:linkId',Authenticate, async (req, res) => {
 
     if (!user) return res.status(404).json({ error: 'User not found' });
 
-    res.status(200).json({ message: 'Link deleted' });
+    res.status(200).json({ success: true, message: 'Link deleted' });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ success: false, error: 'Server error' });
   }
 });
 
@@ -303,9 +303,9 @@ router.put('/links/update/:linkId', Authenticate, async (req, res) => {
     user[type] = updatedLinks;
     await user.save();
 
-    res.status(200).json({ message: 'Link updated' });
+    res.status(200).json({ success: true, message: 'Link updated' });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ success: false, error: 'Server error' });
   }
 });
 
@@ -320,9 +320,9 @@ router.put('/profile/update-banner', Authenticate, async (req, res) => {
       { profileTitle, bio, bannerColor },
       { new: true }
     );
-    res.status(200).json({ message: "Profile updated", user: updatedUser });
+    res.status(200).json({ success: true, message: "Profile updated", user: updatedUser });
   } catch (err) {
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ success: false, error: "Server error" });
   }
 });
 

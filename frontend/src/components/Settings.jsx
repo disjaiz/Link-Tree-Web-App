@@ -2,6 +2,9 @@ import React,{useState} from 'react'
 import style from './Settings.module.css'
 import {useLocation} from 'react-router-dom';
 import {updateSettings} from '../FetchMaker.js';
+import { toast, ToastContainer } from "react-toastify";
+import checkCircle from '../images/checkCircle.png'
+import toastErrorImage from "../images/toastErrorImage.png";
 
 function Settings() {
   const location = useLocation();
@@ -23,7 +26,9 @@ function Settings() {
     if (!formData.email) {  newErrors.email = "Email is required";} 
     else if (!/\S+@\S+\.\S+/.test(formData.email)) {  newErrors.email = "Email address is invalid";}
     if (!formData.password) {  newErrors.password = "Password is required*";} 
-    else if (formData.password.length < 6) { newErrors.password = "Password must be at least 6 characters long";}
+    else if (!/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(formData.password))
+          { newErrors.password = "Password must be at least 6 characters, include letters, numbers & a special character";}
+
     if (formData.password !== formData.confirmPassword) { newErrors.confirmPassword = "Passwords do not match";}
 
     setErrors(newErrors);
@@ -44,19 +49,52 @@ function Settings() {
                                           );
       const updatedData = await response.json();
   
-      if (response.ok) {
-        console.log(updatedData.user)
-      }
+        if (updatedData.success) {
+                    toast.success(
+                        <div className={style.toastContent}>
+                          <img src={checkCircle} alt="Success" className={style.toastIcon} />
+                          <span>Profile edited successfully</span>
+                        </div>,
+                        {
+                          className: `${style.customToast} ${style.toastGreen}`,
+                          autoClose: true,
+                          hideProgressBar: true,
+                          closeOnClick: true,
+                          draggable: false,
+                          closeButton: ({ closeToast }) => (
+                            <span className={style.closeBtn} onClick={closeToast}>✖</span>
+                          ),
+                          icon: false,
+                        }
+                      );
+                } 
        else {
-        console.log(updatedData.message)
-      }
+            toast.error(
+                  <div className={style.toastContent} >
+                    <img src={toastErrorImage} alt="Fail" className={style.toastIcon} />
+                    <span>{updatedData.message}</span>
+                  </div>,
+                  {
+                    className: `${style.customToast} ${style.toastRed}`,
+                    autoClose: true,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    draggable: false,
+                    closeButton: ({ closeToast }) => (
+                      <span className={style.closeBtn} onClick={closeToast}>✖</span>
+                    ),
+                    icon: false,
+                  }
+                );
+                }
     } catch (error) {
     console.log(error)
     }
   };
-
+// =================================================================================================
   return (
     <div className={style.container}>
+       <ToastContainer   />
           {/* ==================================header====================================== */}
           <div className={style.header}>
             <div>
