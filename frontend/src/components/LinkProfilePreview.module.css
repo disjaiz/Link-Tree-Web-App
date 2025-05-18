@@ -41,7 +41,7 @@
     height: 100%;
     object-fit: contain;
 }
-.mobilePreviewHeader p{
+.userName{
     position: absolute;
     bottom: 0.5em; 
     left: 50%;
@@ -51,6 +51,7 @@
     font-weight: 600;
     color: #FFFFFF;
 }
+
 .mobilePreviewHeader .divOne{
     position: absolute;
     top: 0.6em;
@@ -468,7 +469,7 @@
     width: 5em;
     height: 5em;
 }
- .mobilePreviewHeader > p{
+ .userName{
     bottom: 0.7em;
     font-size: 1.3rem;
   }

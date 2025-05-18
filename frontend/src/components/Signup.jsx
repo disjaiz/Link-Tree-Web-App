@@ -30,6 +30,8 @@ const validateForm = () => {
   if (!formData.email.trim()) newErrors.email = "Email is required";
   else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Invalid email format";
   if (!formData.password.trim()) newErrors.password = "Password is required";
+   else if (!/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(formData.password))
+          { newErrors.password = "Password must be at least 6 characters, include letters, numbers & a special character";}
   if (!formData.confirmPassword.trim()) newErrors.confirmPassword = "Confirm password is required";
   else if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = "Passwords do not match";
 

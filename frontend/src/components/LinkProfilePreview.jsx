@@ -9,10 +9,10 @@ import checkCircle from '../images/checkCircle.png'
 
 const port = 3000;
 // const baseUrl = `http://localhost:${port}`;
-const baseUrl = `http://192.168.0.105:${port}`;
-// const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
-const frontEndBaseUrl = `http://192.168.0.105:5173`;
-// const frontEndBaseUrl  = `https://link-tree-web-app-frontend.onrender.com`;
+// const baseUrl = `http://192.168.0.105:${port}`;
+const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+// const frontEndBaseUrl = `http://192.168.0.105:5173`;
+const frontEndBaseUrl  = `https://link-tree-web-app-frontend.onrender.com`;
 
 function LinkProfilePreview({user, imageSrc , userName, isSocial, setIsSocial, bannerColor, profilePreviewId}) {
     const navigate = useNavigate();
@@ -74,7 +74,7 @@ function LinkProfilePreview({user, imageSrc , userName, isSocial, setIsSocial, b
                     <div className={style.divTwo}>
                       <img src={imageSrc.startsWith("/uploads") ? `${baseUrl}${imageSrc}` : imageSrc} style={{objectFit: "fill"}} height="90%" width="90%"/>
                     </div>
-                    <p style={{fontFamily: user.fontFamily, color: user.fontColor}}>{userName}</p>
+                    <p className={style.userName} style={{fontFamily: user.fontFamily, color: user.fontColor}}>{userName}</p>
                   </div>
 
                   <div className={style.mobilePreviewSlider}>
@@ -88,21 +88,7 @@ function LinkProfilePreview({user, imageSrc , userName, isSocial, setIsSocial, b
                   </div>
       
                     {/*================================Render links===================================  */}
-                                  {/* <div className={style.linksList}>
-                                       {links
-                                         .filter(link => isSocial ? link.type === 'social' : link.type === 'shop')
-                                         .map((link, index) => (
-                                           <button key={index} className={style.linkCard}>
-                                            
-                                            <div className={style.linkCardDetailsDiv}>
-                                               <p className={style.linkTitle}>  {link.linkTitle}   </p>
-                                            </div>
-                                            
-                                           </button>
-                                       ))}
-                                   </div> */}
-
-                                   {/* =========================================================================== */}
+                          
                                       <div className={`${style.linksList} 
                                                                        ${user.profileLayout === "stack" ? style.stackLayout : ""} 
                                                                        ${user.profileLayout === "grid" ? style.gridLayout : ""} 

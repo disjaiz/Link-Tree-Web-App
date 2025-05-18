@@ -98,8 +98,7 @@ function AddLinkModal({ mode, linkData, onClose, isSocial, setIsSocial }) {
     
     const handleCopy = () => {
       const currentInput = isSocial ? socialInput : shopInput;
-      // navigator.clipboard.writeText(currentInput.url);
-      alert(currentInput.url);
+      navigator.clipboard.writeText(currentInput.url);
     };
     const handleDelete = () => {
       if (isSocial) {
