@@ -54,7 +54,7 @@ function LinkProfilePreview({ imageSrc, userName, isSocial, setIsSocial, links, 
                     <div className={style.divTwo}>
                       <img src={imageSrc.startsWith("/uploads") ? `${baseUrl}${imageSrc}` : imageSrc} style={{objectFit: "fill"}} height="90%" width="90%"/>
                     </div>
-                    <p style={{fontFamily: fontFamily, color: fontColor}}>{userName}</p>
+                    <p className={style.userName} style={{fontFamily: fontFamily, color: fontColor}}>{userName}</p>
                   </div>
 
                   <div className={style.mobilePreviewSlider}>
