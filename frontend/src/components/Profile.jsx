@@ -4,14 +4,17 @@ import blackFire from "../images/blackFire.png"
 import {useNavigate} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import bigMemojiBoy from "../images/bigMemojiBoy.png";
+import { toast, ToastContainer } from "react-toastify";
+import checkCircle from '../images/checkCircle.png'
+import { useParams } from "react-router-dom";
+import { saveClickLog, saveCtaLog } from '../FetchMaker';
 
 const port = 3000;
 // const baseUrl = `http://localhost:${port}`;
-// const baseUrl = `http://192.168.0.105:${port}`;
-const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
-
-
-import { useParams } from "react-router-dom";
+const baseUrl = `http://192.168.0.105:${port}`;
+// const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+const frontEndBaseUrl = `http://192.168.0.105:5173`;
+// const frontEndBaseUrl  = `https://link-tree-web-app-frontend.onrender.com`;
 
 function Profile() {
   const navigate = useNavigate()
@@ -23,7 +26,23 @@ function Profile() {
    const handleCopyLink = () => {
       const link = `${frontEndBaseUrl}/user/preview/${profilePreviewId}`;
       navigator.clipboard.writeText(link);
-      // alert(link);
+       toast.success(
+                           <div className={style.toastContent}>
+                                <img src={checkCircle} alt="Success" className={style.toastIcon} />
+                                <span>Profile link saved</span>
+                              </div>,
+                              {
+                                className: `${style.customToast} ${style.toastGreen}`,
+                                autoClose: false,
+                                hideProgressBar: true,
+                                closeOnClick: true,
+                                draggable: false,
+                                closeButton: ({ closeToast }) => (
+                                  <span className={style.closeBtn} onClick={closeToast}>✖</span>
+                                ),
+                                icon: false,
+                              }
+                            );
     };
 
   useEffect(() => {
@@ -37,18 +56,41 @@ function Profile() {
         return res.json();
       })
       .then(data => {
-        setUser(data);
+                  setUser(data);
                   console.log(data)
                 })
       .catch((err) => console.log("err", err));
   }, [id]);
 
-     if (!user) return null; // or a loader
+  const handleLinkClick = async (link) => {
+    try {
+      const response = await saveClickLog(link.linkUrl, isSocial);
+      const data = await response.json();
+      console.log(data)
+    } catch (err) {
+      console.error("Click log failed", err);
+    } finally {
+      window.location.href = `https://${link.linkUrl}`;
+    }
+};
+  const handleCtaClick = async () => {
+     try {
+      const response = await saveCtaLog(id);
+      const data = await response.json();
+      console.log(data)
+    } catch (err) {
+      console.error("Cta log failed", err);
+    } finally {
+    navigate('/')
+    }
+  }
+
+     if (!user) return null; 
 //  ======================================================
   return (
     <div className={style.container}>
-  
       <div className={style.mobilePreviewDiv}>
+         <ToastContainer   />
                 <div className={style.mobilePreview} style={{ backgroundColor: user.theme }}>
 
                   <div className={style.mobilePreviewHeader} style={{backgroundColor: user.bannerColor}}>
@@ -80,7 +122,8 @@ function Profile() {
                                   ${user.profileLayout === "carausel" ? style.carauselLayout : ""}`}>
                      {(isSocial ? user.social : user.shop)?.map((link, index) => (
                            <div key={index} 
-                                onClick={()=>  window.location.href = `https://${link.linkUrl}`}
+                                // onClick={()=>  window.location.href = `https://${link.linkUrl}`}
+                               onClick={() => handleLinkClick(link)}
                                 style={{backgroundColor: user.buttonColor,  '--zigzag-color': user.buttonColor, cursor: "pointer"}}
                                 className={`${style.linkCard}
                                 
@@ -118,7 +161,7 @@ function Profile() {
                   </div>
                  {/* ======================================================================================== */}
 
-                  <button className={style.getConnectedBtn} onClick={()=> navigate('/')}>Get Connected</button>
+                  <button className={style.getConnectedBtn} onClick={handleCtaClick}>Get Connected</button>
       
                   <div className={style.sparkLogo}><img src={blackFire} alt="fireImg" height="20px"/>&nbsp;SPARK</div>
                 </div>

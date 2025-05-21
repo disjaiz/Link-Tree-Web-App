@@ -1,7 +1,7 @@
 const port = 3000;
 // const baseUrl = `http://localhost:${port}`;
-// const baseUrl = `http://192.168.0.105:${port}`;
-const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+const baseUrl = `http://192.168.0.105:${port}`;
+// const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
 //=============================== signup fetch ======================================
 async function signup(formdata){
 
@@ -226,3 +226,32 @@ export const updateAppearence = async (payload) => {
     console.error("Error updating appearence:", err);
   }
 }
+// ========================save click logs ===========================================
+export const saveClickLog = async (linkUrl, isSocial) => {
+  try {
+     await fetch(`${baseUrl}/user/track-click`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ linkUrl, isSocial }),
+      });
+    return response;
+  } catch (err) {
+    console.error("Error saving click log:", err);
+  }
+};
+
+// ========================save cta logs ===========================================
+export const saveCtaLog = async (id) => {
+  try {
+     await fetch(`${baseUrl}/user/track-cta`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({profilePreviewId: id }),
+      });
+    return response;
+  } catch (err) {
+    console.error("Error saving click log:", err);
+  }
+};

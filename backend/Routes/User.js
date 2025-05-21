@@ -12,6 +12,7 @@ import upload from '../Middlewares/upload.js';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+import {UAParser} from 'ua-parser-js';
 // =================================get all users==============================================================
 router.get('/' , async(req, res)=>{
     const users = await User.find();
@@ -66,10 +67,10 @@ router.post('/signup', async (req, res) => {
         res.cookie('Token', token, {
             httpOnly: true,
             maxAge: 5 * 60 * 60 * 1000,
-            sameSite: 'None',
-            secure: true,
-            // secure: false,
-            // sameSite: 'Lax',
+            // sameSite: 'None',
+            // secure: true,
+            secure: false,
+            sameSite: 'Lax',
         });
         return res.status(200).json({ msg: "User registered and logged in!", user });
     } catch (error) {
@@ -102,10 +103,10 @@ router.post('/login', async (req, res)=>{
             res.cookie('Token', token, {
                 httpOnly: true,
                 maxAge:5 * 60 * 60 * 1000,
-                sameSite: 'None', 
-                secure: true,
-//                 secure: false,
-//  sameSite: 'Lax',
+                // sameSite: 'None', 
+                // secure: true,
+                secure: false,
+ sameSite: 'Lax',
 
               });
           
@@ -376,6 +377,63 @@ router.put('/appearance', Authenticate, async (req, res) => {
   }
 });
 
+// ====================== track click ==========================
+router.post('/track-click', async (req, res) => {
+  const { linkUrl, isSocial } = req.body;
+  const userAgent = req.headers['user-agent'];
+  const parser = new UAParser(userAgent);
+  const deviceName = parser.getOS().name || 'Other';
 
+  try {
+    const user = await User.findOne({
+      [isSocial ? 'social.linkUrl' : 'shop.linkUrl']: linkUrl
+    });
+
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    const targetArray = isSocial ? user.social : user.shop;
+    const link = targetArray.find(l => l.linkUrl === linkUrl);
+    if (!link) return res.status(400).json({ error: 'Link not found' });
+
+    link.clickCount += 1;
+    // user.clickLogs.push({ device: deviceName });
+    user.clickLogs.push({ device: deviceName, 
+                          type: isSocial ? 'social' : 'shop',
+                          linkUrl });
+
+    await user.save();
+    res.json({ success: true });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// ========================= track cta click ==========================
+router.post('/track-cta', async (req, res) => {
+  const { profilePreviewId } = req.body;
+  const userAgent = req.headers['user-agent'];
+  const parser = new UAParser(userAgent);
+  const deviceName = parser.getOS().name || 'Other';
+
+  try {
+    const user = await User.findOne({ profilePreviewId });
+
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    user.ctaCount = (user.ctaCount || 0) + 1;
+    // user.clickLogs.push({ device: deviceName });
+    user.clickLogs.push({ device: deviceName, type: 'cta' });
+
+
+    await user.save();
+    res.json({ success: true });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 
 export default router;

@@ -87,7 +87,7 @@ function AddLinkModal({ mode, linkData, onClose, isSocial, setIsSocial }) {
       const data = await response.json();
     
       if (data.success) {
-        alert(mode === "edit" ? "Link updated" : "Link added");
+        console.log(mode === "edit" ? "Link updated" : "Link added");
       }
       else {
         console.error("Error:", data);
