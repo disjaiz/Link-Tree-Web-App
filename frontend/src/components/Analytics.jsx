@@ -27,8 +27,10 @@ function Analytics() {
   const [ctaCount, setCtaCount] = useState(0); 
   const [areaChartData, setAreaChartData] = useState([]);
   const [deviceClicksData, setDeviceClicksData] = useState([]);
+  const [linksBarData, setLinksBarData] = useState([]);
   const ref = useRef(null);
-  const colors = ['#28A263', '#28A263', '#28A263', '#28A263', '#28A263A', '#28A263'];
+  const themeColors = ['#92FFC6', '#9BEBC1', '#165534', '#3EE58F', '#A1D4BA', '#21AF66'];
+
   const clickCounts = { youtube: 0, facebook: 0, instagram: 0, other: 0 };
   const [pieChartData, setPieChartData] = useState([]);
 
@@ -106,6 +108,18 @@ const updatedPieData = [
 ];
 setPieChartData(updatedPieData);
 console.log(updatedPieData)
+
+
+const allLinks = [...data.social, ...data.shop];
+
+const sortedLinks = allLinks
+  .map(link => ({
+    linkTitle: link.linkTitle,
+    clickCount: link.clickCount || 0
+  }))
+  .sort((a, b) => b.clickCount - a.clickCount);
+
+setLinksBarData(sortedLinks);
 };
   useEffect(() => {
       fetchUser();
@@ -221,37 +235,79 @@ const getDeviceClicksInRange = (clickLogs, startDate, endDate) => {
                       tickLine={false}
                       ticks={[0, 1000, 2000, 3000]}  
                       tickFormatter={(val) => val === 0 ? '0' : `${val / 1000}k`} />
-                {/* <Tooltip /> */}
+                <Tooltip />
                 <Bar dataKey="clicks" radius={[8, 8, 8, 8]} barSize={40}>
                    {deviceClicksData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                          <Cell key={`cell-${index}`} fill={themeColors[index % themeColors.length]} />
                             ))}
                 </Bar>
             </BarChart> 
             </ResponsiveContainer>
           </div>
-
-          <div className={style.pieChartDiv}>
-            <p>Traffic by link</p>
-              <ResponsiveContainer width="100%" height="100%">
-              <PieChart width={300} height={300}>
-                  <Pie
-                    data={pieChartData}
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={100}
-                    label
-                    dataKey="value"
-                  >
-                    {pieData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={['#FF0000', '#3b5998', '#C13584', '#8884d8'][index % 4]} />
-                    ))}
-                  </Pie>
-              </PieChart>
-              </ResponsiveContainer>
-          </div>
+           <div className={style.pieChartDiv}>
+            <p>Sites</p>
+            <div className={style.content}>
+              <div className={style.chartWrapper}>
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart style={{overflow: 'hidden'}}>
+              <Pie
+                data={pieChartData}
+                cx="50%"
+                cy="50%"
+                innerRadius={40}
+                outerRadius={80}
+                dataKey="value"
+                cornerRadius={7} 
+              >
+                {pieChartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={themeColors[index % themeColors.length]} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+         <div className={style.legend}>
+          {pieChartData.map((entry, index) => (
+            <div key={index} className={style.legendItem}>
+              <span
+                className={style.colorDot}
+                style={{ backgroundColor: themeColors[index % themeColors.length] }}
+              ></span>
+              <span className={style.labelText}>{entry.name}</span>
+              <span className={style.value}>{entry.value}</span>
+            </div>
+          ))}
         </div>
 
+            </div>
+          </div>
+
+        </div>
+
+      <div className={style.linksBarChartContainer}>
+        <p>Traffic by links</p>
+        <ResponsiveContainer width="100%" height="80%">
+        <BarChart
+          layout="horizontal"
+          data={linksBarData}
+          style={{overflow: 'hidden'}}
+        >
+          <XAxis dataKey="linkTitle" type="category" axisLine={false} tickLine={false}/>
+           <YAxis type="number"
+           padding={{ bottom: 30 }}
+                  axisLine={false} 
+                      tickLine={false}
+                      ticks={[0, 1000, 2000, 3000]}  
+                      tickFormatter={(val) => val === 0 ? '0' : `${val / 1000}k`} />
+          <Tooltip />
+          <Bar dataKey="clickCount" barSize={25} radius={[6, 6, 6, 6]}>
+            {linksBarData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={themeColors[index % themeColors.length]}  />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
       </div>    
     </div>
   )

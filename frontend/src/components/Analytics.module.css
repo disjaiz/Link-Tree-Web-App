@@ -32,7 +32,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 1.5em;
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
 }
 .clicksDiv{
     background-color: #DCFFEB;
@@ -56,7 +56,7 @@
     background-color: #fff;
     border-radius: 1em;
     padding: 1.5em;
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
 }
 .datePicker{
     position: relative;
@@ -97,6 +97,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 1em;
+    margin-bottom: 1.5em;
 }
 .barChartDiv, .pieChartDiv{
     width: 100%;
@@ -108,6 +109,59 @@
     flex-direction: column;
 }
 .barChartDiv p, .pieChartDiv p{
+    font: bold 0.9rem Poppins;
+    color: #000000;
+    margin: 1em 0 1em 2em;
+    height: 10%;
+}
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding: 0 9%;
+}
+.chartWrapper {
+  width: 45%;
+  height: 100%;
+}
+.legend {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 0.9rem;
+  justify-content: space-between;
+}
+.colorDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.labelText {
+  flex: 1;
+  font: regular 0.9rem Poppins;
+}
+.value {
+  font: regular 0.9rem Poppins;
+}
+
+.linksBarChartContainer{
+    width: 42em;
+    height: 24em;
+    background-color: #fff;
+    border-radius: 1em;
+    padding: 0.5em 0;
+    margin-bottom: 1em;
+}
+.linksBarChartContainer p{
     font: bold 0.9rem Poppins;
     color: #000000;
     margin: 1em 0 1em 2em;
