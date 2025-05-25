@@ -141,24 +141,28 @@ const getDeviceClicksInRange = (clickLogs, startDate, endDate) => {
 
 // ========================================================================================
   return (
+  <>
     <div className={style.container}>
-      {/* ==================================header================================= */}
-            <div className={style.header}>
-              <div>
+      {/* ==================================header================================= */}   
+              <div className={style.header}>
               <p style={{marginBottom:'4px', letterSpacing:'1px'}}><span style={{fontWeight: '700'}}>Hi,</span>&nbsp;{Name}</p>
               <p style={{color:'#383838', fontSize:'14px'}}>Congratulations, you got a great response today.</p>
               </div>
+      {/* =====================================main=================================== */}
+      <div className={style.overviewContainer}>
+ 
+        <div className={style.overviewDatePickerContainer}>
+          <p className={style.overviewHeader}>Overview</p>
 
-              <div className={style.datePicker} ref={ref}>
+          <div className={style.datePicker} ref={ref}>
                   <button className={style.dropdownBtn} onClick={() => setOpen(!open)}>
                     <img  className={style.icon} src={calender} alt="calenderImg" />
                      {format(dateRange[0].startDate, "MMM do")} to{" "}
                      {format(dateRange[0].endDate, "MMM do")}
                     <img className={style.arrow} src={calenderDropArrow} alt="calenderDropArrowImg" />
                   </button>
-              </div>
-
-              {open && (
+          </div>
+            {open && (
                   <div className={style.dateRangeContainer}>
                     <DateRange
                       className={style.dateRange}
@@ -171,11 +175,9 @@ const getDeviceClicksInRange = (clickLogs, startDate, endDate) => {
                     />
                   </div>
                 )}
-            </div>
-
-      {/* =====================================main=================================== */}
-      <div className={style.overviewContainer}>
-        <p className={style.overviewHeader}>Overview</p>
+           
+        </div>
+        
         <div className={style.clicksDivContainer}>
           <div className={style.clicksDiv} style={{backgroundColor:'#22D679', color:'#FFFFFF'}}>
             <p className={style.clicksDivHeader} style={{color: "#FFFFFF"}}>Clicks on Link</p>
@@ -310,7 +312,9 @@ const getDeviceClicksInRange = (clickLogs, startDate, endDate) => {
     </div>
       </div>    
     </div>
+    </>
   )
 }
+
 
 export default Analytics
