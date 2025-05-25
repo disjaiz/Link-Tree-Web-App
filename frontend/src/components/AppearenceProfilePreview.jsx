@@ -20,7 +20,6 @@ function AppearenceProfilePreview({ imageSrc, userName, isSocial, setIsSocial, l
 
     const handleCopyLink = () => {
       const link = `${frontEndBaseUrl}/user/preview/${profilePreviewId}`;
-      // alert(link);
       navigator.clipboard.writeText(link);
       toast.success(
                   <div className={style.toastContent}>

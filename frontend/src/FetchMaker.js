@@ -236,6 +236,7 @@ export const saveClickLog = async (linkUrl, isSocial) => {
         body: JSON.stringify({ linkUrl, isSocial }),
       });
     return response;
+    console.log(response)
   } catch (err) {
     console.error("Error saving click log:", err);
   }

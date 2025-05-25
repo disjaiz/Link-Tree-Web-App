@@ -210,7 +210,6 @@ function Links() {
 
   const handleShareBtn = () =>{
       navigator.clipboard.writeText(frontEndBaseUrl);
-      // alert(frontEndBaseUrl);
   }
 //  =====================================================================================
   return (
@@ -349,7 +348,7 @@ function Links() {
                               </p>
                               <div className={style.clicksCountDiv}>
                                 <img src={clicksLadder} alt="clicksLadderImg" />
-                                <p>0 clicks</p>
+                                <p>{link.clickCount}</p>
                               </div>
                             </div>
                             <div className={style.linkCardControlsDiv}> 

@@ -67,10 +67,10 @@ router.post('/signup', async (req, res) => {
         res.cookie('Token', token, {
             httpOnly: true,
             maxAge: 5 * 60 * 60 * 1000,
-            sameSite: 'None',
-            secure: true,
-            // secure: false,
-            // sameSite: 'Lax',
+            // sameSite: 'None',
+            // secure: true,
+            secure: false,
+            sameSite: 'Lax',
         });
         return res.status(200).json({ msg: "User registered and logged in!", user });
     } catch (error) {
@@ -269,7 +269,11 @@ router.delete('/links/:linkId',Authenticate, async (req, res) => {
 
     const user = await User.findByIdAndUpdate(
       userId,
-      { $pull: { social: { _id: linkId } } },
+      {
+        $pull: {
+              social: { _id: linkId },
+              shop: { _id: linkId }
+      }},
       { new: true }
     );
 

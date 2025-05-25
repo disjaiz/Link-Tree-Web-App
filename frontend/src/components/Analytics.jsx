@@ -60,6 +60,7 @@ function Analytics() {
     const data = await response.json();
     const totalShopClicks = data.shop.reduce((sum, link) => sum + (link.clickCount || 0), 0);
     const totalSocialClicks = data.social.reduce((sum, link) => sum + (link.clickCount || 0), 0);
+    console.log(data);
    
     setSocialClicksCount(totalSocialClicks);
     setshopClicksCount(totalShopClicks);

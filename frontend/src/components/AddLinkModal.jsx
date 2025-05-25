@@ -37,7 +37,6 @@ function AddLinkModal({ mode, linkData, onClose, isSocial, setIsSocial }) {
     
       // Handle edit mode data fill
       if (mode === "edit" && linkData) {
-        console.log("lainkData",linkData);
         if (linkData.type === "social") {
            setSocialInput({ 
             title: linkData.title,
