@@ -8,20 +8,21 @@ import checkCircle from '../images/checkCircle.png'
 
 const port = 3000;
 // const baseUrl = `http://localhost:${port}`;
-// const baseUrl = `http://192.168.0.105:${port}`;
-const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
-// const frontEndBaseUrl = `http://192.168.0.105:5173`;
-const frontEndBaseUrl = `https://link-tree-web-app-frontend.onrender.com`;
+const baseUrl = `http://192.168.0.105:${port}`;
+// const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+const frontEndBaseUrl = `http://192.168.0.105:5173`;
+// const frontEndBaseUrl = `https://link-tree-web-app-frontend.onrender.com`;
 
 
-function LinkProfilePreview({ imageSrc, userName, isSocial, setIsSocial, links, bannerColor, profilePreviewId,
+function AppearenceProfilePreview({ imageSrc, userName, isSocial, setIsSocial, links, bannerColor, profilePreviewId,
     layout, buttonStyle, buttonColor, buttonFontColor, fontFamily, fontColor, theme }) {
     const navigate = useNavigate();
 
     const handleCopyLink = () => {
       const link = `${frontEndBaseUrl}/user/preview/${profilePreviewId}`;
+      alert(link);
       navigator.clipboard.writeText(link);
-       toast.success(
+      toast.success(
                   <div className={style.toastContent}>
                     <img src={checkCircle} alt="Success" className={style.toastIcon} />
                     <span>Profile link saved</span>
@@ -125,4 +126,4 @@ function LinkProfilePreview({ imageSrc, userName, isSocial, setIsSocial, links, 
   )
 }
 
-export default LinkProfilePreview
+export default AppearenceProfilePreview

@@ -3,7 +3,6 @@
   background-color: #000000;
   overflow: visible;
 }
-
 .zigZag::before,
 .zigZag::after {
   content: "";

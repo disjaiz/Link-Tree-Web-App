@@ -1,0 +1,257 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.container{
+    height: auto;
+    width: 100%;
+    padding: 1% 3%;
+    background-color: #f1f2f3;    
+    padding-bottom: 20em;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    font-family: Poppins;
+    padding: 0.6em 0;
+}
+.overviewDatePickerContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+}
+.overviewContainer{
+    width: 100%;
+}
+.overviewHeader{
+    color: #000000;
+    font: 600 1rem Poppins;
+    padding-left: 0.5em;
+}
+.clicksDivContainer{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1.5em;
+    margin-bottom: 1.5em;
+}
+.clicksDiv{
+    background-color: #DCFFEB;
+    border-radius: 1em;
+    padding: 1.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    width: 100%;
+}
+.clicksDivHeader{
+    font: 500 1rem Poppins;
+    color: #000000;
+}
+.clicks{
+    font: 600 1.4rem Poppins;
+    color: #1C1C1C;
+}
+.clicksAreaChartContainer{
+    width: 100%;
+    height: 20em;
+    background-color: #fff;
+    border-radius: 1em;
+    padding: 1.5em 1.5em 0.5em 0;
+    margin-bottom: 1.5em;
+}
+.datePicker{
+    display: inline-block;
+    cursor: pointer;
+    width: 230px; 
+    position: relative;
+}
+ .dropdownBtn {
+  background-color: white;
+  color: #666666;
+  padding: 1.2em 1em;
+  border-radius: 12px;
+  border: none;
+  font: 500 0.8rem Poppins;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  gap: 0.8em;
+  width: 100%; 
+}
+.dropdownBtn .icon {
+  flex-shrink: 0;
+  height: 1.4em; 
+}
+.dropdownBtn .arrow {
+  flex-shrink: 0;
+  height: 0.5em;
+  margin-left: auto;
+}
+.dateRangeContainer{
+  position: absolute;
+  top: 130px;
+  right : 30px;
+  z-index: 1000;
+}
+.dateRange :global(.rdrDay) {
+  height: 46px !important;
+}
+.barPieChartContainer{
+    width: 100%;
+    height: 20em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1em;
+    margin-bottom: 1.5em;
+}
+.barChartDiv, .pieChartDiv{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    padding: 0.5em 0;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+}
+.barChartDiv p, .pieChartDiv p{
+    font: bold 0.9rem Poppins;
+    color: #000000;
+    margin: 1em 0 1em 2em;
+    height: 10%;
+}
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding: 0 9%;
+}
+.chartWrapper {
+  width: 45%;
+  height: 100%;
+}
+.legend {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 0.9rem;
+  justify-content: space-between;
+}
+.colorDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.labelText {
+  flex: 1;
+  font: regular 0.9rem Poppins;
+}
+.value {
+  font: regular 0.9rem Poppins;
+}
+
+.linksBarChartContainer{
+    width: 42em;
+    height: 24em;
+    background-color: #fff;
+    border-radius: 1em;
+    padding: 0.5em 0;
+    margin-bottom: 1em;
+}
+.linksBarChartContainer p{
+    font: bold 0.9rem Poppins;
+    color: #000000;
+    margin: 1em 0 1em 2em;
+    height: 10%;
+}
+
+/* ======================================================== */
+/* ======================================================== */
+/* ======================================================== */
+/* ======================================================== */
+
+@media (max-width: 375px) {
+  .container{
+    background-color: #fff; 
+    padding: 0 1%;
+    padding-bottom: 5em;
+  }
+  .header{
+    display: none;
+  }
+  .overviewDatePickerContainer{
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5em;
+    margin-bottom: 1em;
+  }
+ .datePicker{
+    width: 100%;
+  }
+  .dropdownBtn {
+    background-color: #f1f2f3;    
+    width: 100%;
+    font: 500 0.9rem Poppins;
+  }
+  .dateRangeContainer{
+    top: 180px;
+    right : 0;
+  }
+  .clicksDivContainer{
+    overflow: scroll;
+  }
+  .clicksDiv{
+      height: 6em;
+      min-width: 15em;
+      padding: 1em;
+  }
+  .clicksDivHeader{
+    font: 500 0.9rem Poppins;
+}
+.clicks{
+    font: 600 1.2rem Poppins;
+}
+  .clicksAreaChartContainer{
+      width: 100%;
+      height: 22em;
+      background-color: #f1f2f3;  
+      margin-bottom: 1.5em;
+      font-size: 0.7rem;
+      overflow-x: scroll;
+      padding: 1em 1em 0 0;
+  }
+  .barPieChartContainer{
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 1.5em;
+}
+.barChartDiv, .pieChartDiv{
+    width: 100%;
+    height: 20em;
+    background-color: #f1f2f3;
+    font-size: 0.8rem;
+    padding: 0.5em 0;
+}
+  .linksBarChartContainer{
+      width: 100%;
+      height: 20em;
+      background-color:  #f1f2f3;
+      font-size: 0.8rem;
+      padding: 0.5em 0;
+  }
+  }
