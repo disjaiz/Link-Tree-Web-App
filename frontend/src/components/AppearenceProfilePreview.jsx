@@ -8,10 +8,10 @@ import checkCircle from '../images/checkCircle.png'
 
 const port = 3000;
 // const baseUrl = `http://localhost:${port}`;
-const baseUrl = `http://192.168.0.105:${port}`;
-// const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
-const frontEndBaseUrl = `http://192.168.0.105:5173`;
-// const frontEndBaseUrl = `https://link-tree-web-app-frontend.onrender.com`;
+// const baseUrl = `http://192.168.0.105:${port}`;
+const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+// const frontEndBaseUrl = `http://192.168.0.105:5173`;
+const frontEndBaseUrl = `https://link-tree-web-app-frontend.onrender.com`;
 
 
 function AppearenceProfilePreview({ imageSrc, userName, isSocial, setIsSocial, links, bannerColor, profilePreviewId,
@@ -20,7 +20,7 @@ function AppearenceProfilePreview({ imageSrc, userName, isSocial, setIsSocial, l
 
     const handleCopyLink = () => {
       const link = `${frontEndBaseUrl}/user/preview/${profilePreviewId}`;
-      alert(link);
+      // alert(link);
       navigator.clipboard.writeText(link);
       toast.success(
                   <div className={style.toastContent}>

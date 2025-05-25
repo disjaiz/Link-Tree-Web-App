@@ -9,10 +9,10 @@ import checkCircle from '../images/checkCircle.png'
 
 const port = 3000;
 // const baseUrl = `http://localhost:${port}`;
-const baseUrl = `http://192.168.0.105:${port}`;
-// const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
-const frontEndBaseUrl = `http://192.168.0.105:5173`;
-// const frontEndBaseUrl  = `https://link-tree-web-app-frontend.onrender.com`;
+// const baseUrl = `http://192.168.0.105:${port}`;
+const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+// const frontEndBaseUrl = `http://192.168.0.105:5173`;
+const frontEndBaseUrl  = `https://link-tree-web-app-frontend.onrender.com`;
 
 function LinkProfilePreview({user, imageSrc , userName, isSocial, setIsSocial, bannerColor, profilePreviewId}) {
     const navigate = useNavigate();

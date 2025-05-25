@@ -16,8 +16,8 @@ import {
 } from 'recharts';
 
 const port = 3000;
-const baseUrl = `http://192.168.0.105:${port}`;
-// const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+// const baseUrl = `http://192.168.0.105:${port}`;
+const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
 
 function Analytics() {
   const location = useLocation();
