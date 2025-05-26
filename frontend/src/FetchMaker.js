@@ -1,7 +1,5 @@
-const port = 3000;
-// const baseUrl = `http://localhost:${port}`;
-// const baseUrl = `http://192.168.0.105:${port}`;
-const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+import baseUrl from './config'; 
+
 //=============================== signup fetch ======================================
 async function signup(formdata){
 

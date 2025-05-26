@@ -11,33 +11,28 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000 ;
 app.use(express.json());
+
 // app.use(cors({
-//   origin: 'http://localhost:5173',
+//   origin: 'https://link-tree-web-app-frontend.onrender.com', 
 //   credentials: true, 
 //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 //   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 // }));
+
+const allowedOrigins = ['http://localhost:5173', 'http://192.168.0.105:5173'];
 app.use(cors({
-  origin: 'https://link-tree-web-app-frontend.onrender.com', 
-  credentials: true, 
+  origin: function(origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      // allow requests with no origin (like mobile devices)
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
-
-// const allowedOrigins = ['http://localhost:5173', 'http://192.168.0.105:5173'];
-// app.use(cors({
-//   origin: function(origin, callback) {
-//     if (allowedOrigins.includes(origin) || !origin) {
-//       // allow requests with no origin (like mobile devices)
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-//   credentials: true,
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
-// }));
 
 
 app.use(cookieParser());

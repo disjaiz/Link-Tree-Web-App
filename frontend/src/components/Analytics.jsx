@@ -15,9 +15,8 @@ import {
   PieChart, Pie, BarChart, Bar,Cell, AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer
 } from 'recharts';
 
-const port = 3000;
-// const baseUrl = `http://192.168.0.105:${port}`;
-const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+import baseUrl from '../config';
+
 
 function Analytics() {
   const location = useLocation();
@@ -60,7 +59,6 @@ function Analytics() {
     const data = await response.json();
     const totalShopClicks = data.shop.reduce((sum, link) => sum + (link.clickCount || 0), 0);
     const totalSocialClicks = data.social.reduce((sum, link) => sum + (link.clickCount || 0), 0);
-    console.log(data);
    
     setSocialClicksCount(totalSocialClicks);
     setshopClicksCount(totalShopClicks);

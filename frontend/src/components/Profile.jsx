@@ -8,13 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import checkCircle from '../images/checkCircle.png'
 import { useParams } from "react-router-dom";
 import { saveClickLog, saveCtaLog } from '../FetchMaker';
-
-const port = 3000;
-// const baseUrl = `http://localhost:${port}`;
-// const baseUrl = `http://192.168.0.105:${port}`;
-const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
-// const frontEndBaseUrl = `http://192.168.0.105:5173`;
-const frontEndBaseUrl  = `https://link-tree-web-app-frontend.onrender.com`;
+import baseUrl, {frontEndBaseUrl} from '../config'; 
 
 function Profile() {
   const navigate = useNavigate()

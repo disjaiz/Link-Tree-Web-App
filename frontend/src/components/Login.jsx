@@ -156,6 +156,7 @@ function Login() {
       <form onSubmit={handleLogin} className={style.loginForm}>
         <label htmlFor="username" >Username</label>
           <input
+            autoFocus
             type="text"
             name="userName"
             placeholder="Spark/Username"

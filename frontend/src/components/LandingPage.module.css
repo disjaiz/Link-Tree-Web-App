@@ -2,6 +2,7 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    
 }
 button{
     cursor: pointer;
@@ -9,7 +10,6 @@ button{
 .page{
     width: 100vw;
     background-color: #f3faf6;
-    /* background-color: thistle; */
 }
 .container{
     background-color: #f3faf6;
@@ -38,8 +38,14 @@ button{
     align-items: center;
     margin-left: 0.9em;
 }
-.logoBox img{
-    margin-right: 0.6em;
+.logoBox .fireImg{
+    margin-right: 0.4em;
+    height: auto;
+    width: 25px;
+}
+.separatorContainer > img{
+    height: auto;
+    width: 60px;
 }
 .separatorContainer {
     display: flex;

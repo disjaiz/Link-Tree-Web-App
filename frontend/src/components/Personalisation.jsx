@@ -59,7 +59,7 @@ function Personalisation() {
         const response = await updateProfileTitle(userId,  profileTitle );
         const data = await response.json();
         if (response.ok) {
-            console.log("Profile title updated:", data.user);
+            console.log("Profile title updated:");
         } else {
             console.error("Error updating profile:", data.message);
         }
@@ -82,6 +82,7 @@ function Personalisation() {
           <p id={style.pOne}>For a Personalised Spark experience</p>
 
           <input 
+            autoFocus
             type="text" 
             name="" 
             placeholder='Tell us your username'  

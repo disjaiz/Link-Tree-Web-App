@@ -1,4 +1,3 @@
-import React from 'react'
 import fire from '../images/fire.png'
 import spark from '../images/SPARK.png'
 import greenPallete from '../images/green_pallet.png'
@@ -31,11 +30,10 @@ function LandingPage() {
     <div className={style.container}>
 
         <div className={style.navbarTab}>
-            <div className={style.logoBox}> 
-                <img src={fire} alt="fire_logo" style={{ height: '25px' }} />
+            <div className={style.logoBox} style={{overflow: 'hidden'}}> 
+                <img className={style.fireImg} src={fire} alt="fire_logo" />
                 <div className={style.separatorContainer}>
-                <img src={spark} alt="spark_logo" style={{ height: '15px' }} />
-
+                <img src={spark} alt="spark_logo"   />
                 <div className={style.separator}></div>
                 </div>
                 <p style={{ display: "inline-block" }}>Marketplace</p>

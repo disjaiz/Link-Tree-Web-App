@@ -112,7 +112,7 @@ const handleSignup = async (e) => {
 
         <form onSubmit={handleSignup} className={style.signupForm}>
           <label htmlFor="firstname">First name</label>
-          <input type="text" name="firstName" 
+          <input autoFocus type="text" name="firstName" 
           value={formData.firstName} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
           {errors.firstName && <p className={style.errorText}>{errors.firstName}</p>}
 

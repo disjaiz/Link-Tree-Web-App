@@ -18,9 +18,8 @@ import signOut from "../images/signOut.png";
 import { useNavigate ,  useLocation} from 'react-router-dom';
 import {logout} from '../FetchMaker.js';
 import {fetchUserData} from '../FetchMaker.js';
-const port = 3000 || 5000;
-// const baseUrl = `http://192.168.0.105:${port}`;
-const baseUrl = `https://link-tree-web-app-2-backend.onrender.com`;
+import baseUrl from '../config'; 
+
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -75,8 +74,8 @@ function Dashboard() {
         <div className={styles.sidebar}>
 
             <div className={`${styles.sparkLogo} ${activeTab === "links" ? styles.lowerCurve : ""}`}>
-                <img src={fire} alt="fire_logo" />
-                <img src={spark} alt="spark_logo" />
+                <img src={fire} alt="fire_logo" style={{height:'29px', width: '29px'}}/>
+                <img src={spark} alt="spark_logo"  style={{height: 'auto', width: '80px'}} />
             </div>
             
             <div className={styles.optionBtnsContainer}>
