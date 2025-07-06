@@ -103,10 +103,10 @@ router.post('/login', async (req, res)=>{
             res.cookie('Token', token, {
                 httpOnly: true,
                 maxAge:5 * 60 * 60 * 1000,
-                // sameSite: 'None', 
-                // secure: true,
-                secure: false,
- sameSite: 'Lax',
+                sameSite: 'None', 
+                secure: true,
+//                 secure: false,
+//  sameSite: 'Lax',
 
               });
           
