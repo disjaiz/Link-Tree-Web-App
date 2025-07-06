@@ -64,7 +64,7 @@ function Profile() {
     } catch (err) {
       console.error("Click log failed", err);
     } finally {
-      window.location.href = `https://${link.linkUrl}`;
+      window.location.href = link.linkUrl.startsWith('http') ? link.linkUrl : `https://${link.linkUrl}`;
     }
 };
   const handleCtaClick = async () => {

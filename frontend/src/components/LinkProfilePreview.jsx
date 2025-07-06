@@ -11,7 +11,6 @@ import baseUrl, {frontEndBaseUrl} from '../config';
 function LinkProfilePreview({user, imageSrc , userName, isSocial, setIsSocial, bannerColor, profilePreviewId}) {
     const navigate = useNavigate();
     
-
     const handleCopyLink = () => {
       const link = `${frontEndBaseUrl}/user/preview/${profilePreviewId}`;
       navigator.clipboard.writeText(link);
@@ -22,7 +21,7 @@ function LinkProfilePreview({user, imageSrc , userName, isSocial, setIsSocial, b
                         </div>,
                         {
                           className: `${style.customToast} ${style.toastGreen}`,
-                          autoClose: false,
+                          autoClose: 3000,
                           hideProgressBar: true,
                           closeOnClick: true,
                           draggable: false,
@@ -88,7 +87,7 @@ function LinkProfilePreview({user, imageSrc , userName, isSocial, setIsSocial, b
                                                                        ${user.profileLayout === "carausel" ? style.carauselLayout : ""}`}>
                                                           {(isSocial ? user.social : user.shop)?.map((link, index) => (
                                                                 <div key={index} 
-                                                                     onClick={()=>  window.location.href = `https://${link.linkUrl}`}
+                                                                     onClick={()=>  window.location.href = link.linkUrl.startsWith('http') ? link.linkUrl : `https://${link.linkUrl}`}
                                                                      style={{backgroundColor: user.buttonColor,  '--zigzag-color': user.buttonColor, cursor: "pointer"}}
                                                                      className={`${style.linkCard}
                                                                      
@@ -117,9 +116,11 @@ function LinkProfilePreview({user, imageSrc , userName, isSocial, setIsSocial, b
                                                                                    }
                                                                      >
                                                                <div className={style.linkCardImageDiv}>
-                                                                         <img src={link.icon}/>
+                                                                  <img src={link.icon}/>
                                                                </div>
-                                                               <p className={style.linkTitle} style={{color:user.buttonFontColor, fontFamily: user.fontFamily}}>  {link.linkTitle}   </p>
+                                                               <p className={style.linkTitle} style={{color:user.buttonFontColor, fontFamily: user.fontFamily}}>
+                                                                  {link.linkTitle}  
+                                                               </p>
                                                                                                            
                                                                 </div>
                                                             ))}

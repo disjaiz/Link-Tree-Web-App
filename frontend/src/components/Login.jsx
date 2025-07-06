@@ -3,6 +3,8 @@ import fire from '../images/fire.png'
 import spark from '../images/SPARK.png'
 import sideWoman from '../images/sideWoman.png'
 import checkCircle from '../images/checkCircle.png'
+import openedEye from '../images/openedEye.png'
+import closedEye from '../images/closedEye.png'
 import style from  './Login.module.css'
 import { useNavigate } from 'react-router-dom';
 import {login} from '../FetchMaker';
@@ -10,6 +12,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
+  const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const [formData, setformData] = useState({
         userName: "",
@@ -162,28 +165,40 @@ function Login() {
             placeholder="Spark/Username"
             value={formData.userName}
             onChange={(e) => setformData({ ...formData, [e.target.name]: e.target.value })}
+            style={{marginBottom: '1.4em'}}
           />
           {errors.userName && <p className={style.errorText}>{errors.userName}</p>}
           
           <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={(e) => setformData({ ...formData, [e.target.name]: e.target.value })}
-          />
+          <div className={style.passwordField}>
+              <input
+               type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={(e) => setformData({ ...formData, [e.target.name]: e.target.value })}
+              />
+              <img
+                  src={showPassword ? openedEye : closedEye}
+                  alt="Toggle visibility"
+                  className={style.eyeIcon}
+                  onClick={() => setShowPassword(!showPassword)}
+              />
+          </div>
           {errors.password && <p className={style.errorText}>{errors.password}</p>}
 
-            <button className={style.loginButton}>Login</button>
+          <button className={style.loginButton}>Login</button>
 
-            <p id={style.pOne} style={{ textDecoration: 'underline', color: '#28A263', fontSize: '14px' }} >Forgot Password?</p>
+          <p id={style.pOne} style={{ textDecoration: 'underline', color: '#28A263', fontSize: '14px' }} >Forgot Password?</p>
 
-            <p id={style.pTwo} style={{ marginTop: '30px', fontSize: '13px', color: '#000000' }}> Don't have an account?&nbsp;
+          <p id={style.pTwo} style={{ marginTop: '30px', fontSize: '13px', color: '#000000' }}> Don't have an account?&nbsp;
             <span 
-              id={style.span}
-              style={{ textDecoration: 'underline', color: '#28A263', fontSize: '14px' }} 
-              onClick={() => navigate("/signup")}>Sign up</span></p>
+                id={style.span}
+                style={{ textDecoration: 'underline', color: '#28A263', fontSize: '14px' }} 
+                onClick={() => navigate("/signup")}>
+              Sign up
+            </span>
+          </p>
        </form>
   
             <p> This site is protected by reCAPTCHA and the{' '} <span style={{ textDecoration: 'underline' }}>Google Privacy Policy</span> and{' '} <span style={{ textDecoration: 'underline' }}>Terms of Service</span> apply. </p>
