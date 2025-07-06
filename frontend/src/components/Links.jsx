@@ -315,7 +315,7 @@ function Links() {
                     
               </div>
               <div>
-                <p>/80</p>
+                <p>{bio.length}/80</p>
               </div>
               </div>
 
