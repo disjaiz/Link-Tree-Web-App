@@ -17,7 +17,6 @@ import twitter from '../images/twitterLogo.png'
 import instagram from '../images/instagramLogo.png'
 import youtube from '../images/youtubeLogo.png'
 import tiktok from '../images/tiktokLogo.png'
-import linkedInLogo from '../images/linkedInLogo.png'
 import linktree from '../images/linkTreeLogo.png'
 import boxOne from '../images/boxOne.png'
 import style from  './LandingPage.module.css'
@@ -244,20 +243,11 @@ function LandingPage() {
                 <p>We acknowledge the Traditional Custodians of the land on which our office stands, the Wurundjeri people of the Kulin Nation, and pay our
                     respects to Elders past, present and emerging.</p>
                 <div>
-                    <a href="https://x.com/JaiswalSid87831" target="_blank" rel="noopener noreferrer">
-                      <img src={twitter} alt="twitter_logo" />
-                    </a>
-                    <a href="https://www.linkedin.com/in/siddhi-jaiswal-77b015269?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
-                      <img src={linkedInLogo} alt="linkedIn_logo" />
-                    </a>
-                    <a href="https://link-tree-web-app-frontend.onrender.com/user/preview/50588a88-6b49-443a-a90f-58d15a7a433a" target="_blank" rel="noopener noreferrer">
-                      <img src={linktree} alt="linktree_logo" />
-                    </a>
-                    {/* <img src={twitter} alt="twitter_logo" /> */}
-                    {/* <img src={instagram} alt="instagram_logo" />    */}
-                    {/* <img src={youtube} alt="youtube_logo" /> */}
-                    {/* <img src={tiktok} alt="tiktok_logo" /> */}
-                    {/* <img src={linktree} alt="linktree_logo" /> */}
+                    <img src={twitter} alt="twitter_logo" />
+                    <img src={instagram} alt="instagram_logo" />   
+                    <img src={youtube} alt="youtube_logo" />
+                    <img src={tiktok} alt="tiktok_logo" />
+                    <img src={linktree} alt="linktree_logo" />
                 </div>
             </div>
         </div>
@@ -265,6 +255,5 @@ function LandingPage() {
     </div>
   )
 }
-
 
 export default LandingPage

@@ -168,7 +168,7 @@ function Links() {
                   </div>,
                   {
                     className: `${style.customToast} ${style.toastGreen}`,
-                    autoClose: 3000,
+                    autoClose: true,
                     hideProgressBar: true,
                     closeOnClick: true,
                     draggable: false,
@@ -187,7 +187,7 @@ function Links() {
             </div>,
             {
               className: `${style.customToast} ${style.toastRed}`,
-              autoClose: 3000,
+              autoClose: true,
               hideProgressBar: true,
               closeOnClick: true,
               draggable: false,
@@ -206,23 +206,6 @@ function Links() {
 
   const handleShareBtn = () =>{
       navigator.clipboard.writeText(frontEndBaseUrl);
-      toast.success(
-                           <div className={style.toastContent}>
-                                <img src={checkCircle} alt="Success" className={style.toastIcon} />
-                                <span>Profile link saved</span>
-                              </div>,
-                              {
-                                className: `${style.customToast} ${style.toastGreen}`,
-                                autoClose: 3000,
-                                hideProgressBar: true,
-                                closeOnClick: true,
-                                draggable: false,
-                                closeButton: ({ closeToast }) => (
-                                  <span className={style.closeBtn} onClick={closeToast}>✖</span>
-                                ),
-                                icon: false,
-                              }
-                            );
   }
 //  =====================================================================================
   return (

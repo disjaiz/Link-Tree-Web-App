@@ -3,8 +3,6 @@ import fire from '../images/fire.png'
 import spark from '../images/SPARK.png'
 import sideWoman from '../images/sideWoman.png'
 import checkCircle from '../images/checkCircle.png'
-import openedEye from '../images/openedEye.png'
-import closedEye from '../images/closedEye.png'
 import style from  './Signup.module.css'
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +11,6 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
-  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const [formData, setformData] = useState({
     firstName:"",
@@ -130,29 +127,13 @@ const handleSignup = async (e) => {
           {errors.email && <p className={style.errorText}>{errors.email}</p>}
 
           <label htmlFor="password">Password</label>
-          <div className={style.passwordField}>
-              <input type={showPassword ? "text" : "password"} name="password"
-              value={formData.password} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
-               <img
-                                src={showPassword ? openedEye : closedEye}
-                                alt="Toggle visibility"
-                                className={style.eyeIcon}
-                                onClick={() => setShowPassword(!showPassword)}
-                            />
-          </div>
+          <input type="password" name="password"
+          value={formData.password} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
          {errors.password && <p className={style.errorText}>{errors.password}</p>}
 
           <label htmlFor="confirmpassword">Confirm Password</label>
-          <div className={style.passwordField}>
-          <input type={showPassword ? "text" : "password"} name="confirmPassword" 
+          <input type="password" name="confirmPassword" 
           value={formData.confirmPassword} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
-            <img
-                                src={showPassword ? openedEye : closedEye}
-                                alt="Toggle visibility"
-                                className={style.eyeIcon}
-                                onClick={() => setShowPassword(!showPassword)}
-                            />
-          </div>
           {errors.confirmPassword && <p className={style.errorText}>{errors.confirmPassword}</p>}
 
           <div className={style.checkbox}>

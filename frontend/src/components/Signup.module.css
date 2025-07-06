@@ -94,19 +94,6 @@
     flex-direction: column;
     /* margin-bottom: 100px; */
 }
-.passwordField{
-    position: relative;
-    /* margin-bottom: 1.4em; */
-}
-.eyeIcon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 15px;
-  height: 15px;
-  cursor: pointer;
-}
 .signupForm input{
     width: 100%;
     padding: 0.7em 0.9em;
