@@ -294,11 +294,12 @@ function Links() {
               </div> 
               <div>      
                     <label htmlFor="bio">Bio</label>
-                    <input id="bio" type="text" placeholder="Bio" maxLength="80" defaultValue={bio} onChange={(e) => setBio(e.target.value)} ref={bioRef}/>
+                    <input id="bio" type="text" placeholder="Bio" maxLength="80" defaultValue={bio || ""} onChange={(e) => setBio(e.target.value)} ref={bioRef}/>
                     
               </div>
               <div>
-                <p>{bio.length}/80</p>
+                <p>{bio?.length || 0}/80</p>
+
               </div>
               </div>
 
