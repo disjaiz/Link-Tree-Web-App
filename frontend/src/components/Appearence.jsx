@@ -90,7 +90,7 @@ function Appearence() {
             </div>,
             {
               className: `${style.customToast} ${style.toastGreen}`,
-              autoClose: false,
+              autoClose: 3000,
               hideProgressBar: true,
               closeOnClick: true,
               draggable: false,
@@ -109,7 +109,7 @@ function Appearence() {
       </div>,
       {
         className: `${style.customToast} ${style.toastRed}`,
-        autoClose: false,
+        autoClose: 3000,
         hideProgressBar: true,
         closeOnClick: true,
         draggable: false,

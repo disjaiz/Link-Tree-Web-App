@@ -3,6 +3,8 @@ import fire from '../images/fire.png'
 import spark from '../images/SPARK.png'
 import sideWoman from '../images/sideWoman.png'
 import checkCircle from '../images/checkCircle.png'
+import openedEye from '../images/openedEye.png'
+import closedEye from '../images/closedEye.png'
 import style from  './Login.module.css'
 import { useNavigate } from 'react-router-dom';
 import {login} from '../FetchMaker';
@@ -11,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
     const [formData, setformData] = useState({
         userName: "",
         password: "",
@@ -55,7 +58,7 @@ function Login() {
     //   </div>,
     //   {
     //     className: style.customToast,
-    //     autoClose: false, 
+    //     autoClose: 3000, 
     //     hideProgressBar: true,
     //     closeOnClick: false,
     //     draggable: false,
@@ -126,7 +129,7 @@ function Login() {
           </div>,
           {
             className: style.customToast,
-            autoClose: false,
+            autoClose: 3000,
             hideProgressBar: true,
             closeOnClick: false,
             draggable: false,
@@ -157,6 +160,7 @@ function Login() {
         <label htmlFor="username" >Username</label>
           <input
             autoFocus
+            style={{marginBottom: '1.4em'}}
             type="text"
             name="userName"
             placeholder="Spark/Username"
@@ -166,13 +170,20 @@ function Login() {
           {errors.userName && <p className={style.errorText}>{errors.userName}</p>}
           
           <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={(e) => setformData({ ...formData, [e.target.name]: e.target.value })}
-          />
+           <div className={style.passwordField}>
+             <input
+             type={showPassword ? "text" : "password"}
+              name="password"
+                placeholder="Password"
+               value={formData.password}
+               onChange={(e) => setformData({ ...formData, [e.target.name]: e.target.value })}
+              />
+              <img
+                 src={showPassword ? openedEye : closedEye}
+                 alt="Toggle visibility"
+                 className={style.eyeIcon}
+                 onClick={() => setShowPassword(!showPassword)}              />
+          </div>
           {errors.password && <p className={style.errorText}>{errors.password}</p>}
 
             <button className={style.loginButton}>Login</button>

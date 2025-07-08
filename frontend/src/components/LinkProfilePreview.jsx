@@ -15,6 +15,7 @@ function LinkProfilePreview({user, imageSrc , userName, isSocial, setIsSocial, b
     const handleCopyLink = () => {
       const link = `${frontEndBaseUrl}/user/preview/${profilePreviewId}`;
       navigator.clipboard.writeText(link);
+
        toast.success(
                      <div className={style.toastContent}>
                           <img src={checkCircle} alt="Success" className={style.toastIcon} />
@@ -22,7 +23,7 @@ function LinkProfilePreview({user, imageSrc , userName, isSocial, setIsSocial, b
                         </div>,
                         {
                           className: `${style.customToast} ${style.toastGreen}`,
-                          autoClose: false,
+                          autoClose: 3000,
                           hideProgressBar: true,
                           closeOnClick: true,
                           draggable: false,
@@ -88,7 +89,8 @@ function LinkProfilePreview({user, imageSrc , userName, isSocial, setIsSocial, b
                                                                        ${user.profileLayout === "carausel" ? style.carauselLayout : ""}`}>
                                                           {(isSocial ? user.social : user.shop)?.map((link, index) => (
                                                                 <div key={index} 
-                                                                     onClick={()=>  window.location.href = `https://${link.linkUrl}`}
+                                                                    //  onClick={()=>  window.location.href = `https://${link.linkUrl}`}
+                                                                    onClick={()=>  window.location.href = link.linkUrl.startsWith('http') ? link.linkUrl : `https://${link.linkUrl}`}
                                                                      style={{backgroundColor: user.buttonColor,  '--zigzag-color': user.buttonColor, cursor: "pointer"}}
                                                                      className={`${style.linkCard}
                                                                      

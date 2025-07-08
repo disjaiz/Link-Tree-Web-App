@@ -5,13 +5,16 @@ import sideWoman from '../images/sideWoman.png'
 import checkCircle from '../images/checkCircle.png'
 import style from  './Signup.module.css'
 import { useNavigate } from 'react-router-dom';
-
+import openedEye from '../images/openedEye.png'
+import closedEye from '../images/closedEye.png'
 import signup from '../FetchMaker';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordTwo, setShowPasswordTwo] = useState(false);
   const [formData, setformData] = useState({
     firstName:"",
     lastName:"",
@@ -66,7 +69,7 @@ const handleSignup = async (e) => {
       </div>,
       {
         className: style.customToast,
-        autoClose: false, 
+        autoClose: 3000, 
         hideProgressBar: true,
         closeOnClick: false,
         draggable: false,
@@ -83,7 +86,7 @@ const handleSignup = async (e) => {
           </div>,
           {
             className: style.customToast,
-            autoClose: false, 
+            autoClose: 3000, 
             hideProgressBar: true,
             closeOnClick: false,
             draggable: false,
@@ -127,13 +130,29 @@ const handleSignup = async (e) => {
           {errors.email && <p className={style.errorText}>{errors.email}</p>}
 
           <label htmlFor="password">Password</label>
-          <input type="password" name="password"
-          value={formData.password} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
+          <div className={style.passwordField}>
+              <input type={showPassword ? "text" : "password"} name="password"
+              value={formData.password} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
+               <img
+                                src={showPassword ? openedEye : closedEye}
+                                alt="Toggle visibility"
+                                className={style.eyeIcon}
+                                onClick={() => setShowPassword(!showPassword)}
+                            />
+          </div>
          {errors.password && <p className={style.errorText}>{errors.password}</p>}
 
           <label htmlFor="confirmpassword">Confirm Password</label>
-          <input type="password" name="confirmPassword" 
+           <div className={style.passwordField}>
+          <input type={showPasswordTwo ? "text" : "password"} name="confirmPassword" 
           value={formData.confirmPassword} onChange={(e)=>setformData({...formData,[e.target.name]: e.target.value})} />
+            <img
+                                src={showPasswordTwo ? openedEye : closedEye}
+                                alt="Toggle visibility"
+                                className={style.eyeIcon}
+                                onClick={() => setShowPasswordTwo(!showPasswordTwo)}
+                            />
+          </div>
           {errors.confirmPassword && <p className={style.errorText}>{errors.confirmPassword}</p>}
 
           <div className={style.checkbox}>

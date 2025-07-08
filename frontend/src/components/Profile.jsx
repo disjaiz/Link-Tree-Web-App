@@ -18,7 +18,7 @@ function Profile() {
   const [isSocial, setIsSocial] = useState(true);
 
    const handleCopyLink = () => {
-      const link = `${frontEndBaseUrl}/user/preview/${profilePreviewId}`;
+      const link = `${frontEndBaseUrl}/user/preview/${id}`;
       navigator.clipboard.writeText(link);
        toast.success(
                            <div className={style.toastContent}>
@@ -27,7 +27,7 @@ function Profile() {
                               </div>,
                               {
                                 className: `${style.customToast} ${style.toastGreen}`,
-                                autoClose: false,
+                                autoClose: 3000,
                                 hideProgressBar: true,
                                 closeOnClick: true,
                                 draggable: false,
@@ -64,7 +64,8 @@ function Profile() {
     } catch (err) {
       console.error("Click log failed", err);
     } finally {
-      window.location.href = `https://${link.linkUrl}`;
+      // window.location.href = `https://${link.linkUrl}`;
+    window.location.href = link.linkUrl.startsWith('http') ? link.linkUrl : `https://${link.linkUrl}`;
     }
 };
   const handleCtaClick = async () => {

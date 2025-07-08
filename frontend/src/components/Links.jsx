@@ -112,7 +112,7 @@ function Links() {
                   </div>,
                   {
                     className: `${style.customToast} ${style.toastGreen}`,
-                    autoClose: true,
+                    autoClose: 3000,
                     hideProgressBar: true,
                     closeOnClick: true,
                     draggable: false,
@@ -131,7 +131,7 @@ function Links() {
             </div>,
             {
               className: `${style.customToast} ${style.toastRed}`,
-              autoClose: true,
+              autoClose: 3000,
               hideProgressBar: true,
               closeOnClick: true,
               draggable: false,
@@ -168,7 +168,7 @@ function Links() {
                   </div>,
                   {
                     className: `${style.customToast} ${style.toastGreen}`,
-                    autoClose: true,
+                    autoClose: 3000,
                     hideProgressBar: true,
                     closeOnClick: true,
                     draggable: false,
@@ -187,7 +187,7 @@ function Links() {
             </div>,
             {
               className: `${style.customToast} ${style.toastRed}`,
-              autoClose: true,
+              autoClose: 3000,
               hideProgressBar: true,
               closeOnClick: true,
               draggable: false,
