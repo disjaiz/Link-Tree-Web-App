@@ -1,5 +1,5 @@
 // Create a function to handle Google authentication using fetch
-import {baseUrl} from './config';
+import baseUrl from './config';
 
 export const googleAuth = async (code) => {
     try{
