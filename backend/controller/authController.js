@@ -15,24 +15,24 @@ const googleLogin = async (req, res) => {
         // 2. Fetch user profile information
         const userResToken = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${googleRes.tokens.access_token}`);
 
-        const {email} = userResToken.data;
-
+        // const {email} = userResToken.data;
+        const { email, given_name, family_name, picture } = userResToken.data;
+    
         // 3. Find or create user
         const user = await User.findOne({email : email });
 
         if (!user) {
           user = await User.create({
-            name,                         // Google name
+            name: `${given_name} ${family_name}`, 
             email,
             password: null,               // no password yet
-            profileImage: picture,        // correct schema field
+            profileImage: picture,
             authProvider: "google",
-            profileTitle: "",             // default fields
-            bio: "",
-            bannerColor: "",
+            profileTitle: given_name.toLowerCase(), // optional but useful
           });
         }
-        
+
+
         // 4. Generate JWT
         const token = jwt.sign(
           { id: user._id, email },
