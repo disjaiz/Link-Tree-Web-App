@@ -92,6 +92,7 @@ function Links() {
   const handleRemove = async () => {
     try {
       const res = await removeProfileImage();
+      // eslint-disable-next-line no-unused-vars
       const data = await res.json();
   
       setImageSrc(bigMemojiBoy);

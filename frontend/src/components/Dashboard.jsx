@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, use} from 'react'
+import {useState, useEffect} from 'react'
 import styles from './Dashboard.module.css'
 import fire from '../images/fire.png'
 import spark from '../images/SPARK.png'
@@ -8,10 +8,10 @@ import Appearence from "./Appearence";
 import Analytics from "./Analytics";
 import Settings from "./Settings";
 
-import links from "../images/linksImg.png";
-import appearance from "../images/appearanceImg.png";
-import analytics from "../images/analyticsImg.png";
-import settings from "../images/settingsImg.png";
+// import links from "../images/linksImg.png";
+// import appearance from "../images/appearanceImg.png";
+// import analytics from "../images/analyticsImg.png";
+// import settings from "../images/settingsImg.png";
 import memojiBoy from "../images/MemojiBoy.png";
 import bigMemojiBoy from "../images/bigMemojiBoy.png";
 import signOut from "../images/signOut.png";

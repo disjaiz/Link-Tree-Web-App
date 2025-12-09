@@ -13,6 +13,21 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import {UAParser} from 'ua-parser-js';
+
+
+// ========================= Google Auth Controller ==============================
+import  googleLogin  from '../controller/authController.js';
+
+router.get('/test', (req, res) => {
+    res.send("Auth Router Test Successful");
+});
+
+router.get('/google', googleLogin, (req, res) => {
+    res.send("Google Auth Endpoint");
+});
+
+
+
 // =================================get all users==============================================================
 router.get('/' , async(req, res)=>{
     const users = await User.find();
@@ -84,11 +99,12 @@ router.post('/login', async (req, res)=>{
     const { userName, password } =   req.body;
 
     const existingUser = await User.findOne({ profileTitle: userName });
+    
     if (!existingUser) {
       return res.status(400).json({msg:"User does not exists."});
     }
 
-    const payload = { id: existingUser.id }
+    const payload = { id: existingUser._id }
 
     // compare password
     bcrypt.compare(password, existingUser.password, (err, isMatch) => { 

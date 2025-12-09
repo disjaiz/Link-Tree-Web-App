@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import {createBrowserRouter,RouterProvider,} from "react-router-dom";
 import LandingPage from './components/LandingPage';
@@ -7,6 +6,18 @@ import Login from './components/Login';
 import Personalisation from './components/Personalisation';
 import Dashboard from './components/Dashboard';
 import Profile from './components/Profile';
+
+import {GoogleOAuthProvider} from '@react-oauth/google';
+const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
+const GoogleAuthWrapper = () => {
+    return (
+    <GoogleOAuthProvider clientId={clientId}>
+      <Login />
+    </GoogleOAuthProvider>
+    )
+  }
+
 
 function App() {
   const routerdata = createBrowserRouter([
@@ -20,7 +31,7 @@ function App() {
     }, 
     {
       path: "/login",
-      element: <Login />,
+      element: <GoogleAuthWrapper />,
     },
     {
       path: "/personalization",

@@ -1,4 +1,4 @@
-import React , {useState} from 'react'
+import {useState} from 'react'
 import fire from '../images/fire.png'
 import spark from '../images/SPARK.png'
 import sideWoman from '../images/sideWoman.png'
@@ -10,6 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import {login} from '../FetchMaker';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { useGoogleLogin } from '@react-oauth/google';
+import {googleAuth} from '../api.js';
 
 function Login() {
     const navigate = useNavigate();
@@ -75,19 +78,19 @@ function Login() {
       const newErrors = { userName: "", password: "" };
       let hasError = false;
 
-  if (formData.userName == "") {
-    newErrors.userName = "Username required*";
-    hasError = true;
-  }
-  if (formData.password == "") {
-    newErrors.password = "Please enter your password*";
-    hasError = true;
-  }
-
-  if (hasError) {
-    setErrors(newErrors);
-    return; 
-  }
+      if (formData.userName == "") {
+        newErrors.userName = "Username required*";
+        hasError = true;
+      } 
+      if (formData.password == "") {                  
+        newErrors.password = "Please enter your password*";
+            hasError = true;
+      }
+    
+      if (hasError) {
+        setErrors(newErrors);
+        return; 
+      }
 
       try {
         const response = await login(formData);
@@ -121,7 +124,7 @@ function Login() {
           }
         }
         setErrors(newErrors);
-      } catch (error) {
+      } catch  {
         toast.error(
           <div className={style.toastContent}>
             <img src={checkCircle} alt="Success" className={style.toastIcon} />
@@ -141,8 +144,39 @@ function Login() {
         );
       }
     };
-    
+
+
+    // =================google login function========================
+    const responseGoogle = async (authResult)=>{
+    try{
+      if(authResult.code){
+        const result = await googleAuth(authResult.code);
       
+        const {_id, profileTitle, name} = result.user;
+        const token = result.token;
+        const obj = {_id, profileTitle, name, token};
+        localStorage.setItem("userInfo", JSON.stringify(obj));
+
+        navigate("/dashboard", {
+            state: {
+              userid: _id,
+              username: profileTitle,
+              name: name
+            }
+          });
+      }
+    }
+    catch(err){
+      console.error("erroe while requesting google code", err);
+    }
+  }
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: responseGoogle,
+    onError: responseGoogle,
+    flow: "auth-code",
+  });
+  // =====================================================================
     
   // ===============================================================================================================================================
     return (
@@ -189,8 +223,13 @@ function Login() {
             <button className={style.loginButton}>Login</button>
 
             <p id={style.pOne} style={{ textDecoration: 'underline', color: '#28A263', fontSize: '14px' }} >Forgot Password?</p>
+            {/* =================google login==================== */}
+            <div className={style.googleBtn} onClick={googleLogin}>
+               <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" />Login with Google
+            </div>
+            {/* =============================================== */}
 
-            <p id={style.pTwo} style={{ marginTop: '30px', fontSize: '13px', color: '#000000' }}> Don't have an account?&nbsp;
+            <p id={style.pTwo} style={{ marginTop: '5px', fontSize: '13px', color: '#000000' }}> Don&apos;t have an account?&nbsp;
             <span 
               id={style.span}
               style={{ textDecoration: 'underline', color: '#28A263', fontSize: '14px' }} 

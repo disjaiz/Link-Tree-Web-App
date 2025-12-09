@@ -1,5 +1,6 @@
 import baseUrl from './config'; 
 
+
 //=============================== signup fetch ======================================
 async function signup(formdata){
 
@@ -233,8 +234,8 @@ export const saveClickLog = async (linkUrl, isSocial) => {
         credentials: 'include',
         body: JSON.stringify({ linkUrl, isSocial }),
       });
-    return response;
-    console.log(response)
+    // return response;
+    // console.log(response)
   } catch (err) {
     console.error("Error saving click log:", err);
   }
@@ -249,7 +250,7 @@ export const saveCtaLog = async (id) => {
         credentials: 'include',
         body: JSON.stringify({profilePreviewId: id }),
       });
-    return response;
+    // return response;
   } catch (err) {
     console.error("Error saving click log:", err);
   }
