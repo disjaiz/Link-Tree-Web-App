@@ -104,6 +104,13 @@ router.post('/login', async (req, res)=>{
       return res.status(400).json({msg:"User does not exists."});
     }
 
+    // 🚨 BLOCK GOOGLE USERS FROM NORMAL LOGIN
+    if (existingUser.authProvider === "google") {
+      return res
+        .status(400)
+        .json({ msg: "This account uses Google login. Please continue with Google." });
+    }
+
     const payload = { id: existingUser._id }
 
     // compare password

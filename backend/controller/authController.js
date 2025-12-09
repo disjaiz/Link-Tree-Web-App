@@ -20,14 +20,19 @@ const googleLogin = async (req, res) => {
         // 3. Find or create user
         const user = await User.findOne({email : email });
 
-        if(!user) {
-            user = await userModel.create({
-                username: name,
-                email,
-                image: picture,
-            });
+        if (!user) {
+          user = await User.create({
+            name,                         // Google name
+            email,
+            password: null,               // no password yet
+            profileImage: picture,        // correct schema field
+            authProvider: "google",
+            profileTitle: "",             // default fields
+            bio: "",
+            bannerColor: "",
+          });
         }
-
+        
         // 4. Generate JWT
         const token = jwt.sign(
           { id: user._id, email },

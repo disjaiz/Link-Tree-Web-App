@@ -6,7 +6,10 @@ const userSchema = new mongoose.Schema({
   profilePreviewId: { type: String, default: uuidv4 },
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  password: { type: String, required: function () { 
+    return this.authProvider === "local"; 
+  }},
+  authProvider: { type: String, enum: ["local", "google"], default: "local" },
   profileTitle: { type: String, default: "" },
   bio: { type: String, default: "" },
   profileImage: { type: String, default: "" },
